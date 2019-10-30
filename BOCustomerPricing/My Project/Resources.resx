@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Param_iActivityCodeFrom" xml:space="preserve">
+    <value>iActivityCodeFrom</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iActivityCodeTo" xml:space="preserve">
+    <value>iActivityCodeTo</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iFreightMarkup" xml:space="preserve">
+    <value>iFreightMarkup</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iItemDesc_From" xml:space="preserve">
+    <value>iItemDesc_From</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iItemDesc_To" xml:space="preserve">
+    <value>iItemDesc_To</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iItemNo" xml:space="preserve">
+    <value>iItemNo</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iItemNo_From" xml:space="preserve">
+    <value>iItemNo_From</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iItemNo_To" xml:space="preserve">
+    <value>iItemNo_To</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iItems" xml:space="preserve">
+    <value>iItems</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iLastDate" xml:space="preserve">
+    <value>iLastDate</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iPrcRococo" xml:space="preserve">
+    <value>iPrcColor</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iPrcDetailStain" xml:space="preserve">
+    <value>iPrcDetail</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iTerCode" xml:space="preserve">
+    <value>iTerCode</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iPrcLevelFrom" xml:space="preserve">
+    <value>iPrcLevelFromNOT USED</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iPrcLevelTo" xml:space="preserve">
+    <value>iPrcLevelToNOT USED</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iPrcColor" xml:space="preserve">
+    <value>iPrcNatural</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iPriceLevelB" xml:space="preserve">
+    <value>iPrcLevelB</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iProdCat_From" xml:space="preserve">
+    <value>iProdCat_From</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iProdCat_To" xml:space="preserve">
+    <value>iProdCat_To</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iProdCatDesc_From" xml:space="preserve">
+    <value>iProdCatDesc_From</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iProdCatDesc_To" xml:space="preserve">
+    <value>iProdCatDesc_To</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iProdCategory" xml:space="preserve">
+    <value>iProdCategory</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iProductCategory" xml:space="preserve">
+    <value>iProductCategory</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iRowState" xml:space="preserve">
+    <value>iRowState</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iSearchType" xml:space="preserve">
+    <value>iSearchType</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iTerrCode" xml:space="preserve">
+    <value>iTerrCode_NOTUSED</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iType" xml:space="preserve">
+    <value>iType</value>
+    <comment>IN Param: Used with spIMGetItemListAdvanced_MAS to determine if Terr Pricing is to be included. </comment>
+  </data>
+  <data name="Param_iWhere" xml:space="preserve">
+    <value>iWhere</value>
+    <comment>IN Param: Where Clause for SQL Stored Procedure</comment>
+  </data>
+  <data name="SP_spARCustFreightMarkupList_MAS" xml:space="preserve">
+    <value>spARCustFreightMarkupList_MAS</value>
+    <comment>SP that retrieves the Freight Markup percentage found in the Customer Master on Tab 1 Macola</comment>
+  </data>
+  <data name="SP_spIMGetItemList_MAS" xml:space="preserve">
+    <value>spIMGetItemList_MAS</value>
+    <comment>Retrieves Data for the Item Search List</comment>
+  </data>
+  <data name="SP_spIMGetItemListAdvanced_MAS" xml:space="preserve">
+    <value>spIMGetItemListAdvanced_MAS</value>
+    <comment>SP that retrieves list from Lookup selection and populates ItemPricing DataGridView</comment>
+  </data>
+  <data name="SP_spIMGetItemLookup_MAS" xml:space="preserve">
+    <value>spIMGetItemLookup_MAS</value>
+    <comment>SP that retrieves Items for the Item Lookup.  It takes on parameter for Activity code that is either empty or 'A' based on a check box selection on the Search Form</comment>
+  </data>
+  <data name="SP_spIMGetItemLookup_NoTerritory_MAS" xml:space="preserve">
+    <value>spIMGetItemLookup_NoTerritory_MAS</value>
+    <comment>SP that Inserts, Updates or Deletes Territory custom pricing and ignores the Territory pricing</comment>
+  </data>
+  <data name="SP_spIMGetProductCategories_MAS" xml:space="preserve">
+    <value>spIMGetProductCategories_MAS</value>
+    <comment>SP that returns Product Category List for dropdown box</comment>
+  </data>
+  <data name="SP_spIMSaveItem_MAS" xml:space="preserve">
+    <value>spIMSaveItem_MAS</value>
+    <comment>SP that Inserts, Updates or Deletes Territory custom pricing</comment>
+  </data>
+  <data name="Param_iShowOnlyActive" xml:space="preserve">
+    <value>iShowOnlyActive</value>
+    <comment>IN Param: Integer, 0 show all, 1 show only categories with active items.  </comment>
+  </data>
+  <data name="SP_spIMGetProdCatActiveItems_MAS" xml:space="preserve">
+    <value>spIMGetProdCatActiveItems_MAS</value>
+    <comment>SP that returns list of Product Categories - one parameter to return only Product Categories where Active Items exist or all Product Categories, iShowOnlyActive</comment>
+  </data>
+  <data name="Param_iOnPriceList" xml:space="preserve">
+    <value>iOnPriceList</value>
+    <comment>IN Param: Y or N</comment>
+  </data>
+  <data name="Param_iCopiedBasColor" xml:space="preserve">
+    <value>iCopiedBasColor</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iCopiedBasDetail" xml:space="preserve">
+    <value>iCopiedBasDetail</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iCopiedBasNatural" xml:space="preserve">
+    <value>iCopiedBasNatural</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iTerFrom" xml:space="preserve">
+    <value>iTerFrom</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iTerDesc" xml:space="preserve">
+    <value>iTerDesc</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iCreateDate" xml:space="preserve">
+    <value>iCreateDate</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_tvpA4GLIdentity" xml:space="preserve">
+    <value>tvpA4GLIdentity</value>
+    <comment>INParam: Table Valued Parameter of A4GLIdentity records from OEPRCCUS_MAZ</comment>
+  </data>
+  <data name="SP_spDeleteItemsByA4GLIdentity" xml:space="preserve">
+    <value>spDeleteItemsByA4GLIdentity</value>
+    <comment>SP that deletes records from the OEPRCCUS_MAZ table using A4GLIdentity records in a datatable sent as Table Valued Parameter</comment>
+  </data>
+  <data name="SP_spDeleteItemsByItem_noTVP" xml:space="preserve">
+    <value>spDeleteItemsByItem_noTVP</value>
+    <comment>SP that Deletes Items from OEPRCCUS_MAZ based on the Item_no and Prc_level</comment>
+  </data>
+  <data name="Param_tvpItem_no" xml:space="preserve">
+    <value>tvpItem_no</value>
+    <comment>IN Param: Table Valued Parameter containing Item_no and Prc_level</comment>
+  </data>
+  <data name="Param_iCTEWhere" xml:space="preserve">
+    <value>iCTEWhere</value>
+    <comment>IN Param: Separate Where clause for the CTE in spIMGetItemLookup_MAS</comment>
+  </data>
+  <data name="Param_iHasTerrPrice" xml:space="preserve">
+    <value>iHasTerrPrice</value>
+    <comment>IN Param:</comment>
+  </data>
+  <data name="Param_iItemDesc" xml:space="preserve">
+    <value>iItemDesc</value>
+    <comment>IN Param:</comment>
+  </data>
+</root>
