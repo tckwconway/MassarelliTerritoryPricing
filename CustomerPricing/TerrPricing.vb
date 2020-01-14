@@ -991,7 +991,7 @@ Public Class TerrPricing
 
         For Each o As ItemPricingObj In cItemPricingList
             If o.Selected Then
-                dt.Rows.Add(o.ItemNo, o.TerCode, o.ActivePriceColor, o.ActivePriceRococo, o.ActivePriceDetailStain, o.TerFrom, o.TerDescription, Year(Now), Now, Now)
+                dt.Rows.Add(o.ItemNo, o.TerCode, o.ActivePriceRococo, o.ActivePriceColor, o.ActivePriceDetailStain, o.TerFrom, o.TerDescription, Year(Now), Now, Now)
             End If
         Next
         Return dt
@@ -2334,13 +2334,17 @@ Public Class TerrPricing
     End Sub
 
     Private Sub btnSaveDefaultDB_Click(sender As System.Object, e As System.EventArgs) Handles btnSaveDefaultDB.Click
-
+        Dim cbo As ComboBox = CType(cbDBList, ComboBox)
         Try
             With cOptionalCriteria
-                .DBName = My.Settings.DefaultDB
-                MacStartup()
+                .DBName = cbo.Text
+                MacStartup(.DBName)
                 lblCurrentDB.Text = .CurrentDB
                 lblDefaultDB.Text = .DefaultDB
+
+                'save the default db
+                My.Settings.DefaultDB = .DBName
+                My.Settings.Save()
             End With
 
             LoadControls()
