@@ -1022,10 +1022,10 @@ Public Class TerrPricing
         dt.Columns.Add("item_no", GetType(String))
         dt.Columns.Add("prc_level", GetType(String))
         dt.Columns.Add("ter_from", GetType(String))
-
+        dt.Columns.Add("A4GLIdentity", GetType(String))
         For Each o As ItemPricingObj In cItemPricingList
             If o.Selected = True Then
-                dt.Rows.Add(o.ItemNo, o.TerCode, o.TerFrom)
+                dt.Rows.Add(o.ItemNo, o.TerCode, o.TerFrom, o.A4GLIdentity)
             End If
         Next
         Return dt
@@ -1982,7 +1982,7 @@ Public Class TerrPricing
 
             With saveMessage
                 .Append(vbCrLf)
-                .Append("Territory From: ") : .Append(" - Keep Existing For Each Territory" & vbCrLf)
+                .Append("Territory From: ") : .Append(" - Keep existing markup for each territory.  Manual price changes will also be saved." & vbCrLf)
                 .Append(vbCrLf)
             End With
 
@@ -1999,14 +1999,22 @@ Public Class TerrPricing
 
 
             Dim rd As DataTableReader = dt.CreateDataReader
+            'empty all objects and refresh the grid
+            clear()
+
             itmprclst = New ItemPricingList
             itmprclst = BusObj.PopulateSearchItems(rd)
+            cItemPricingList = itmprclst
 
             With ItemPricingObjBindingSource
                 .DataSource = Nothing
                 .DataSource = itmprclst
             End With
+
+            DataGridView1.DataSource = Nothing
+            DataGridView1.Refresh()
             DataGridView1.DataSource = ItemPricingObjBindingSource
+            DataGridView1.Refresh()
 
             Cursor = Cursors.Default
             cOptionalCriteria.IsFillPressed = False
