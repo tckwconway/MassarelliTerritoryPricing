@@ -74,7 +74,7 @@ Public Class TerrPricing
     ' - Copied: copies a Primary Zone pricing (i.e. 002, 003 etc) directly into the Active Price Column
     ' - CustomPercent: Does a calculation on the 
     Private Enum PrcType As Integer
-        'Primary = 1
+        Primary = 0
         Copied = 1
         CustomPercent = 2
         CustomDollar = 3
@@ -556,11 +556,12 @@ Public Class TerrPricing
         Me.Validate()
 
         With cOptionalCriteria
-            dtDelete = GetItemPrcLevelFromObject(cItemPricingList, .TerCopyToCode.Trim, .TerFromCode.Trim)
+            dtDelete = GetItemPrcLevelFromObject(cItemPricingList)
             dtSave = GetSQLBulkCopyDataTableFromObject(cItemPricingList, .TerCopyToCode.Trim, .TerCopyToDesc.Trim, .TerFromCode.Trim)
         End With
 
         Try
+            'BusObj.DeleteA4GLIdentitybyTVP(dtDelete, cn)
             BusObj.DeleteItemsbyTVP(dtDelete, cn)
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -658,6 +659,8 @@ Public Class TerrPricing
                    .PricingType = PrcType.Advanced.ToString And rbCustomFill.Checked Then
                 DoFillWithMarkup()
             ElseIf .PricingType = PrcType.Copied.ToString Then
+                DoStandardMarkup()
+            ElseIf .PricingType = PrcType.Primary.tostring Then
                 DoStandardMarkup()
             End If
 
@@ -783,10 +786,23 @@ Public Class TerrPricing
 
 
                     With cOptionalCriteria
-                        If Not .PricingType.ToString = PrcType.Advanced.ToString Then
-                            rw.Cells("TerCode").Value = .TerCopyToCode
+
+
+                        'If Not .PricingType.ToString = PrcType.Advanced.ToString Then
+                        '    rw.Cells("TerCode").Value = IIf(.TerCopyToCode = "", Me.txtTerCode.Text.Trim, .TerCopyToCode)
+                        '    rw.Cells("TerFrom").Value = .TerFromCode   'dvZoneMarkup(0)("ter_from")
+                        '    rw.Cells("TerDesc").Value = .TerCopyToDesc
+                        '    rw.Cells("LastDate").Value = Now.ToString("MM/dd/yyyy")
+                        'End If
+                        If .PricingType.ToString = PrcType.Copied.ToString Then
+                            rw.Cells("TerCode").Value = IIf(.TerCopyToCode = "", Me.txtTerCode.Text.Trim, .TerCopyToCode)
                             rw.Cells("TerFrom").Value = .TerFromCode   'dvZoneMarkup(0)("ter_from")
                             rw.Cells("TerDesc").Value = .TerCopyToDesc
+                            rw.Cells("LastDate").Value = Now.ToString("MM/dd/yyyy")
+                        ElseIf .PricingType = PrcType.Primary.tostring Then
+                            rw.Cells("TerCode").Value = .TerCode
+                            rw.Cells("TerFrom").Value = .TerFromCode
+                            rw.Cells("TerDesc").Value = .TerFromDesc
                             rw.Cells("LastDate").Value = Now.ToString("MM/dd/yyyy")
                         End If
                     End With
@@ -929,6 +945,12 @@ Public Class TerrPricing
                     .TerFromCode = cboZonePrc.Text
                 ElseIf rbDirectMacolaPrc.Checked Then
                     .MarkupType = MarkupType.Direct.ToString
+                ElseIf txtTerCode.Text = "002" Or txtTerCode.Text = "003" Or txtTerCode.Text = "004" Or txtTerCode.Text = "005" Or txtTerCode.Text = "006" Or txtTerCode.Text = "007" Or txtTerCode.Text = "008" Or txtTerCode.Text = "009" Then
+                    .PricingType = PrcType.Primary.ToString
+                    .TerCopyToCode = txtTerCode.Text.Trim
+                    .TerFromCode = ""
+                    .TerCopyToDesc = txtTerrDesc.Text.Trim
+
                 End If
 
                 'once we have the TerCopyToCode (the TerrCode that will be saved) determine if it's a Primary or Copied.

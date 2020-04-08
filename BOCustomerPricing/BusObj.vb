@@ -72,7 +72,7 @@ Public Class BusObj
     End Function
 
     Public Shared Sub DeleteItemsbyTVP(dt As DataTable, cn As SqlConnection)
-
+        'the SP has been altered to include only the A4GLIdentity column to join on the TVP
         DAC.Execute_SP_DeleteItemsByTVP(My.Resources.SP_spDeleteItemsByItem_noTVP, cn, _
                                             My.Resources.Param_tvpItem_no, dt)
 
