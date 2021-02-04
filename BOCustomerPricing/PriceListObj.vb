@@ -12,26 +12,26 @@ Public Class PriceListObj
     Implements IEditableObject
 #Region "   Methods   "
     Public Shared Function NewPriceListObj(ByVal ItemNo As String, ByVal PageNo As String, ByVal ItemDescription As String,
-    ByVal ItemWeight As Decimal, ByVal OriginalPriceColor As Decimal, ByVal PriceFinish As Decimal, ByVal OriginalPriceDetailStain As Decimal, TerritoryCode As String) As PriceListObj
+    ByVal ItemWeight As Decimal, ByVal OriginalPriceNatural As Decimal, ByVal PriceFinish As Decimal, ByVal OriginalPriceDetailStain As Decimal, TerritoryCode As String) As PriceListObj
         Dim prclst As New PriceListObj
         prclst.ItemNo = ItemNo
         prclst.PageNo = PageNo
         prclst.ItemDescription = ItemDescription
         prclst.ItemWeight = ItemWeight
-        prclst.OriginalPriceColor = OriginalPriceColor
+        prclst.OriginalPriceNatural = OriginalPriceNatural
         prclst.PriceFinish = PriceFinish
         prclst.OriginalPriceDetailStain = OriginalPriceDetailStain
         prclst.TerritoryCode = TerritoryCode
         Return prclst
     End Function
     Public Shared Function GetPriceListObj(ByVal ItemNo As String, ByVal PageNo As String, ByVal ItemDescription As String,
-    ByVal ItemWeight As Decimal, ByVal OriginalPriceColor As Decimal, ByVal PriceFinish As Decimal, ByVal OriginalPriceDetailStain As Decimal, TerritoryCode As String) As PriceListObj
+    ByVal ItemWeight As Decimal, ByVal OriginalPriceNatural As Decimal, ByVal PriceFinish As Decimal, ByVal OriginalPriceDetailStain As Decimal, TerritoryCode As String) As PriceListObj
         Dim prclst As New PriceListObj
         prclst.ItemNo = ItemNo
         prclst.PageNo = PageNo
         prclst.ItemDescription = ItemDescription
         prclst.ItemWeight = ItemWeight
-        prclst.OriginalPriceColor = OriginalPriceColor
+        prclst.OriginalPriceNatural = OriginalPriceNatural
         prclst.PriceFinish = PriceFinish
         prclst.OriginalPriceDetailStain = OriginalPriceDetailStain
         prclst.TerritoryCode = TerritoryCode
@@ -43,20 +43,20 @@ Public Class PriceListObj
 #Region "   Properties   "
 
     Public Shared Function NewPricingObj(ByVal TerCode As String, ByVal ItemNo As String, ByVal ItemDesc As String,
-        ByVal ProdCat As String, ByVal ProdCatDesc As String, ByVal OriginalPriceColor As Decimal, ByVal OriginalPriceRococo As Decimal,
-        ByVal OriginalPriceDetailStain As Decimal, ByVal ItemLocPriceColor As Decimal,
-        ByVal ItemLocPriceRococo As Decimal, ByVal ItemLocPriceDetailStain As Decimal, ByVal LastDate As Date, ByVal ItemWeight As Decimal, TerritoryCode As String) As ItemPricingObj
+        ByVal ProdCat As String, ByVal ProdCatDesc As String, ByVal OriginalPriceNatural As Decimal, ByVal OriginalPriceColor As Decimal,
+        ByVal OriginalPriceDetailStain As Decimal, ByVal ItemLocPriceNatural As Decimal,
+        ByVal ItemLocPriceColor As Decimal, ByVal ItemLocPriceDetailStain As Decimal, ByVal LastDate As Date, ByVal ItemWeight As Decimal, TerritoryCode As String) As ItemPricingObj
         Dim prc As New ItemPricingObj
         prc.TerCode = TerCode
         prc.ItemNo = ItemNo
         prc.ItemDesc = ItemDesc
         prc.ProdCat = ProdCat
         prc.ProdCatDesc = ProdCatDesc
+        prc.OriginalPriceNatural = OriginalPriceNatural
         prc.OriginalPriceColor = OriginalPriceColor
-        prc.OriginalPriceRococo = OriginalPriceRococo
         prc.OriginalPriceDetailStain = OriginalPriceDetailStain
+        prc.ItemLocPriceNatural = ItemLocPriceNatural
         prc.ItemLocPriceColor = ItemLocPriceColor
-        prc.ItemLocPriceRococo = ItemLocPriceRococo
         prc.ItemLocPriceDetailStain = ItemLocPriceDetailStain
         prc.Selected = False
         prc.LastDate = LastDate
@@ -108,13 +108,13 @@ Public Class PriceListObj
         End Set
     End Property
 
-    Private mOriginalPriceColor As Decimal
-    Public Property OriginalPriceColor() As Decimal
+    Private mOriginalPriceNatural As Decimal
+    Public Property OriginalPriceNatural() As Decimal
         Get
-            Return mOriginalPriceColor
+            Return mOriginalPriceNatural
         End Get
         Set(ByVal value As Decimal)
-            mOriginalPriceColor = value
+            mOriginalPriceNatural = value
         End Set
     End Property
 

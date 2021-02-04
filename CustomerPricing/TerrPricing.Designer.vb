@@ -67,12 +67,6 @@ Partial Class TerrPricing
         Me.btnSaveDefaultDB = New System.Windows.Forms.Button()
         Me.btnAdvancedSearch = New System.Windows.Forms.Button()
         Me.chkCopiedFromVislble = New System.Windows.Forms.CheckBox()
-        Me.rbUpdate = New System.Windows.Forms.RadioButton()
-        Me.rbPrimary = New System.Windows.Forms.RadioButton()
-        Me.rbCopy = New System.Windows.Forms.RadioButton()
-        Me.rbManual = New System.Windows.Forms.RadioButton()
-        Me.rbDirectCopy = New System.Windows.Forms.RadioButton()
-        Me.rbAdvanced = New System.Windows.Forms.RadioButton()
         Me.rbAmountFill = New System.Windows.Forms.RadioButton()
         Me.rbPercentFill = New System.Windows.Forms.RadioButton()
         Me.rbDirectMacolaPrc = New System.Windows.Forms.RadioButton()
@@ -86,14 +80,14 @@ Partial Class TerrPricing
         Me.ProdCategory = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProdCatDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TerCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ItemLocPriceNatural = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OriginalPriceNatural = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ActivePriceNatural = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CopiedPriceNatural = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemLocPriceColor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OriginalPriceColor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ActivePriceColor = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CopiedPriceColor = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ItemLocPriceRococo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OriginalPriceRococo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ActivePriceRococo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CopiedPriceRococo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemLocPriceDetailStain = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.OriginalPriceDetailStain = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ActivePriceDetailStain = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -107,6 +101,10 @@ Partial Class TerrPricing
         Me.A4GLIdentity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemPricingObjBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvHeader = New System.Windows.Forms.DataGridView()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cbDBList = New System.Windows.Forms.ComboBox()
         Me.bt = New System.Windows.Forms.Button()
@@ -163,10 +161,10 @@ Partial Class TerrPricing
         Me.lblNatural = New System.Windows.Forms.Label()
         Me.txtNaturalMarkup = New System.Windows.Forms.TextBox()
         Me.tbCopyTo = New System.Windows.Forms.TabPage()
+        Me.mcboFillTerrCodes = New TerritoryPricing.JTG.ColumnComboBox()
         Me.lblNew = New System.Windows.Forms.Label()
         Me.btnCopyTo = New System.Windows.Forms.Button()
         Me.txtFillTerrDesc = New System.Windows.Forms.TextBox()
-        Me.mcboFillTerrCodes = New TerritoryPricing.JTG.ColumnComboBox()
         Me.txtTerFrom = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtTerCode = New System.Windows.Forms.TextBox()
@@ -181,16 +179,10 @@ Partial Class TerrPricing
         Me.btnExportHeader = New System.Windows.Forms.Button()
         Me.btnExportExcel = New System.Windows.Forms.Button()
         Me.Timer4 = New System.Windows.Forms.Timer(Me.components)
-        Me.lblTerrDescription = New System.Windows.Forms.Label()
-        Me.grpPriceType = New System.Windows.Forms.GroupBox()
         Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
         Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
         Me.SearchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -206,7 +198,6 @@ Partial Class TerrPricing
         Me.pnlFillOptions.SuspendLayout()
         Me.tbCopyTo.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.grpPriceType.SuspendLayout()
         CType(Me.SearchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -215,42 +206,42 @@ Partial Class TerrPricing
         Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCopy, Me.btnPaste, Me.btnPasteDown, Me.btnClearSelection, Me.ToolStripSeparator2, Me.ClearAllToolStripMenuItem, Me.btnClearChecked, Me.ToolStripSeparator6, Me.btnCopyRow, Me.btnCopyRowWithHeader, Me.btnPasteRow})
         Me.ContextMenuStrip1.Name = "ContextMenuStripLoadItems"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(292, 286)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(217, 286)
         '
         'btnCopy
         '
         Me.btnCopy.Name = "btnCopy"
-        Me.btnCopy.Size = New System.Drawing.Size(291, 30)
+        Me.btnCopy.Size = New System.Drawing.Size(216, 30)
         Me.btnCopy.Text = "Copy - Ctrl C"
         '
         'btnPaste
         '
         Me.btnPaste.Name = "btnPaste"
-        Me.btnPaste.Size = New System.Drawing.Size(291, 30)
+        Me.btnPaste.Size = New System.Drawing.Size(216, 30)
         Me.btnPaste.Text = "Paste - Ctrl V"
         '
         'btnPasteDown
         '
         Me.btnPasteDown.Name = "btnPasteDown"
-        Me.btnPasteDown.Size = New System.Drawing.Size(291, 30)
+        Me.btnPasteDown.Size = New System.Drawing.Size(216, 30)
         Me.btnPasteDown.Text = "Paste Down"
         '
         'btnClearSelection
         '
         Me.btnClearSelection.Name = "btnClearSelection"
-        Me.btnClearSelection.Size = New System.Drawing.Size(291, 30)
+        Me.btnClearSelection.Size = New System.Drawing.Size(216, 30)
         Me.btnClearSelection.Text = "Clear selection"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(288, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(213, 6)
         '
         'ClearAllToolStripMenuItem
         '
         Me.ClearAllToolStripMenuItem.Image = Global.TerritoryPricing.My.Resources.Resources.ClearGrid
         Me.ClearAllToolStripMenuItem.Name = "ClearAllToolStripMenuItem"
-        Me.ClearAllToolStripMenuItem.Size = New System.Drawing.Size(291, 30)
+        Me.ClearAllToolStripMenuItem.Size = New System.Drawing.Size(216, 30)
         Me.ClearAllToolStripMenuItem.Text = "Clear Grid"
         Me.ClearAllToolStripMenuItem.Visible = False
         '
@@ -258,21 +249,21 @@ Partial Class TerrPricing
         '
         Me.btnClearChecked.Image = Global.TerritoryPricing.My.Resources.Resources.Clear1616_Selected31
         Me.btnClearChecked.Name = "btnClearChecked"
-        Me.btnClearChecked.Size = New System.Drawing.Size(291, 30)
+        Me.btnClearChecked.Size = New System.Drawing.Size(216, 30)
         Me.btnClearChecked.Text = "Remove  Checked"
         Me.btnClearChecked.Visible = False
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(288, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(213, 6)
         Me.ToolStripSeparator6.Visible = False
         '
         'btnCopyRow
         '
         Me.btnCopyRow.Image = CType(resources.GetObject("btnCopyRow.Image"), System.Drawing.Image)
         Me.btnCopyRow.Name = "btnCopyRow"
-        Me.btnCopyRow.Size = New System.Drawing.Size(291, 30)
+        Me.btnCopyRow.Size = New System.Drawing.Size(216, 30)
         Me.btnCopyRow.Text = "Copy Row(s)"
         Me.btnCopyRow.Visible = False
         '
@@ -280,7 +271,7 @@ Partial Class TerrPricing
         '
         Me.btnCopyRowWithHeader.Image = Global.TerritoryPricing.My.Resources.Resources.Copy_Plus2
         Me.btnCopyRowWithHeader.Name = "btnCopyRowWithHeader"
-        Me.btnCopyRowWithHeader.Size = New System.Drawing.Size(291, 30)
+        Me.btnCopyRowWithHeader.Size = New System.Drawing.Size(216, 30)
         Me.btnCopyRowWithHeader.Text = "Copy Row(s) with Header"
         Me.btnCopyRowWithHeader.Visible = False
         '
@@ -288,7 +279,7 @@ Partial Class TerrPricing
         '
         Me.btnPasteRow.Image = CType(resources.GetObject("btnPasteRow.Image"), System.Drawing.Image)
         Me.btnPasteRow.Name = "btnPasteRow"
-        Me.btnPasteRow.Size = New System.Drawing.Size(291, 30)
+        Me.btnPasteRow.Size = New System.Drawing.Size(216, 30)
         Me.btnPasteRow.Text = "Paste Row(s) from Excel"
         Me.btnPasteRow.Visible = False
         '
@@ -299,20 +290,18 @@ Partial Class TerrPricing
         Me.cboFilter.DropDownWidth = 150
         Me.cboFilter.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboFilter.FormattingEnabled = True
-        Me.cboFilter.Location = New System.Drawing.Point(12, 28)
-        Me.cboFilter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboFilter.Location = New System.Drawing.Point(8, 19)
         Me.cboFilter.Name = "cboFilter"
-        Me.cboFilter.Size = New System.Drawing.Size(124, 33)
+        Me.cboFilter.Size = New System.Drawing.Size(84, 23)
         Me.cboFilter.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.cboFilter, "Add - Enter Key / Apply Filter - Ctrl + Enter Key")
         '
         'rbAdvancedSearchPricing
         '
         Me.rbAdvancedSearchPricing.AutoSize = True
-        Me.rbAdvancedSearchPricing.Location = New System.Drawing.Point(2216, 123)
-        Me.rbAdvancedSearchPricing.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbAdvancedSearchPricing.Location = New System.Drawing.Point(1477, 82)
         Me.rbAdvancedSearchPricing.Name = "rbAdvancedSearchPricing"
-        Me.rbAdvancedSearchPricing.Size = New System.Drawing.Size(203, 24)
+        Me.rbAdvancedSearchPricing.Size = New System.Drawing.Size(140, 17)
         Me.rbAdvancedSearchPricing.TabIndex = 73
         Me.rbAdvancedSearchPricing.Text = "AdvancedSearchPricing"
         Me.ToolTip1.SetToolTip(Me.rbAdvancedSearchPricing, "Check Copied Prices to enable Territor Code and Territory Description")
@@ -322,10 +311,9 @@ Partial Class TerrPricing
         'rbCopiedTerritory
         '
         Me.rbCopiedTerritory.AutoSize = True
-        Me.rbCopiedTerritory.Location = New System.Drawing.Point(2216, 90)
-        Me.rbCopiedTerritory.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbCopiedTerritory.Location = New System.Drawing.Point(1477, 60)
         Me.rbCopiedTerritory.Name = "rbCopiedTerritory"
-        Me.rbCopiedTerritory.Size = New System.Drawing.Size(179, 24)
+        Me.rbCopiedTerritory.Size = New System.Drawing.Size(120, 17)
         Me.rbCopiedTerritory.TabIndex = 72
         Me.rbCopiedTerritory.Text = "Copied from Existing"
         Me.ToolTip1.SetToolTip(Me.rbCopiedTerritory, "Check Copied Prices to enable Territor Code and Territory Description")
@@ -336,10 +324,9 @@ Partial Class TerrPricing
         '
         Me.rbPrimaryTerritory.AutoSize = True
         Me.rbPrimaryTerritory.Checked = True
-        Me.rbPrimaryTerritory.Location = New System.Drawing.Point(2216, 57)
-        Me.rbPrimaryTerritory.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbPrimaryTerritory.Location = New System.Drawing.Point(1477, 38)
         Me.rbPrimaryTerritory.Name = "rbPrimaryTerritory"
-        Me.rbPrimaryTerritory.Size = New System.Drawing.Size(137, 24)
+        Me.rbPrimaryTerritory.Size = New System.Drawing.Size(94, 17)
         Me.rbPrimaryTerritory.TabIndex = 71
         Me.rbPrimaryTerritory.TabStop = True
         Me.rbPrimaryTerritory.Text = "Primary Pricing"
@@ -353,10 +340,9 @@ Partial Class TerrPricing
         Me.chkShowActiveOnly.Checked = True
         Me.chkShowActiveOnly.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkShowActiveOnly.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkShowActiveOnly.Location = New System.Drawing.Point(21, 279)
-        Me.chkShowActiveOnly.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.chkShowActiveOnly.Location = New System.Drawing.Point(14, 186)
         Me.chkShowActiveOnly.Name = "chkShowActiveOnly"
-        Me.chkShowActiveOnly.Size = New System.Drawing.Size(250, 28)
+        Me.chkShowActiveOnly.Size = New System.Drawing.Size(167, 19)
         Me.chkShowActiveOnly.TabIndex = 4
         Me.chkShowActiveOnly.Text = "(active category codes)"
         Me.chkShowActiveOnly.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -367,10 +353,10 @@ Partial Class TerrPricing
         '
         Me.btnRemoveAll.Font = New System.Drawing.Font("Arial", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRemoveAll.Image = Global.TerritoryPricing.My.Resources.Resources.ArrowBlue1212LeftDouble
-        Me.btnRemoveAll.Location = New System.Drawing.Point(141, 110)
+        Me.btnRemoveAll.Location = New System.Drawing.Point(94, 73)
         Me.btnRemoveAll.Margin = New System.Windows.Forms.Padding(0)
         Me.btnRemoveAll.Name = "btnRemoveAll"
-        Me.btnRemoveAll.Size = New System.Drawing.Size(39, 36)
+        Me.btnRemoveAll.Size = New System.Drawing.Size(26, 24)
         Me.btnRemoveAll.TabIndex = 3
         Me.btnRemoveAll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.ToolTip1.SetToolTip(Me.btnRemoveAll, "Remove All Filter Items")
@@ -380,10 +366,9 @@ Partial Class TerrPricing
         '
         Me.btnRemove.Font = New System.Drawing.Font("Arial", 6.75!)
         Me.btnRemove.Image = Global.TerritoryPricing.My.Resources.Resources.ArrowBlue1212Left
-        Me.btnRemove.Location = New System.Drawing.Point(141, 69)
-        Me.btnRemove.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRemove.Location = New System.Drawing.Point(94, 46)
         Me.btnRemove.Name = "btnRemove"
-        Me.btnRemove.Size = New System.Drawing.Size(39, 36)
+        Me.btnRemove.Size = New System.Drawing.Size(26, 24)
         Me.btnRemove.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.btnRemove, "Remove Filter Item (Escape Key)")
         Me.btnRemove.UseVisualStyleBackColor = True
@@ -392,10 +377,9 @@ Partial Class TerrPricing
         '
         Me.btnAdd.Font = New System.Drawing.Font("Arial", 6.75!)
         Me.btnAdd.Image = Global.TerritoryPricing.My.Resources.Resources.ArrowBlue1212Right
-        Me.btnAdd.Location = New System.Drawing.Point(141, 27)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAdd.Location = New System.Drawing.Point(94, 18)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(39, 36)
+        Me.btnAdd.Size = New System.Drawing.Size(26, 24)
         Me.btnAdd.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.btnAdd, "Add Filter Item")
         Me.btnAdd.UseVisualStyleBackColor = True
@@ -405,10 +389,9 @@ Partial Class TerrPricing
         Me.btnRefreshDB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnRefreshDB.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRefreshDB.Image = Global.TerritoryPricing.My.Resources.Resources.Refresh1616
-        Me.btnRefreshDB.Location = New System.Drawing.Point(44, 80)
-        Me.btnRefreshDB.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRefreshDB.Location = New System.Drawing.Point(29, 53)
         Me.btnRefreshDB.Name = "btnRefreshDB"
-        Me.btnRefreshDB.Size = New System.Drawing.Size(38, 36)
+        Me.btnRefreshDB.Size = New System.Drawing.Size(25, 24)
         Me.btnRefreshDB.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.btnRefreshDB, "Load from selected Database")
         Me.btnRefreshDB.UseVisualStyleBackColor = True
@@ -418,10 +401,9 @@ Partial Class TerrPricing
         Me.btnSaveDefaultDB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnSaveDefaultDB.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveDefaultDB.Image = Global.TerritoryPricing.My.Resources.Resources.Save1616
-        Me.btnSaveDefaultDB.Location = New System.Drawing.Point(87, 80)
-        Me.btnSaveDefaultDB.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveDefaultDB.Location = New System.Drawing.Point(58, 53)
         Me.btnSaveDefaultDB.Name = "btnSaveDefaultDB"
-        Me.btnSaveDefaultDB.Size = New System.Drawing.Size(38, 36)
+        Me.btnSaveDefaultDB.Size = New System.Drawing.Size(25, 24)
         Me.btnSaveDefaultDB.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.btnSaveDefaultDB, "Save As Default Database")
         Me.btnSaveDefaultDB.UseVisualStyleBackColor = True
@@ -431,10 +413,9 @@ Partial Class TerrPricing
         Me.btnAdvancedSearch.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdvancedSearch.Image = Global.TerritoryPricing.My.Resources.Resources.FindPlus2020
         Me.btnAdvancedSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAdvancedSearch.Location = New System.Drawing.Point(279, 128)
-        Me.btnAdvancedSearch.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAdvancedSearch.Location = New System.Drawing.Point(186, 85)
         Me.btnAdvancedSearch.Name = "btnAdvancedSearch"
-        Me.btnAdvancedSearch.Size = New System.Drawing.Size(120, 42)
+        Me.btnAdvancedSearch.Size = New System.Drawing.Size(80, 28)
         Me.btnAdvancedSearch.TabIndex = 66
         Me.btnAdvancedSearch.Text = "1 Item+"
         Me.btnAdvancedSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -445,107 +426,21 @@ Partial Class TerrPricing
         '
         Me.chkCopiedFromVislble.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chkCopiedFromVislble.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkCopiedFromVislble.Location = New System.Drawing.Point(3, 314)
-        Me.chkCopiedFromVislble.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.chkCopiedFromVislble.Location = New System.Drawing.Point(2, 209)
         Me.chkCopiedFromVislble.Name = "chkCopiedFromVislble"
-        Me.chkCopiedFromVislble.Size = New System.Drawing.Size(268, 28)
+        Me.chkCopiedFromVislble.Size = New System.Drawing.Size(179, 19)
         Me.chkCopiedFromVislble.TabIndex = 84
         Me.chkCopiedFromVislble.Text = "(show copied from columns)"
         Me.ToolTip1.SetToolTip(Me.chkCopiedFromVislble, "Show or hide the columns that hold the territory copied from values")
         Me.chkCopiedFromVislble.UseVisualStyleBackColor = True
         '
-        'rbUpdate
-        '
-        Me.rbUpdate.AutoSize = True
-        Me.rbUpdate.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbUpdate.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.rbUpdate.Location = New System.Drawing.Point(15, 112)
-        Me.rbUpdate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rbUpdate.Name = "rbUpdate"
-        Me.rbUpdate.Size = New System.Drawing.Size(164, 29)
-        Me.rbUpdate.TabIndex = 99
-        Me.rbUpdate.Text = "Update current"
-        Me.ToolTip1.SetToolTip(Me.rbUpdate, "Make changes to a Primary or a Copied Price List")
-        Me.rbUpdate.UseVisualStyleBackColor = True
-        Me.rbUpdate.Visible = False
-        '
-        'rbPrimary
-        '
-        Me.rbPrimary.AutoSize = True
-        Me.rbPrimary.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbPrimary.Location = New System.Drawing.Point(15, 153)
-        Me.rbPrimary.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rbPrimary.Name = "rbPrimary"
-        Me.rbPrimary.Size = New System.Drawing.Size(145, 29)
-        Me.rbPrimary.TabIndex = 100
-        Me.rbPrimary.Text = "New primary"
-        Me.ToolTip1.SetToolTip(Me.rbPrimary, "Create a New Primary Price List")
-        Me.rbPrimary.UseVisualStyleBackColor = True
-        Me.rbPrimary.Visible = False
-        '
-        'rbCopy
-        '
-        Me.rbCopy.AutoSize = True
-        Me.rbCopy.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbCopy.Location = New System.Drawing.Point(15, 70)
-        Me.rbCopy.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rbCopy.Name = "rbCopy"
-        Me.rbCopy.Size = New System.Drawing.Size(130, 29)
-        Me.rbCopy.TabIndex = 103
-        Me.rbCopy.Text = "Custom Fill"
-        Me.ToolTip1.SetToolTip(Me.rbCopy, "Create a new Copied Price List from an existing Primary or Copied  list")
-        Me.rbCopy.UseVisualStyleBackColor = True
-        '
-        'rbManual
-        '
-        Me.rbManual.AutoSize = True
-        Me.rbManual.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbManual.Location = New System.Drawing.Point(15, 231)
-        Me.rbManual.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rbManual.Name = "rbManual"
-        Me.rbManual.Size = New System.Drawing.Size(99, 29)
-        Me.rbManual.TabIndex = 111
-        Me.rbManual.Text = "Manual"
-        Me.ToolTip1.SetToolTip(Me.rbManual, "Enter manual pricing")
-        Me.rbManual.UseVisualStyleBackColor = True
-        Me.rbManual.Visible = False
-        '
-        'rbDirectCopy
-        '
-        Me.rbDirectCopy.AutoSize = True
-        Me.rbDirectCopy.BackColor = System.Drawing.Color.LimeGreen
-        Me.rbDirectCopy.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbDirectCopy.Location = New System.Drawing.Point(15, 32)
-        Me.rbDirectCopy.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rbDirectCopy.Name = "rbDirectCopy"
-        Me.rbDirectCopy.Size = New System.Drawing.Size(185, 29)
-        Me.rbDirectCopy.TabIndex = 112
-        Me.rbDirectCopy.Text = "Direct Price Copy "
-        Me.ToolTip1.SetToolTip(Me.rbDirectCopy, "Create a new Copied Price List from an existing Primary or Copied  list")
-        Me.rbDirectCopy.UseVisualStyleBackColor = False
-        '
-        'rbAdvanced
-        '
-        Me.rbAdvanced.AutoSize = True
-        Me.rbAdvanced.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbAdvanced.Location = New System.Drawing.Point(15, 192)
-        Me.rbAdvanced.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.rbAdvanced.Name = "rbAdvanced"
-        Me.rbAdvanced.Size = New System.Drawing.Size(118, 29)
-        Me.rbAdvanced.TabIndex = 113
-        Me.rbAdvanced.Text = "Advanced"
-        Me.ToolTip1.SetToolTip(Me.rbAdvanced, "Add one item to mulitiple Price Lists")
-        Me.rbAdvanced.UseVisualStyleBackColor = True
-        Me.rbAdvanced.Visible = False
-        '
         'rbAmountFill
         '
         Me.rbAmountFill.AutoSize = True
         Me.rbAmountFill.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbAmountFill.Location = New System.Drawing.Point(4, 42)
-        Me.rbAmountFill.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbAmountFill.Location = New System.Drawing.Point(3, 28)
         Me.rbAmountFill.Name = "rbAmountFill"
-        Me.rbAmountFill.Size = New System.Drawing.Size(47, 29)
+        Me.rbAmountFill.Size = New System.Drawing.Size(32, 19)
         Me.rbAmountFill.TabIndex = 84
         Me.rbAmountFill.Text = "$"
         Me.ToolTip1.SetToolTip(Me.rbAmountFill, "Create a New Primary Price List")
@@ -556,10 +451,9 @@ Partial Class TerrPricing
         Me.rbPercentFill.AutoSize = True
         Me.rbPercentFill.Checked = True
         Me.rbPercentFill.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbPercentFill.Location = New System.Drawing.Point(4, 9)
-        Me.rbPercentFill.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbPercentFill.Location = New System.Drawing.Point(3, 6)
         Me.rbPercentFill.Name = "rbPercentFill"
-        Me.rbPercentFill.Size = New System.Drawing.Size(52, 29)
+        Me.rbPercentFill.Size = New System.Drawing.Size(35, 19)
         Me.rbPercentFill.TabIndex = 83
         Me.rbPercentFill.TabStop = True
         Me.rbPercentFill.Text = "%"
@@ -571,10 +465,9 @@ Partial Class TerrPricing
         Me.rbDirectMacolaPrc.AutoSize = True
         Me.rbDirectMacolaPrc.BackColor = System.Drawing.Color.Transparent
         Me.rbDirectMacolaPrc.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbDirectMacolaPrc.Location = New System.Drawing.Point(12, 189)
-        Me.rbDirectMacolaPrc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbDirectMacolaPrc.Location = New System.Drawing.Point(8, 126)
         Me.rbDirectMacolaPrc.Name = "rbDirectMacolaPrc"
-        Me.rbDirectMacolaPrc.Size = New System.Drawing.Size(338, 29)
+        Me.rbDirectMacolaPrc.Size = New System.Drawing.Size(217, 19)
         Me.rbDirectMacolaPrc.TabIndex = 136
         Me.rbDirectMacolaPrc.Text = "Direct Price Copy (Use Macola Price)"
         Me.ToolTip1.SetToolTip(Me.rbDirectMacolaPrc, "Create a new Copied Price List from an existing Primary or Copied  list")
@@ -584,10 +477,9 @@ Partial Class TerrPricing
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(9, 196)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label7.Location = New System.Drawing.Point(6, 131)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(117, 25)
+        Me.Label7.Size = New System.Drawing.Size(73, 15)
         Me.Label7.TabIndex = 63
         Me.Label7.Text = "On Price List"
         Me.ToolTip1.SetToolTip(Me.Label7, "Filter by the printed catalogue price list:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Y = Items with Y in Macola for 'On P" &
@@ -597,10 +489,9 @@ Partial Class TerrPricing
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(9, 234)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Location = New System.Drawing.Point(6, 156)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(125, 25)
+        Me.Label5.Size = New System.Drawing.Size(79, 15)
         Me.Label5.TabIndex = 126
         Me.Label5.Text = "Has Terr Price"
         Me.ToolTip1.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
@@ -612,10 +503,9 @@ Partial Class TerrPricing
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.Controls.Add(Me.DataGridView1)
         Me.Panel1.Controls.Add(Me.dgvHeader)
-        Me.Panel1.Location = New System.Drawing.Point(15, 378)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Location = New System.Drawing.Point(10, 252)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1623, 609)
+        Me.Panel1.Size = New System.Drawing.Size(1082, 406)
         Me.Panel1.TabIndex = 46
         '
         'DataGridView1
@@ -636,7 +526,7 @@ Partial Class TerrPricing
         Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.ColumnHeadersHeight = 27
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Selected, Me.ItemNumber, Me.ItemDescription, Me.ProdCategory, Me.ProdCatDescription, Me.TerCode, Me.ItemLocPriceColor, Me.OriginalPriceColor, Me.ActivePriceColor, Me.CopiedPriceColor, Me.ItemLocPriceRococo, Me.OriginalPriceRococo, Me.ActivePriceRococo, Me.CopiedPriceRococo, Me.ItemLocPriceDetailStain, Me.OriginalPriceDetailStain, Me.ActivePriceDetailStain, Me.CopiedPriceDetailStain, Me.TerFrom, Me.TerDesc, Me.Activeitm, Me.ItemWeight, Me.PageNo, Me.LastDate, Me.A4GLIdentity})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Selected, Me.ItemNumber, Me.ItemDescription, Me.ProdCategory, Me.ProdCatDescription, Me.TerCode, Me.ItemLocPriceNatural, Me.OriginalPriceNatural, Me.ActivePriceNatural, Me.CopiedPriceNatural, Me.ItemLocPriceColor, Me.OriginalPriceColor, Me.ActivePriceColor, Me.CopiedPriceColor, Me.ItemLocPriceDetailStain, Me.OriginalPriceDetailStain, Me.ActivePriceDetailStain, Me.CopiedPriceDetailStain, Me.TerFrom, Me.TerDesc, Me.Activeitm, Me.ItemWeight, Me.PageNo, Me.LastDate, Me.A4GLIdentity})
         Me.DataGridView1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.DataGridView1.DataSource = Me.ItemPricingObjBindingSource
         DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -648,8 +538,7 @@ Partial Class TerrPricing
         DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle18
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 84)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 56)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -663,7 +552,7 @@ Partial Class TerrPricing
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.DataGridView1.Size = New System.Drawing.Size(1344, 340)
+        Me.DataGridView1.Size = New System.Drawing.Size(896, 227)
         Me.DataGridView1.TabIndex = 49
         '
         'Selected
@@ -708,14 +597,65 @@ Partial Class TerrPricing
         Me.TerCode.Name = "TerCode"
         Me.TerCode.Width = 60
         '
-        'ItemLocPriceColor
+        'ItemLocPriceNatural
         '
-        Me.ItemLocPriceColor.DataPropertyName = "ItemLocPriceColor"
+        Me.ItemLocPriceNatural.DataPropertyName = "ItemLocPriceNatural"
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         DataGridViewCellStyle2.Format = "N2"
         DataGridViewCellStyle2.NullValue = Nothing
-        Me.ItemLocPriceColor.DefaultCellStyle = DataGridViewCellStyle2
-        Me.ItemLocPriceColor.FillWeight = 120.0!
+        Me.ItemLocPriceNatural.DefaultCellStyle = DataGridViewCellStyle2
+        Me.ItemLocPriceNatural.FillWeight = 120.0!
+        Me.ItemLocPriceNatural.HeaderText = "MAC Prc"
+        Me.ItemLocPriceNatural.Name = "ItemLocPriceNatural"
+        Me.ItemLocPriceNatural.ReadOnly = True
+        Me.ItemLocPriceNatural.Width = 60
+        '
+        'OriginalPriceNatural
+        '
+        Me.OriginalPriceNatural.DataPropertyName = "OriginalPriceNatural"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle3.Format = "N2"
+        DataGridViewCellStyle3.NullValue = Nothing
+        Me.OriginalPriceNatural.DefaultCellStyle = DataGridViewCellStyle3
+        Me.OriginalPriceNatural.FillWeight = 120.0!
+        Me.OriginalPriceNatural.HeaderText = "Curr Prc"
+        Me.OriginalPriceNatural.Name = "OriginalPriceNatural"
+        Me.OriginalPriceNatural.Width = 60
+        '
+        'ActivePriceNatural
+        '
+        Me.ActivePriceNatural.DataPropertyName = "ActivePriceNatural"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.Format = "N2"
+        DataGridViewCellStyle4.NullValue = """"""
+        Me.ActivePriceNatural.DefaultCellStyle = DataGridViewCellStyle4
+        Me.ActivePriceNatural.FillWeight = 120.0!
+        Me.ActivePriceNatural.HeaderText = "New Prc"
+        Me.ActivePriceNatural.MinimumWidth = 2
+        Me.ActivePriceNatural.Name = "ActivePriceNatural"
+        Me.ActivePriceNatural.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ActivePriceNatural.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.ActivePriceNatural.Width = 60
+        '
+        'CopiedPriceNatural
+        '
+        Me.CopiedPriceNatural.DataPropertyName = "CopiedPriceNatural"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.Format = "N2"
+        Me.CopiedPriceNatural.DefaultCellStyle = DataGridViewCellStyle5
+        Me.CopiedPriceNatural.HeaderText = "Copied"
+        Me.CopiedPriceNatural.Name = "CopiedPriceNatural"
+        Me.CopiedPriceNatural.Visible = False
+        Me.CopiedPriceNatural.Width = 60
+        '
+        'ItemLocPriceColor
+        '
+        Me.ItemLocPriceColor.DataPropertyName = "ItemLocPriceColor"
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.Format = "N2"
+        DataGridViewCellStyle6.NullValue = Nothing
+        Me.ItemLocPriceColor.DefaultCellStyle = DataGridViewCellStyle6
+        Me.ItemLocPriceColor.FillWeight = 140.0!
         Me.ItemLocPriceColor.HeaderText = "MAC Prc"
         Me.ItemLocPriceColor.Name = "ItemLocPriceColor"
         Me.ItemLocPriceColor.ReadOnly = True
@@ -724,10 +664,10 @@ Partial Class TerrPricing
         'OriginalPriceColor
         '
         Me.OriginalPriceColor.DataPropertyName = "OriginalPriceColor"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle3.Format = "N2"
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.OriginalPriceColor.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.Format = "N2"
+        DataGridViewCellStyle7.NullValue = Nothing
+        Me.OriginalPriceColor.DefaultCellStyle = DataGridViewCellStyle7
         Me.OriginalPriceColor.FillWeight = 120.0!
         Me.OriginalPriceColor.HeaderText = "Curr Prc"
         Me.OriginalPriceColor.Name = "OriginalPriceColor"
@@ -736,75 +676,24 @@ Partial Class TerrPricing
         'ActivePriceColor
         '
         Me.ActivePriceColor.DataPropertyName = "ActivePriceColor"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Format = "N2"
-        DataGridViewCellStyle4.NullValue = """"""
-        Me.ActivePriceColor.DefaultCellStyle = DataGridViewCellStyle4
-        Me.ActivePriceColor.FillWeight = 120.0!
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle8.Format = "N2"
+        Me.ActivePriceColor.DefaultCellStyle = DataGridViewCellStyle8
         Me.ActivePriceColor.HeaderText = "New Prc"
         Me.ActivePriceColor.MinimumWidth = 2
         Me.ActivePriceColor.Name = "ActivePriceColor"
-        Me.ActivePriceColor.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ActivePriceColor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.ActivePriceColor.Width = 60
         '
         'CopiedPriceColor
         '
         Me.CopiedPriceColor.DataPropertyName = "CopiedPriceColor"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        Me.CopiedPriceColor.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle9.Format = "N2"
+        Me.CopiedPriceColor.DefaultCellStyle = DataGridViewCellStyle9
         Me.CopiedPriceColor.HeaderText = "Copied"
         Me.CopiedPriceColor.Name = "CopiedPriceColor"
         Me.CopiedPriceColor.Visible = False
         Me.CopiedPriceColor.Width = 60
-        '
-        'ItemLocPriceRococo
-        '
-        Me.ItemLocPriceRococo.DataPropertyName = "ItemLocPriceRococo"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle6.Format = "N2"
-        DataGridViewCellStyle6.NullValue = Nothing
-        Me.ItemLocPriceRococo.DefaultCellStyle = DataGridViewCellStyle6
-        Me.ItemLocPriceRococo.FillWeight = 140.0!
-        Me.ItemLocPriceRococo.HeaderText = "MAC Prc"
-        Me.ItemLocPriceRococo.Name = "ItemLocPriceRococo"
-        Me.ItemLocPriceRococo.ReadOnly = True
-        Me.ItemLocPriceRococo.Width = 60
-        '
-        'OriginalPriceRococo
-        '
-        Me.OriginalPriceRococo.DataPropertyName = "OriginalPriceRococo"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Format = "N2"
-        DataGridViewCellStyle7.NullValue = Nothing
-        Me.OriginalPriceRococo.DefaultCellStyle = DataGridViewCellStyle7
-        Me.OriginalPriceRococo.FillWeight = 120.0!
-        Me.OriginalPriceRococo.HeaderText = "Curr Prc"
-        Me.OriginalPriceRococo.Name = "OriginalPriceRococo"
-        Me.OriginalPriceRococo.Width = 60
-        '
-        'ActivePriceRococo
-        '
-        Me.ActivePriceRococo.DataPropertyName = "ActivePriceRococo"
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.Format = "N2"
-        Me.ActivePriceRococo.DefaultCellStyle = DataGridViewCellStyle8
-        Me.ActivePriceRococo.HeaderText = "New Prc"
-        Me.ActivePriceRococo.MinimumWidth = 2
-        Me.ActivePriceRococo.Name = "ActivePriceRococo"
-        Me.ActivePriceRococo.Width = 60
-        '
-        'CopiedPriceRococo
-        '
-        Me.CopiedPriceRococo.DataPropertyName = "CopiedPriceRococo"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle9.Format = "N2"
-        Me.CopiedPriceRococo.DefaultCellStyle = DataGridViewCellStyle9
-        Me.CopiedPriceRococo.HeaderText = "Copied"
-        Me.CopiedPriceRococo.Name = "CopiedPriceRococo"
-        Me.CopiedPriceRococo.Visible = False
-        Me.CopiedPriceRococo.Width = 60
         '
         'ItemLocPriceDetailStain
         '
@@ -937,12 +826,31 @@ Partial Class TerrPricing
         Me.dgvHeader.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
         Me.dgvHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.dgvHeader.Location = New System.Drawing.Point(0, 0)
-        Me.dgvHeader.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dgvHeader.Name = "dgvHeader"
         Me.dgvHeader.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.dgvHeader.RowHeadersVisible = False
-        Me.dgvHeader.Size = New System.Drawing.Size(1623, 40)
+        Me.dgvHeader.Size = New System.Drawing.Size(1082, 27)
         Me.dgvHeader.TabIndex = 48
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Item / Category"
+        Me.Column1.Name = "Column1"
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Natural"
+        Me.Column2.Name = "Column2"
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Color"
+        Me.Column3.Name = "Column3"
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Detail Stain"
+        Me.Column4.Name = "Column4"
         '
         'GroupBox1
         '
@@ -950,11 +858,9 @@ Partial Class TerrPricing
         Me.GroupBox1.Controls.Add(Me.cbDBList)
         Me.GroupBox1.Controls.Add(Me.btnSaveDefaultDB)
         Me.GroupBox1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox1.Location = New System.Drawing.Point(1306, 189)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Location = New System.Drawing.Point(871, 126)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.GroupBox1.Size = New System.Drawing.Size(141, 134)
+        Me.GroupBox1.Size = New System.Drawing.Size(94, 89)
         Me.GroupBox1.TabIndex = 49
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Data Settings"
@@ -962,10 +868,9 @@ Partial Class TerrPricing
         'cbDBList
         '
         Me.cbDBList.FormattingEnabled = True
-        Me.cbDBList.Location = New System.Drawing.Point(9, 36)
-        Me.cbDBList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDBList.Location = New System.Drawing.Point(6, 24)
         Me.cbDBList.Name = "cbDBList"
-        Me.cbDBList.Size = New System.Drawing.Size(115, 33)
+        Me.cbDBList.Size = New System.Drawing.Size(78, 23)
         Me.cbDBList.TabIndex = 0
         '
         'bt
@@ -982,14 +887,14 @@ Partial Class TerrPricing
         '
         Me.TextBox1.Location = New System.Drawing.Point(182, 18)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(190, 26)
+        Me.TextBox1.Size = New System.Drawing.Size(190, 20)
         Me.TextBox1.TabIndex = 0
         '
         'TextBox2
         '
         Me.TextBox2.Location = New System.Drawing.Point(617, 8)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(190, 26)
+        Me.TextBox2.Size = New System.Drawing.Size(190, 20)
         Me.TextBox2.TabIndex = 1
         '
         'grpFilter
@@ -1004,11 +909,9 @@ Partial Class TerrPricing
         Me.grpFilter.Controls.Add(Me.ListBox1)
         Me.grpFilter.Controls.Add(Me.cboFilter)
         Me.grpFilter.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpFilter.Location = New System.Drawing.Point(976, 15)
-        Me.grpFilter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpFilter.Location = New System.Drawing.Point(651, 10)
         Me.grpFilter.Name = "grpFilter"
-        Me.grpFilter.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.grpFilter.Size = New System.Drawing.Size(318, 308)
+        Me.grpFilter.Size = New System.Drawing.Size(212, 205)
         Me.grpFilter.TabIndex = 10
         Me.grpFilter.TabStop = False
         Me.grpFilter.Text = "Filter"
@@ -1019,9 +922,10 @@ Partial Class TerrPricing
         Me.lblCompany.BackColor = System.Drawing.SystemColors.Control
         Me.lblCompany.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCompany.ForeColor = System.Drawing.SystemColors.GrayText
-        Me.lblCompany.Location = New System.Drawing.Point(10, 207)
+        Me.lblCompany.Location = New System.Drawing.Point(7, 138)
+        Me.lblCompany.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblCompany.Name = "lblCompany"
-        Me.lblCompany.Size = New System.Drawing.Size(164, 32)
+        Me.lblCompany.Size = New System.Drawing.Size(112, 24)
         Me.lblCompany.TabIndex = 117
         Me.lblCompany.Text = "COMPANY"
         '
@@ -1031,9 +935,10 @@ Partial Class TerrPricing
         Me.lblTest.BackColor = System.Drawing.SystemColors.Control
         Me.lblTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 19.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTest.ForeColor = System.Drawing.SystemColors.GrayText
-        Me.lblTest.Location = New System.Drawing.Point(33, 159)
+        Me.lblTest.Location = New System.Drawing.Point(22, 106)
+        Me.lblTest.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblTest.Name = "lblTest"
-        Me.lblTest.Size = New System.Drawing.Size(126, 46)
+        Me.lblTest.Size = New System.Drawing.Size(88, 31)
         Me.lblTest.TabIndex = 116
         Me.lblTest.Text = "TEST"
         '
@@ -1043,10 +948,9 @@ Partial Class TerrPricing
         Me.btnRemoveFilter.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRemoveFilter.Image = Global.TerritoryPricing.My.Resources.Resources.FilterRemove1616
         Me.btnRemoveFilter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnRemoveFilter.Location = New System.Drawing.Point(12, 110)
-        Me.btnRemoveFilter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRemoveFilter.Location = New System.Drawing.Point(8, 73)
         Me.btnRemoveFilter.Name = "btnRemoveFilter"
-        Me.btnRemoveFilter.Size = New System.Drawing.Size(124, 36)
+        Me.btnRemoveFilter.Size = New System.Drawing.Size(83, 24)
         Me.btnRemoveFilter.TabIndex = 5
         Me.btnRemoveFilter.Text = "Remove"
         Me.btnRemoveFilter.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1058,10 +962,9 @@ Partial Class TerrPricing
         Me.btnApplyFilter.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnApplyFilter.Image = Global.TerritoryPricing.My.Resources.Resources.FilterAdd16161
         Me.btnApplyFilter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnApplyFilter.Location = New System.Drawing.Point(12, 69)
-        Me.btnApplyFilter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnApplyFilter.Location = New System.Drawing.Point(8, 46)
         Me.btnApplyFilter.Name = "btnApplyFilter"
-        Me.btnApplyFilter.Size = New System.Drawing.Size(124, 36)
+        Me.btnApplyFilter.Size = New System.Drawing.Size(83, 24)
         Me.btnApplyFilter.TabIndex = 4
         Me.btnApplyFilter.Text = "      Apply"
         Me.btnApplyFilter.UseVisualStyleBackColor = True
@@ -1070,11 +973,10 @@ Partial Class TerrPricing
         '
         Me.ListBox1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 25
-        Me.ListBox1.Location = New System.Drawing.Point(189, 28)
-        Me.ListBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ListBox1.ItemHeight = 15
+        Me.ListBox1.Location = New System.Drawing.Point(126, 19)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(115, 229)
+        Me.ListBox1.Size = New System.Drawing.Size(78, 154)
         Me.ListBox1.TabIndex = 53
         Me.ListBox1.TabStop = False
         '
@@ -1085,10 +987,10 @@ Partial Class TerrPricing
         '
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblPricingType, Me.lblDivider1, Me.lblCount, Me.lblDivider2, Me.lblCurrentDB, Me.lblDivider3, Me.lblDefaultDB})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 1000)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 659)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(2, 0, 22, 0)
-        Me.StatusStrip1.Size = New System.Drawing.Size(1660, 22)
+        Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 15, 0)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1107, 22)
         Me.StatusStrip1.TabIndex = 60
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -1144,10 +1046,9 @@ Partial Class TerrPricing
         '
         Me.cboTerrCodeLoad.Enabled = False
         Me.cboTerrCodeLoad.FormattingEnabled = True
-        Me.cboTerrCodeLoad.Location = New System.Drawing.Point(1084, 46)
-        Me.cboTerrCodeLoad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboTerrCodeLoad.Location = New System.Drawing.Point(723, 31)
         Me.cboTerrCodeLoad.Name = "cboTerrCodeLoad"
-        Me.cboTerrCodeLoad.Size = New System.Drawing.Size(181, 33)
+        Me.cboTerrCodeLoad.Size = New System.Drawing.Size(122, 23)
         Me.cboTerrCodeLoad.TabIndex = 3
         Me.cboTerrCodeLoad.Visible = False
         '
@@ -1155,10 +1056,9 @@ Partial Class TerrPricing
         '
         Me.rbFromItemMaster.AutoSize = True
         Me.rbFromItemMaster.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbFromItemMaster.Location = New System.Drawing.Point(1503, 21)
-        Me.rbFromItemMaster.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbFromItemMaster.Location = New System.Drawing.Point(1002, 14)
         Me.rbFromItemMaster.Name = "rbFromItemMaster"
-        Me.rbFromItemMaster.Size = New System.Drawing.Size(208, 24)
+        Me.rbFromItemMaster.Size = New System.Drawing.Size(142, 17)
         Me.rbFromItemMaster.TabIndex = 8
         Me.rbFromItemMaster.Text = "Items Not Yet Priced"
         Me.rbFromItemMaster.UseVisualStyleBackColor = True
@@ -1169,10 +1069,9 @@ Partial Class TerrPricing
         Me.rbFromTerrPricing.AutoSize = True
         Me.rbFromTerrPricing.Checked = True
         Me.rbFromTerrPricing.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.rbFromTerrPricing.Location = New System.Drawing.Point(1503, 57)
-        Me.rbFromTerrPricing.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rbFromTerrPricing.Location = New System.Drawing.Point(1002, 38)
         Me.rbFromTerrPricing.Name = "rbFromTerrPricing"
-        Me.rbFromTerrPricing.Size = New System.Drawing.Size(108, 24)
+        Me.rbFromTerrPricing.Size = New System.Drawing.Size(73, 17)
         Me.rbFromTerrPricing.TabIndex = 9
         Me.rbFromTerrPricing.TabStop = True
         Me.rbFromTerrPricing.Text = "All Items"
@@ -1183,10 +1082,9 @@ Partial Class TerrPricing
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(922, 21)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label10.Location = New System.Drawing.Point(615, 14)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(80, 20)
+        Me.Label10.Size = New System.Drawing.Size(54, 13)
         Me.Label10.TabIndex = 4
         Me.Label10.Text = "FROM:  "
         '
@@ -1194,10 +1092,9 @@ Partial Class TerrPricing
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(1119, 16)
-        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label11.Location = New System.Drawing.Point(746, 11)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(140, 20)
+        Me.Label11.Size = New System.Drawing.Size(94, 13)
         Me.Label11.TabIndex = 11
         Me.Label11.Text = "...Other Criteria"
         '
@@ -1206,20 +1103,18 @@ Partial Class TerrPricing
         Me.cboCategoryCodes.BackColor = System.Drawing.SystemColors.Window
         Me.cboCategoryCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboCategoryCodes.FormattingEnabled = True
-        Me.cboCategoryCodes.Location = New System.Drawing.Point(124, 147)
-        Me.cboCategoryCodes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboCategoryCodes.Location = New System.Drawing.Point(83, 98)
         Me.cboCategoryCodes.Name = "cboCategoryCodes"
-        Me.cboCategoryCodes.Size = New System.Drawing.Size(145, 33)
+        Me.cboCategoryCodes.Size = New System.Drawing.Size(98, 23)
         Me.cboCategoryCodes.TabIndex = 2
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(40, 154)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Location = New System.Drawing.Point(27, 103)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(84, 25)
+        Me.Label3.Size = New System.Drawing.Size(52, 15)
         Me.Label3.TabIndex = 15
         Me.Label3.Text = "Prod Cat"
         '
@@ -1227,32 +1122,29 @@ Partial Class TerrPricing
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(30, 33)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Location = New System.Drawing.Point(20, 22)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(92, 25)
+        Me.Label4.Size = New System.Drawing.Size(57, 15)
         Me.Label4.TabIndex = 16
         Me.Label4.Text = "Terr Code"
         '
         'txtTerrDesc
         '
         Me.txtTerrDesc.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTerrDesc.Location = New System.Drawing.Point(124, 108)
-        Me.txtTerrDesc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtTerrDesc.Location = New System.Drawing.Point(83, 72)
         Me.txtTerrDesc.MaxLength = 0
         Me.txtTerrDesc.Name = "txtTerrDesc"
         Me.txtTerrDesc.ReadOnly = True
-        Me.txtTerrDesc.Size = New System.Drawing.Size(145, 31)
+        Me.txtTerrDesc.Size = New System.Drawing.Size(98, 23)
         Me.txtTerrDesc.TabIndex = 1
         '
         'Label14
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(15, 112)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label14.Location = New System.Drawing.Point(10, 75)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(108, 25)
+        Me.Label14.Size = New System.Drawing.Size(68, 15)
         Me.Label14.TabIndex = 61
         Me.Label14.Text = "Description"
         '
@@ -1261,10 +1153,9 @@ Partial Class TerrPricing
         Me.cboOnPriceList.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboOnPriceList.FormattingEnabled = True
         Me.cboOnPriceList.Items.AddRange(New Object() {"", "Y", "N"})
-        Me.cboOnPriceList.Location = New System.Drawing.Point(136, 186)
-        Me.cboOnPriceList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboOnPriceList.Location = New System.Drawing.Point(91, 124)
         Me.cboOnPriceList.Name = "cboOnPriceList"
-        Me.cboOnPriceList.Size = New System.Drawing.Size(133, 33)
+        Me.cboOnPriceList.Size = New System.Drawing.Size(90, 23)
         Me.cboOnPriceList.TabIndex = 3
         '
         'GroupBox2
@@ -1295,11 +1186,9 @@ Partial Class TerrPricing
         Me.GroupBox2.Controls.Add(Me.rbFromItemMaster)
         Me.GroupBox2.Controls.Add(Me.cboTerrCodeLoad)
         Me.GroupBox2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.GroupBox2.Location = New System.Drawing.Point(15, 15)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Location = New System.Drawing.Point(10, 10)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.GroupBox2.Size = New System.Drawing.Size(414, 354)
+        Me.GroupBox2.Size = New System.Drawing.Size(276, 236)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Load a Price"
@@ -1308,10 +1197,9 @@ Partial Class TerrPricing
         '
         Me.btnSetZonePercentage.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSetZonePercentage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSetZonePercentage.Location = New System.Drawing.Point(279, 248)
-        Me.btnSetZonePercentage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSetZonePercentage.Location = New System.Drawing.Point(186, 165)
         Me.btnSetZonePercentage.Name = "btnSetZonePercentage"
-        Me.btnSetZonePercentage.Size = New System.Drawing.Size(120, 42)
+        Me.btnSetZonePercentage.Size = New System.Drawing.Size(80, 28)
         Me.btnSetZonePercentage.TabIndex = 139
         Me.btnSetZonePercentage.Text = "Set Zone %"
         Me.btnSetZonePercentage.UseVisualStyleBackColor = True
@@ -1322,10 +1210,9 @@ Partial Class TerrPricing
         Me.cboHasTerrPrice.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboHasTerrPrice.FormattingEnabled = True
         Me.cboHasTerrPrice.Items.AddRange(New Object() {"Y", "N"})
-        Me.cboHasTerrPrice.Location = New System.Drawing.Point(136, 225)
-        Me.cboHasTerrPrice.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboHasTerrPrice.Location = New System.Drawing.Point(91, 150)
         Me.cboHasTerrPrice.Name = "cboHasTerrPrice"
-        Me.cboHasTerrPrice.Size = New System.Drawing.Size(133, 33)
+        Me.cboHasTerrPrice.Size = New System.Drawing.Size(90, 23)
         Me.cboHasTerrPrice.TabIndex = 125
         Me.cboHasTerrPrice.Text = "Y"
         '
@@ -1334,10 +1221,10 @@ Partial Class TerrPricing
         Me.btnBackup.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBackup.Image = Global.TerritoryPricing.My.Resources.Resources.Backup_1616
         Me.btnBackup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnBackup.Location = New System.Drawing.Point(279, 297)
-        Me.btnBackup.Margin = New System.Windows.Forms.Padding(4, 4, 0, 4)
+        Me.btnBackup.Location = New System.Drawing.Point(186, 198)
+        Me.btnBackup.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
         Me.btnBackup.Name = "btnBackup"
-        Me.btnBackup.Size = New System.Drawing.Size(120, 42)
+        Me.btnBackup.Size = New System.Drawing.Size(80, 28)
         Me.btnBackup.TabIndex = 124
         Me.btnBackup.Text = "Backup"
         Me.btnBackup.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1346,21 +1233,19 @@ Partial Class TerrPricing
         'txtFrom
         '
         Me.txtFrom.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFrom.Location = New System.Drawing.Point(124, 69)
-        Me.txtFrom.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFrom.Location = New System.Drawing.Point(83, 46)
         Me.txtFrom.MaxLength = 0
         Me.txtFrom.Name = "txtFrom"
-        Me.txtFrom.Size = New System.Drawing.Size(145, 31)
+        Me.txtFrom.Size = New System.Drawing.Size(98, 23)
         Me.txtFrom.TabIndex = 123
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(28, 72)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Location = New System.Drawing.Point(19, 48)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(92, 25)
+        Me.Label2.Size = New System.Drawing.Size(58, 15)
         Me.Label2.TabIndex = 122
         Me.Label2.Text = "Terr From"
         '
@@ -1369,10 +1254,10 @@ Partial Class TerrPricing
         Me.btnCancel.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.Image = Global.TerritoryPricing.My.Resources.Resources.CloseWindow2020
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancel.Location = New System.Drawing.Point(279, 177)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 4, 0, 4)
+        Me.btnCancel.Location = New System.Drawing.Point(186, 118)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(120, 42)
+        Me.btnCancel.Size = New System.Drawing.Size(80, 28)
         Me.btnCancel.TabIndex = 83
         Me.btnCancel.Text = "Close"
         Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1383,10 +1268,9 @@ Partial Class TerrPricing
         Me.btnClearAll.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClearAll.Image = Global.TerritoryPricing.My.Resources.Resources.Delete202
         Me.btnClearAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnClearAll.Location = New System.Drawing.Point(279, 78)
-        Me.btnClearAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnClearAll.Location = New System.Drawing.Point(186, 52)
         Me.btnClearAll.Name = "btnClearAll"
-        Me.btnClearAll.Size = New System.Drawing.Size(120, 42)
+        Me.btnClearAll.Size = New System.Drawing.Size(80, 28)
         Me.btnClearAll.TabIndex = 65
         Me.btnClearAll.Text = "Clear"
         Me.btnClearAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1397,10 +1281,9 @@ Partial Class TerrPricing
         Me.btnLoadItems.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLoadItems.Image = Global.TerritoryPricing.My.Resources.Resources.Check2020
         Me.btnLoadItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLoadItems.Location = New System.Drawing.Point(279, 28)
-        Me.btnLoadItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnLoadItems.Location = New System.Drawing.Point(186, 19)
         Me.btnLoadItems.Name = "btnLoadItems"
-        Me.btnLoadItems.Size = New System.Drawing.Size(120, 42)
+        Me.btnLoadItems.Size = New System.Drawing.Size(80, 28)
         Me.btnLoadItems.TabIndex = 64
         Me.btnLoadItems.Text = "Load"
         Me.btnLoadItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1414,11 +1297,10 @@ Partial Class TerrPricing
         Me.mcboTerritoryCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mcboTerritoryCodes.FormattingEnabled = True
         Me.mcboTerritoryCodes.IntegralHeight = False
-        Me.mcboTerritoryCodes.Location = New System.Drawing.Point(124, 28)
-        Me.mcboTerritoryCodes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.mcboTerritoryCodes.Location = New System.Drawing.Point(83, 19)
         Me.mcboTerritoryCodes.MaxDropDownItems = 20
         Me.mcboTerritoryCodes.Name = "mcboTerritoryCodes"
-        Me.mcboTerritoryCodes.Size = New System.Drawing.Size(145, 32)
+        Me.mcboTerritoryCodes.Size = New System.Drawing.Size(98, 24)
         Me.mcboTerritoryCodes.TabIndex = 0
         Me.mcboTerritoryCodes.ViewColumn = 0
         '
@@ -1432,11 +1314,9 @@ Partial Class TerrPricing
         Me.grpFill.Controls.Add(Me.Label8)
         Me.grpFill.Enabled = False
         Me.grpFill.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpFill.Location = New System.Drawing.Point(440, 15)
-        Me.grpFill.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpFill.Location = New System.Drawing.Point(293, 10)
         Me.grpFill.Name = "grpFill"
-        Me.grpFill.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.grpFill.Size = New System.Drawing.Size(411, 354)
+        Me.grpFill.Size = New System.Drawing.Size(274, 236)
         Me.grpFill.TabIndex = 3
         Me.grpFill.TabStop = False
         Me.grpFill.Text = "Fill Settings"
@@ -1445,11 +1325,10 @@ Partial Class TerrPricing
         '
         Me.tabOptions.Controls.Add(Me.tbFill)
         Me.tabOptions.Controls.Add(Me.tbCopyTo)
-        Me.tabOptions.Location = New System.Drawing.Point(9, 72)
-        Me.tabOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabOptions.Location = New System.Drawing.Point(6, 48)
         Me.tabOptions.Name = "tabOptions"
         Me.tabOptions.SelectedIndex = 0
-        Me.tabOptions.Size = New System.Drawing.Size(393, 273)
+        Me.tabOptions.Size = New System.Drawing.Size(262, 182)
         Me.tabOptions.TabIndex = 126
         '
         'tbFill
@@ -1465,11 +1344,10 @@ Partial Class TerrPricing
         Me.tbFill.Controls.Add(Me.txtColorMarkup)
         Me.tbFill.Controls.Add(Me.lblNatural)
         Me.tbFill.Controls.Add(Me.txtNaturalMarkup)
-        Me.tbFill.Location = New System.Drawing.Point(4, 34)
-        Me.tbFill.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbFill.Location = New System.Drawing.Point(4, 24)
         Me.tbFill.Name = "tbFill"
-        Me.tbFill.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.tbFill.Size = New System.Drawing.Size(385, 235)
+        Me.tbFill.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbFill.Size = New System.Drawing.Size(254, 154)
         Me.tbFill.TabIndex = 0
         Me.tbFill.Text = "Fill"
         Me.tbFill.UseVisualStyleBackColor = True
@@ -1477,9 +1355,10 @@ Partial Class TerrPricing
         'rbZoneFill
         '
         Me.rbZoneFill.AutoSize = True
-        Me.rbZoneFill.Location = New System.Drawing.Point(12, 138)
+        Me.rbZoneFill.Location = New System.Drawing.Point(8, 92)
+        Me.rbZoneFill.Margin = New System.Windows.Forms.Padding(2)
         Me.rbZoneFill.Name = "rbZoneFill"
-        Me.rbZoneFill.Size = New System.Drawing.Size(240, 29)
+        Me.rbZoneFill.Size = New System.Drawing.Size(153, 19)
         Me.rbZoneFill.TabIndex = 135
         Me.rbZoneFill.TabStop = True
         Me.rbZoneFill.Text = "Use this Zone % Markup"
@@ -1488,9 +1367,10 @@ Partial Class TerrPricing
         'rbCustomFill
         '
         Me.rbCustomFill.AutoSize = True
-        Me.rbCustomFill.Location = New System.Drawing.Point(12, 10)
+        Me.rbCustomFill.Location = New System.Drawing.Point(8, 7)
+        Me.rbCustomFill.Margin = New System.Windows.Forms.Padding(2)
         Me.rbCustomFill.Name = "rbCustomFill"
-        Me.rbCustomFill.Size = New System.Drawing.Size(130, 29)
+        Me.rbCustomFill.Size = New System.Drawing.Size(84, 19)
         Me.rbCustomFill.TabIndex = 134
         Me.rbCustomFill.TabStop = True
         Me.rbCustomFill.Text = "Custom Fill"
@@ -1500,9 +1380,10 @@ Partial Class TerrPricing
         '
         Me.cboZonePrc.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboZonePrc.FormattingEnabled = True
-        Me.cboZonePrc.Location = New System.Drawing.Point(249, 135)
+        Me.cboZonePrc.Location = New System.Drawing.Point(166, 90)
+        Me.cboZonePrc.Margin = New System.Windows.Forms.Padding(2)
         Me.cboZonePrc.Name = "cboZonePrc"
-        Me.cboZonePrc.Size = New System.Drawing.Size(121, 33)
+        Me.cboZonePrc.Size = New System.Drawing.Size(82, 23)
         Me.cboZonePrc.TabIndex = 133
         '
         'pnlFillOptions
@@ -1511,10 +1392,9 @@ Partial Class TerrPricing
         Me.pnlFillOptions.Controls.Add(Me.rbAmountFill)
         Me.pnlFillOptions.Controls.Add(Me.rbPercentFill)
         Me.pnlFillOptions.Enabled = False
-        Me.pnlFillOptions.Location = New System.Drawing.Point(40, 42)
-        Me.pnlFillOptions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlFillOptions.Location = New System.Drawing.Point(27, 28)
         Me.pnlFillOptions.Name = "pnlFillOptions"
-        Me.pnlFillOptions.Size = New System.Drawing.Size(63, 75)
+        Me.pnlFillOptions.Size = New System.Drawing.Size(42, 50)
         Me.pnlFillOptions.TabIndex = 132
         '
         'lblDetail
@@ -1522,10 +1402,9 @@ Partial Class TerrPricing
         Me.lblDetail.AutoSize = True
         Me.lblDetail.Enabled = False
         Me.lblDetail.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDetail.Location = New System.Drawing.Point(184, 94)
-        Me.lblDetail.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblDetail.Location = New System.Drawing.Point(123, 63)
         Me.lblDetail.Name = "lblDetail"
-        Me.lblDetail.Size = New System.Drawing.Size(81, 25)
+        Me.lblDetail.Size = New System.Drawing.Size(51, 15)
         Me.lblDetail.TabIndex = 131
         Me.lblDetail.Text = "% Detail"
         '
@@ -1533,11 +1412,10 @@ Partial Class TerrPricing
         '
         Me.txtDetailMarkup.Enabled = False
         Me.txtDetailMarkup.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDetailMarkup.Location = New System.Drawing.Point(294, 93)
-        Me.txtDetailMarkup.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtDetailMarkup.Location = New System.Drawing.Point(196, 62)
         Me.txtDetailMarkup.MaxLength = 0
         Me.txtDetailMarkup.Name = "txtDetailMarkup"
-        Me.txtDetailMarkup.Size = New System.Drawing.Size(73, 31)
+        Me.txtDetailMarkup.Size = New System.Drawing.Size(50, 23)
         Me.txtDetailMarkup.TabIndex = 128
         Me.txtDetailMarkup.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1546,10 +1424,9 @@ Partial Class TerrPricing
         Me.lblColor.AutoSize = True
         Me.lblColor.Enabled = False
         Me.lblColor.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblColor.Location = New System.Drawing.Point(184, 52)
-        Me.lblColor.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblColor.Location = New System.Drawing.Point(123, 35)
         Me.lblColor.Name = "lblColor"
-        Me.lblColor.Size = New System.Drawing.Size(73, 25)
+        Me.lblColor.Size = New System.Drawing.Size(47, 15)
         Me.lblColor.TabIndex = 130
         Me.lblColor.Text = "% Stain"
         '
@@ -1557,11 +1434,10 @@ Partial Class TerrPricing
         '
         Me.txtColorMarkup.Enabled = False
         Me.txtColorMarkup.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtColorMarkup.Location = New System.Drawing.Point(294, 51)
-        Me.txtColorMarkup.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtColorMarkup.Location = New System.Drawing.Point(196, 34)
         Me.txtColorMarkup.MaxLength = 0
         Me.txtColorMarkup.Name = "txtColorMarkup"
-        Me.txtColorMarkup.Size = New System.Drawing.Size(73, 31)
+        Me.txtColorMarkup.Size = New System.Drawing.Size(50, 23)
         Me.txtColorMarkup.TabIndex = 127
         Me.txtColorMarkup.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1570,10 +1446,9 @@ Partial Class TerrPricing
         Me.lblNatural.AutoSize = True
         Me.lblNatural.Enabled = False
         Me.lblNatural.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNatural.Location = New System.Drawing.Point(184, 12)
-        Me.lblNatural.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblNatural.Location = New System.Drawing.Point(123, 8)
         Me.lblNatural.Name = "lblNatural"
-        Me.lblNatural.Size = New System.Drawing.Size(94, 25)
+        Me.lblNatural.Size = New System.Drawing.Size(59, 15)
         Me.lblNatural.TabIndex = 129
         Me.lblNatural.Text = "% Natural"
         '
@@ -1581,64 +1456,26 @@ Partial Class TerrPricing
         '
         Me.txtNaturalMarkup.Enabled = False
         Me.txtNaturalMarkup.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtNaturalMarkup.Location = New System.Drawing.Point(294, 9)
-        Me.txtNaturalMarkup.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtNaturalMarkup.Location = New System.Drawing.Point(196, 6)
         Me.txtNaturalMarkup.MaxLength = 0
         Me.txtNaturalMarkup.Name = "txtNaturalMarkup"
-        Me.txtNaturalMarkup.Size = New System.Drawing.Size(73, 31)
+        Me.txtNaturalMarkup.Size = New System.Drawing.Size(50, 23)
         Me.txtNaturalMarkup.TabIndex = 126
         Me.txtNaturalMarkup.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'tbCopyTo
         '
+        Me.tbCopyTo.Controls.Add(Me.mcboFillTerrCodes)
         Me.tbCopyTo.Controls.Add(Me.lblNew)
         Me.tbCopyTo.Controls.Add(Me.btnCopyTo)
         Me.tbCopyTo.Controls.Add(Me.txtFillTerrDesc)
-        Me.tbCopyTo.Controls.Add(Me.mcboFillTerrCodes)
-        Me.tbCopyTo.Location = New System.Drawing.Point(4, 34)
-        Me.tbCopyTo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbCopyTo.Location = New System.Drawing.Point(4, 24)
         Me.tbCopyTo.Name = "tbCopyTo"
-        Me.tbCopyTo.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.tbCopyTo.Size = New System.Drawing.Size(385, 235)
+        Me.tbCopyTo.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbCopyTo.Size = New System.Drawing.Size(254, 154)
         Me.tbCopyTo.TabIndex = 1
         Me.tbCopyTo.Text = "Copy To"
         Me.tbCopyTo.UseVisualStyleBackColor = True
-        '
-        'lblNew
-        '
-        Me.lblNew.AutoSize = True
-        Me.lblNew.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNew.Location = New System.Drawing.Point(14, 22)
-        Me.lblNew.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblNew.Name = "lblNew"
-        Me.lblNew.Size = New System.Drawing.Size(78, 25)
-        Me.lblNew.TabIndex = 123
-        Me.lblNew.Text = "Copy To"
-        '
-        'btnCopyTo
-        '
-        Me.btnCopyTo.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCopyTo.Image = Global.TerritoryPricing.My.Resources.Resources.CopyPricing2020
-        Me.btnCopyTo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCopyTo.Location = New System.Drawing.Point(200, 111)
-        Me.btnCopyTo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.btnCopyTo.Name = "btnCopyTo"
-        Me.btnCopyTo.Size = New System.Drawing.Size(172, 52)
-        Me.btnCopyTo.TabIndex = 122
-        Me.btnCopyTo.Text = "Copy Pricing"
-        Me.btnCopyTo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnCopyTo.UseVisualStyleBackColor = True
-        '
-        'txtFillTerrDesc
-        '
-        Me.txtFillTerrDesc.Enabled = False
-        Me.txtFillTerrDesc.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFillTerrDesc.Location = New System.Drawing.Point(98, 58)
-        Me.txtFillTerrDesc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtFillTerrDesc.MaxLength = 0
-        Me.txtFillTerrDesc.Name = "txtFillTerrDesc"
-        Me.txtFillTerrDesc.Size = New System.Drawing.Size(272, 31)
-        Me.txtFillTerrDesc.TabIndex = 121
         '
         'mcboFillTerrCodes
         '
@@ -1649,53 +1486,83 @@ Partial Class TerrPricing
         Me.mcboFillTerrCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.mcboFillTerrCodes.FormattingEnabled = True
         Me.mcboFillTerrCodes.IntegralHeight = False
-        Me.mcboFillTerrCodes.Location = New System.Drawing.Point(9, 58)
-        Me.mcboFillTerrCodes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.mcboFillTerrCodes.Location = New System.Drawing.Point(6, 39)
         Me.mcboFillTerrCodes.MaxDropDownItems = 30
         Me.mcboFillTerrCodes.Name = "mcboFillTerrCodes"
-        Me.mcboFillTerrCodes.Size = New System.Drawing.Size(78, 32)
+        Me.mcboFillTerrCodes.Size = New System.Drawing.Size(53, 24)
         Me.mcboFillTerrCodes.TabIndex = 120
         Me.mcboFillTerrCodes.ViewColumn = 0
         '
+        'lblNew
+        '
+        Me.lblNew.AutoSize = True
+        Me.lblNew.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNew.Location = New System.Drawing.Point(9, 15)
+        Me.lblNew.Name = "lblNew"
+        Me.lblNew.Size = New System.Drawing.Size(50, 15)
+        Me.lblNew.TabIndex = 123
+        Me.lblNew.Text = "Copy To"
+        '
+        'btnCopyTo
+        '
+        Me.btnCopyTo.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCopyTo.Image = Global.TerritoryPricing.My.Resources.Resources.CopyPricing2020
+        Me.btnCopyTo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCopyTo.Location = New System.Drawing.Point(133, 74)
+        Me.btnCopyTo.Name = "btnCopyTo"
+        Me.btnCopyTo.Size = New System.Drawing.Size(115, 35)
+        Me.btnCopyTo.TabIndex = 122
+        Me.btnCopyTo.Text = "Copy Pricing"
+        Me.btnCopyTo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCopyTo.UseVisualStyleBackColor = True
+        '
+        'txtFillTerrDesc
+        '
+        Me.txtFillTerrDesc.Enabled = False
+        Me.txtFillTerrDesc.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFillTerrDesc.Location = New System.Drawing.Point(65, 39)
+        Me.txtFillTerrDesc.MaxLength = 0
+        Me.txtFillTerrDesc.Name = "txtFillTerrDesc"
+        Me.txtFillTerrDesc.Size = New System.Drawing.Size(183, 23)
+        Me.txtFillTerrDesc.TabIndex = 121
+        '
         'txtTerFrom
         '
+        Me.txtTerFrom.Enabled = False
         Me.txtTerFrom.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTerFrom.Location = New System.Drawing.Point(292, 28)
-        Me.txtTerFrom.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtTerFrom.Location = New System.Drawing.Point(195, 19)
         Me.txtTerFrom.MaxLength = 0
         Me.txtTerFrom.Name = "txtTerFrom"
-        Me.txtTerFrom.Size = New System.Drawing.Size(73, 31)
+        Me.txtTerFrom.Size = New System.Drawing.Size(50, 23)
         Me.txtTerFrom.TabIndex = 121
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(183, 33)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(122, 22)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(92, 25)
+        Me.Label1.Size = New System.Drawing.Size(58, 15)
         Me.Label1.TabIndex = 120
         Me.Label1.Text = "Terr From"
         '
         'txtTerCode
         '
+        Me.txtTerCode.Enabled = False
         Me.txtTerCode.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTerCode.Location = New System.Drawing.Point(104, 28)
-        Me.txtTerCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtTerCode.Location = New System.Drawing.Point(69, 19)
         Me.txtTerCode.MaxLength = 0
         Me.txtTerCode.Name = "txtTerCode"
-        Me.txtTerCode.Size = New System.Drawing.Size(73, 31)
+        Me.txtTerCode.Size = New System.Drawing.Size(50, 23)
         Me.txtTerCode.TabIndex = 119
         '
         'lblCurrent
         '
         Me.lblCurrent.AutoSize = True
         Me.lblCurrent.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCurrent.Location = New System.Drawing.Point(9, 33)
-        Me.lblCurrent.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblCurrent.Location = New System.Drawing.Point(6, 22)
         Me.lblCurrent.Name = "lblCurrent"
-        Me.lblCurrent.Size = New System.Drawing.Size(92, 25)
+        Me.lblCurrent.Size = New System.Drawing.Size(57, 15)
         Me.lblCurrent.TabIndex = 113
         Me.lblCurrent.Text = "Terr Code"
         '
@@ -1703,10 +1570,9 @@ Partial Class TerrPricing
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(1119, 24)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label8.Location = New System.Drawing.Point(746, 16)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(179, 22)
+        Me.Label8.Size = New System.Drawing.Size(125, 15)
         Me.Label8.TabIndex = 45
         Me.Label8.Text = "Terr / Price Values"
         Me.Label8.Visible = False
@@ -1720,10 +1586,9 @@ Partial Class TerrPricing
         Me.btnRoundPricing.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRoundPricing.Image = Global.TerritoryPricing.My.Resources.Resources.RoundUp1818
         Me.btnRoundPricing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnRoundPricing.Location = New System.Drawing.Point(860, 126)
-        Me.btnRoundPricing.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRoundPricing.Location = New System.Drawing.Point(573, 84)
         Me.btnRoundPricing.Name = "btnRoundPricing"
-        Me.btnRoundPricing.Size = New System.Drawing.Size(108, 42)
+        Me.btnRoundPricing.Size = New System.Drawing.Size(72, 28)
         Me.btnRoundPricing.TabIndex = 114
         Me.btnRoundPricing.Text = "Round"
         Me.btnRoundPricing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1735,10 +1600,9 @@ Partial Class TerrPricing
         Me.btnFillPricing.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnFillPricing.Image = Global.TerritoryPricing.My.Resources.Resources.Fill2020D
         Me.btnFillPricing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFillPricing.Location = New System.Drawing.Point(858, 76)
-        Me.btnFillPricing.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnFillPricing.Location = New System.Drawing.Point(572, 51)
         Me.btnFillPricing.Name = "btnFillPricing"
-        Me.btnFillPricing.Size = New System.Drawing.Size(108, 42)
+        Me.btnFillPricing.Size = New System.Drawing.Size(72, 28)
         Me.btnFillPricing.TabIndex = 113
         Me.btnFillPricing.Text = "Fill "
         Me.btnFillPricing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1750,10 +1614,9 @@ Partial Class TerrPricing
         Me.btnDelete.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.Image = Global.TerritoryPricing.My.Resources.Resources.Trash2020
         Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDelete.Location = New System.Drawing.Point(860, 176)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDelete.Location = New System.Drawing.Point(573, 117)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(108, 42)
+        Me.btnDelete.Size = New System.Drawing.Size(72, 28)
         Me.btnDelete.TabIndex = 108
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1765,10 +1628,9 @@ Partial Class TerrPricing
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.Image = Global.TerritoryPricing.My.Resources.Resources.Save3232
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSave.Location = New System.Drawing.Point(860, 225)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSave.Location = New System.Drawing.Point(573, 150)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(108, 60)
+        Me.btnSave.Size = New System.Drawing.Size(72, 40)
         Me.btnSave.TabIndex = 107
         Me.btnSave.Text = "       Save"
         Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1779,11 +1641,9 @@ Partial Class TerrPricing
         Me.GroupBox3.Controls.Add(Me.btnExportHeader)
         Me.GroupBox3.Controls.Add(Me.btnExportExcel)
         Me.GroupBox3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(1306, 15)
-        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox3.Location = New System.Drawing.Point(871, 10)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.GroupBox3.Size = New System.Drawing.Size(141, 165)
+        Me.GroupBox3.Size = New System.Drawing.Size(94, 110)
         Me.GroupBox3.TabIndex = 115
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Excel"
@@ -1794,10 +1654,9 @@ Partial Class TerrPricing
         Me.btnExportHeader.Font = New System.Drawing.Font("Segoe UI Semibold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExportHeader.Image = Global.TerritoryPricing.My.Resources.Resources.ExcelHeader2424
         Me.btnExportHeader.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportHeader.Location = New System.Drawing.Point(9, 94)
-        Me.btnExportHeader.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExportHeader.Location = New System.Drawing.Point(6, 63)
         Me.btnExportHeader.Name = "btnExportHeader"
-        Me.btnExportHeader.Size = New System.Drawing.Size(117, 46)
+        Me.btnExportHeader.Size = New System.Drawing.Size(78, 31)
         Me.btnExportHeader.TabIndex = 66
         Me.btnExportHeader.Text = "Header "
         Me.btnExportHeader.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1808,10 +1667,9 @@ Partial Class TerrPricing
         Me.btnExportExcel.Font = New System.Drawing.Font("Segoe UI Semibold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExportExcel.Image = Global.TerritoryPricing.My.Resources.Resources.Excel2424
         Me.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExportExcel.Location = New System.Drawing.Point(9, 39)
-        Me.btnExportExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExportExcel.Location = New System.Drawing.Point(6, 26)
         Me.btnExportExcel.Name = "btnExportExcel"
-        Me.btnExportExcel.Size = New System.Drawing.Size(116, 42)
+        Me.btnExportExcel.Size = New System.Drawing.Size(77, 28)
         Me.btnExportExcel.TabIndex = 65
         Me.btnExportExcel.Text = "Export"
         Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1820,35 +1678,8 @@ Partial Class TerrPricing
         'Timer4
         '
         '
-        'lblTerrDescription
+        'Timer5
         '
-        Me.lblTerrDescription.AutoSize = True
-        Me.lblTerrDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTerrDescription.Location = New System.Drawing.Point(6, 153)
-        Me.lblTerrDescription.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblTerrDescription.Name = "lblTerrDescription"
-        Me.lblTerrDescription.Size = New System.Drawing.Size(0, 20)
-        Me.lblTerrDescription.TabIndex = 98
-        '
-        'grpPriceType
-        '
-        Me.grpPriceType.BackColor = System.Drawing.Color.Khaki
-        Me.grpPriceType.Controls.Add(Me.rbAdvanced)
-        Me.grpPriceType.Controls.Add(Me.rbDirectCopy)
-        Me.grpPriceType.Controls.Add(Me.rbManual)
-        Me.grpPriceType.Controls.Add(Me.rbCopy)
-        Me.grpPriceType.Controls.Add(Me.rbPrimary)
-        Me.grpPriceType.Controls.Add(Me.rbUpdate)
-        Me.grpPriceType.Controls.Add(Me.lblTerrDescription)
-        Me.grpPriceType.Enabled = False
-        Me.grpPriceType.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpPriceType.Location = New System.Drawing.Point(1464, 15)
-        Me.grpPriceType.Name = "grpPriceType"
-        Me.grpPriceType.Size = New System.Drawing.Size(228, 274)
-        Me.grpPriceType.TabIndex = 74
-        Me.grpPriceType.TabStop = False
-        Me.grpPriceType.Text = "Pricing Type"
-        Me.grpPriceType.Visible = False
         '
         'btnSelectAll
         '
@@ -1856,10 +1687,9 @@ Partial Class TerrPricing
         Me.btnSelectAll.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSelectAll.Image = Global.TerritoryPricing.My.Resources.Resources.Check_Uncheck_13x13
         Me.btnSelectAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSelectAll.Location = New System.Drawing.Point(860, 27)
-        Me.btnSelectAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSelectAll.Location = New System.Drawing.Point(573, 18)
         Me.btnSelectAll.Name = "btnSelectAll"
-        Me.btnSelectAll.Size = New System.Drawing.Size(108, 42)
+        Me.btnSelectAll.Size = New System.Drawing.Size(72, 28)
         Me.btnSelectAll.TabIndex = 116
         Me.btnSelectAll.Text = "Chk All"
         Me.btnSelectAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1869,32 +1699,12 @@ Partial Class TerrPricing
         '
         Me.SearchBindingSource.DataSource = GetType(TerritoryPricing.SearchClass)
         '
-        'Column1
-        '
-        Me.Column1.HeaderText = "Item / Category"
-        Me.Column1.Name = "Column1"
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Color"
-        Me.Column2.Name = "Column2"
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Rococo"
-        Me.Column3.Name = "Column3"
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Detail Stain"
-        Me.Column4.Name = "Column4"
-        '
         'TerrPricing
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(144.0!, 144.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(1660, 1022)
+        Me.ClientSize = New System.Drawing.Size(1107, 681)
         Me.Controls.Add(Me.btnSelectAll)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.GroupBox3)
@@ -1903,7 +1713,6 @@ Partial Class TerrPricing
         Me.Controls.Add(Me.btnFillPricing)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnSave)
-        Me.Controls.Add(Me.grpPriceType)
         Me.Controls.Add(Me.rbAdvancedSearchPricing)
         Me.Controls.Add(Me.rbCopiedTerritory)
         Me.Controls.Add(Me.rbPrimaryTerritory)
@@ -1912,7 +1721,6 @@ Partial Class TerrPricing
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GroupBox2)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "TerrPricing"
         Me.Text = "Territory Pricing"
         Me.ContextMenuStrip1.ResumeLayout(False)
@@ -1938,8 +1746,6 @@ Partial Class TerrPricing
         Me.tbCopyTo.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.grpPriceType.ResumeLayout(False)
-        Me.grpPriceType.PerformLayout()
         CType(Me.SearchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -2033,42 +1839,9 @@ Partial Class TerrPricing
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents chkCopiedFromVislble As System.Windows.Forms.CheckBox
     Friend WithEvents Timer4 As System.Windows.Forms.Timer
-    Friend WithEvents lblTerrDescription As System.Windows.Forms.Label
-    Friend WithEvents rbUpdate As System.Windows.Forms.RadioButton
-    Friend WithEvents rbPrimary As System.Windows.Forms.RadioButton
-    Friend WithEvents rbCopy As System.Windows.Forms.RadioButton
-    Friend WithEvents rbManual As System.Windows.Forms.RadioButton
-    Friend WithEvents rbDirectCopy As System.Windows.Forms.RadioButton
-    Friend WithEvents rbAdvanced As System.Windows.Forms.RadioButton
-    Friend WithEvents grpPriceType As System.Windows.Forms.GroupBox
     Friend WithEvents txtTerFrom As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents btnPaste As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Selected As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents ItemNumber As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ItemDescription As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProdCategory As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ProdCatDescription As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TerCode As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ItemLocPriceColor As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents OriginalPriceColor As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ActivePriceColor As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CopiedPriceColor As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ItemLocPriceRococo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents OriginalPriceRococo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ActivePriceRococo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CopiedPriceRococo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ItemLocPriceDetailStain As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents OriginalPriceDetailStain As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ActivePriceDetailStain As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents CopiedPriceDetailStain As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TerFrom As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents TerDesc As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Activeitm As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ItemWeight As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PageNo As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents LastDate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents A4GLIdentity As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents lblTest As System.Windows.Forms.Label
     Friend WithEvents lblCompany As System.Windows.Forms.Label
     Friend WithEvents tabOptions As System.Windows.Forms.TabControl
@@ -2105,4 +1878,29 @@ Partial Class TerrPricing
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Selected As DataGridViewCheckBoxColumn
+    Friend WithEvents ItemNumber As DataGridViewTextBoxColumn
+    Friend WithEvents ItemDescription As DataGridViewTextBoxColumn
+    Friend WithEvents ProdCategory As DataGridViewTextBoxColumn
+    Friend WithEvents ProdCatDescription As DataGridViewTextBoxColumn
+    Friend WithEvents TerCode As DataGridViewTextBoxColumn
+    Friend WithEvents ItemLocPriceNatural As DataGridViewTextBoxColumn
+    Friend WithEvents OriginalPriceNatural As DataGridViewTextBoxColumn
+    Friend WithEvents ActivePriceNatural As DataGridViewTextBoxColumn
+    Friend WithEvents CopiedPriceNatural As DataGridViewTextBoxColumn
+    Friend WithEvents ItemLocPriceColor As DataGridViewTextBoxColumn
+    Friend WithEvents OriginalPriceColor As DataGridViewTextBoxColumn
+    Friend WithEvents ActivePriceColor As DataGridViewTextBoxColumn
+    Friend WithEvents CopiedPriceColor As DataGridViewTextBoxColumn
+    Friend WithEvents ItemLocPriceDetailStain As DataGridViewTextBoxColumn
+    Friend WithEvents OriginalPriceDetailStain As DataGridViewTextBoxColumn
+    Friend WithEvents ActivePriceDetailStain As DataGridViewTextBoxColumn
+    Friend WithEvents CopiedPriceDetailStain As DataGridViewTextBoxColumn
+    Friend WithEvents TerFrom As DataGridViewTextBoxColumn
+    Friend WithEvents TerDesc As DataGridViewTextBoxColumn
+    Friend WithEvents Activeitm As DataGridViewTextBoxColumn
+    Friend WithEvents ItemWeight As DataGridViewTextBoxColumn
+    Friend WithEvents PageNo As DataGridViewTextBoxColumn
+    Friend WithEvents LastDate As DataGridViewTextBoxColumn
+    Friend WithEvents A4GLIdentity As DataGridViewTextBoxColumn
 End Class

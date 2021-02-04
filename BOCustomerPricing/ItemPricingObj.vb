@@ -13,10 +13,10 @@ Public Class ItemPricingObj
 #Region "   Methods   "
 
     Public Shared Function NewPricingObj(ByVal TerCode As String, ByVal ItemNo As String, ByVal ItemDesc As String,
-    ByVal ProdCat As String, ByVal ProdCatDesc As String, ByVal OriginalPriceColor As Decimal, ByVal OriginalPriceRococo As Decimal,
-    ByVal OriginalPriceDetailStain As Decimal, ByVal ItemLocPriceColor As Decimal, ByVal ItemLocPriceRococo As Decimal,
-    ByVal ItemLocPriceDetailStain As Decimal, ByVal ActiveItemLocPriceColor As Decimal, ByVal ActiveItemLocPriceRococo As Decimal,
-    ByVal ActiveItemLocPriceDetailStain As Decimal, ByVal CopiedItemLocPriceColor As Decimal, ByVal CopiedItemLocPriceRococo As Decimal,
+    ByVal ProdCat As String, ByVal ProdCatDesc As String, ByVal OriginalPriceNatural As Decimal, ByVal OriginalPriceColor As Decimal,
+    ByVal OriginalPriceDetailStain As Decimal, ByVal ItemLocPriceNatural As Decimal, ByVal ItemLocPriceColor As Decimal,
+    ByVal ItemLocPriceDetailStain As Decimal, ByVal ActiveItemLocPriceNatural As Decimal, ByVal ActiveItemLocPriceColor As Decimal,
+    ByVal ActiveItemLocPriceDetailStain As Decimal, ByVal CopiedItemLocPriceNatural As Decimal, ByVal CopiedItemLocPriceColor As Decimal,
     ByVal CopiedItemLocPriceDetailStain As Decimal, ByVal TerFrom As String, ByVal TerDescription As String, ByVal LastDate As Date, Selected As Boolean, ByVal ItemWeight As Decimal,
     ByVal Page_n As Integer, ByVal OnPriceList As String, Dimensions As String, A4GLIdentity As Integer) As ItemPricingObj
         Dim prc As New ItemPricingObj
@@ -25,17 +25,17 @@ Public Class ItemPricingObj
         prc.ItemDesc = ItemDesc
         prc.ProdCat = ProdCat
         prc.ProdCatDesc = ProdCatDesc
+        prc.OriginalPriceNatural = OriginalPriceNatural
         prc.OriginalPriceColor = OriginalPriceColor
-        prc.OriginalPriceRococo = OriginalPriceRococo
         prc.OriginalPriceDetailStain = OriginalPriceDetailStain
+        prc.ItemLocPriceNatural = ItemLocPriceNatural
         prc.ItemLocPriceColor = ItemLocPriceColor
-        prc.ItemLocPriceRococo = ItemLocPriceRococo
         prc.ItemLocPriceDetailStain = ItemLocPriceDetailStain
+        prc.ActivePriceNatural = ActiveItemLocPriceNatural
         prc.ActivePriceColor = ActiveItemLocPriceColor
-        prc.ActivePriceRococo = ActiveItemLocPriceRococo
         prc.ActivePriceDetailStain = ActiveItemLocPriceDetailStain
+        prc.CopiedPriceNatural = CopiedItemLocPriceNatural
         prc.CopiedPriceColor = CopiedItemLocPriceColor
-        prc.CopiedPriceRococo = CopiedItemLocPriceRococo
         prc.CopiedPriceDetailStain = CopiedItemLocPriceDetailStain
         prc.TerFrom = TerFrom
         prc.TerDescription = TerDescription
@@ -50,10 +50,10 @@ Public Class ItemPricingObj
     End Function
 
     Public Shared Function GetPricingObj(ByVal TerCode As String, ByVal ItemNo As String, ByVal ItemDesc As String,
-    ByVal ProdCat As String, ByVal ProdCatDesc As String, ByVal OriginalPriceColor As Decimal, ByVal OriginalPriceRococo As Decimal,
-    ByVal OriginalPriceDetailStain As Decimal, ByVal ItemLocPriceColor As Decimal, ByVal ItemLocPriceRococo As Decimal,
-    ByVal ItemLocPriceDetailStain As Decimal, ByVal ActiveItemLocPriceColor As Decimal, ByVal ActiveItemLocPriceRococo As Decimal,
-    ByVal ActiveItemLocPriceDetailStain As Decimal, ByVal CopiedItemLocPriceColor As Decimal, ByVal CopiedItemLocPriceRococo As Decimal,
+    ByVal ProdCat As String, ByVal ProdCatDesc As String, ByVal OriginalPriceNatural As Decimal, ByVal OriginalPriceColor As Decimal,
+    ByVal OriginalPriceDetailStain As Decimal, ByVal ItemLocPriceNatural As Decimal, ByVal ItemLocPriceColor As Decimal,
+    ByVal ItemLocPriceDetailStain As Decimal, ByVal ActiveItemLocPriceNatural As Decimal, ByVal ActiveItemLocPriceColor As Decimal,
+    ByVal ActiveItemLocPriceDetailStain As Decimal, ByVal CopiedItemLocPriceNatural As Decimal, ByVal CopiedItemLocPriceColor As Decimal,
     ByVal CopiedItemLocPriceDetailStain As Decimal, ByVal TerFrom As String, ByVal TerDescription As String, ByVal LastDate As Date, Selected As Boolean, ByVal ItemWeight As Decimal,
     ByVal Page_n As Integer, ByVal OnPriceList As String, Dimensions As String, A4GLIdentity As Integer) As ItemPricingObj
         Dim prc As New ItemPricingObj
@@ -62,17 +62,17 @@ Public Class ItemPricingObj
         prc.ItemDesc = ItemDesc
         prc.ProdCat = ProdCat
         prc.ProdCatDesc = ProdCatDesc
+        prc.OriginalPriceNatural = OriginalPriceNatural
         prc.OriginalPriceColor = OriginalPriceColor
-        prc.OriginalPriceRococo = OriginalPriceRococo
         prc.OriginalPriceDetailStain = OriginalPriceDetailStain
+        prc.ItemLocPriceNatural = ItemLocPriceNatural
         prc.ItemLocPriceColor = ItemLocPriceColor
-        prc.ItemLocPriceRococo = ItemLocPriceRococo
         prc.ItemLocPriceDetailStain = ItemLocPriceDetailStain
+        prc.ActivePriceNatural = ActiveItemLocPriceNatural
         prc.ActivePriceColor = ActiveItemLocPriceColor
-        prc.ActivePriceRococo = ActiveItemLocPriceRococo
         prc.ActivePriceDetailStain = ActiveItemLocPriceDetailStain
+        prc.CopiedPriceNatural = CopiedItemLocPriceNatural
         prc.CopiedPriceColor = CopiedItemLocPriceColor
-        prc.CopiedPriceRococo = CopiedItemLocPriceRococo
         prc.CopiedPriceDetailStain = CopiedItemLocPriceDetailStain
         prc.TerFrom = TerFrom
         prc.TerDescription = TerDescription
@@ -87,7 +87,7 @@ Public Class ItemPricingObj
     End Function
 
 
-    Public Function SaveItemPricing(ByVal ItemNo As String, ByVal TerCode As String, ByVal OriginalPriceColor As Decimal,
+    Public Function SaveItemPricing(ByVal ItemNo As String, ByVal TerCode As String, ByVal OriginalPriceNatural As Decimal,
                                     ByVal OriginalPrcColor As Decimal, ByVal OriginalPriceDetailStain As Decimal, ByVal TerFrom As String, ByVal TerDesc As String,
                                     ByVal State As String, ByVal cn As SqlConnection) As Object
 
@@ -97,8 +97,8 @@ Public Class ItemPricingObj
         Result = DAC.ExecuteSaveSP(My.Resources.SP_spIMSaveItem_MAS, cn,
                    DAC.Parameter(My.Resources.Param_iItemNo, ItemNo, ParameterDirection.Input),
                    DAC.Parameter(My.Resources.Param_iTerCode, TerCode, ParameterDirection.Input),
-                   DAC.Parameter(My.Resources.Param_iPrcColor, OriginalPriceColor, ParameterDirection.Input),
-                   DAC.Parameter(My.Resources.Param_iPrcRococo, OriginalPrcColor, ParameterDirection.Input),
+                   DAC.Parameter(My.Resources.Param_iPrcNatural, OriginalPriceNatural, ParameterDirection.Input),
+                   DAC.Parameter(My.Resources.Param_iPrcColor, OriginalPrcColor, ParameterDirection.Input),
                    DAC.Parameter(My.Resources.Param_iPrcDetailStain, OriginalPriceDetailStain, ParameterDirection.Input),
                    DAC.Parameter(My.Resources.Param_iTerFrom, TerFrom, ParameterDirection.Input),
                    DAC.Parameter(My.Resources.Param_iRowState, State, ParameterDirection.Input),
@@ -212,16 +212,16 @@ Public Class ItemPricingObj
         End Set
     End Property
 
-    Private mOriginalPriceRococo As Decimal
-    Public Property OriginalPriceRococo() As Decimal
+    Private mOriginalPriceNatural As Decimal
+    Public Property OriginalPriceNatural() As Decimal
         Get
-            Return mOriginalPriceRococo
+            Return mOriginalPriceNatural
         End Get
         Set(ByVal value As Decimal)
-            If mOriginalPriceRococo <> value Then
-                Dim propertyName As String = "OriginalPriceRococo"
+            If mOriginalPriceNatural <> value Then
+                Dim propertyName As String = "OriginalPriceNatural"
                 Me.DataStateChanged(EntityStateEnum.Modified)
-                mOriginalPriceRococo = value
+                mOriginalPriceNatural = value
                 Me.Dirty = Me.isDirty
 
             End If
@@ -255,13 +255,13 @@ Public Class ItemPricingObj
         End Set
     End Property
 
-    Private mItemLocPriceRococo As Decimal
-    Public Property ItemLocPriceRococo() As Decimal
+    Private mItemLocPriceNatural As Decimal
+    Public Property ItemLocPriceNatural() As Decimal
         Get
-            Return mItemLocPriceRococo
+            Return mItemLocPriceNatural
         End Get
         Set(ByVal value As Decimal)
-            mItemLocPriceRococo = value
+            mItemLocPriceNatural = value
         End Set
     End Property
 
@@ -376,13 +376,13 @@ Public Class ItemPricingObj
             mActivePriceColor = value
         End Set
     End Property
-    Private mActivePriceRococo As Decimal
-    Public Property ActivePriceRococo() As Decimal
+    Private mActivePriceNatural As Decimal
+    Public Property ActivePriceNatural() As Decimal
         Get
-            Return mActivePriceRococo
+            Return mActivePriceNatural
         End Get
         Set(ByVal value As Decimal)
-            mActivePriceRococo = value
+            mActivePriceNatural = value
         End Set
     End Property
     Private mActivePriceDetailStain As Decimal
@@ -404,13 +404,13 @@ Public Class ItemPricingObj
             mCopiedPriceColor = value
         End Set
     End Property
-    Private mCopiedPriceRococo As Decimal
-    Public Property CopiedPriceRococo() As Decimal
+    Private mCopiedPriceNatural As Decimal
+    Public Property CopiedPriceNatural() As Decimal
         Get
-            Return mCopiedPriceRococo
+            Return mCopiedPriceNatural
         End Get
         Set(ByVal value As Decimal)
-            mCopiedPriceRococo = value
+            mCopiedPriceNatural = value
         End Set
     End Property
     Private mCopiedPriceDetailStain As Decimal

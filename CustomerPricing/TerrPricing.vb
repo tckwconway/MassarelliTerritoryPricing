@@ -80,13 +80,7 @@ Public Class TerrPricing
         CustomDollar = 3
         Advanced = 4
         Zone = 5
-        'DirectCopied = 5
-        'Update = 6
-        'Advanced = 7
-        'Copied = 1
 
-        ''Update = 4
-        ''Primary = 1
     End Enum
 
     'Search Type is sent as a parameter to spIMGetItemList_MAS to return either the Primary Price Only or 
@@ -103,10 +97,11 @@ Public Class TerrPricing
         Custom = 2
         Zone = 3
         Direct = 4
-        'Manual = 4
+        Manual = 5
     End Enum
 
     Public Enum PrcUpdateType As Integer
+        'not used ####################################
         Update = 1
         Copied = 2
         DirectCopy = 3
@@ -131,12 +126,6 @@ Public Class TerrPricing
         Amount = 2
     End Enum
 
-    Private Sub CustPricing_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
-        Me.Validate()
-        Me.Refresh()
-        Me.ItemPricingObjBindingSource.DataSource = cItemPricingList
-        Me.ItemPricingObjBindingSource.ResetBindings(True)
-    End Sub
 
     Private Enum FormatPriceTypeState
         Open = 1
@@ -148,6 +137,12 @@ Public Class TerrPricing
         Advanced = 7
     End Enum
 
+    Private Sub CustPricing_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.Validate()
+        Me.Refresh()
+        Me.ItemPricingObjBindingSource.DataSource = cItemPricingList
+        Me.ItemPricingObjBindingSource.ResetBindings(True)
+    End Sub
     Private Enum FormatFillTypeState
         Open = 0
         Manual = 1
@@ -249,11 +244,11 @@ Public Class TerrPricing
                 .Width = 22
             End With
 
-            With .Columns("ItemLocPriceColor")
+            With .Columns("ItemLocPriceNatural")
                 .ReadOnly = True
                 .DefaultCellStyle.BackColor = readOnlyBackColor
             End With
-            With .Columns("ItemLocPriceRococo")
+            With .Columns("ItemLocPriceColor")
                 .ReadOnly = True
                 .DefaultCellStyle.BackColor = readOnlyBackColor
             End With
@@ -262,11 +257,11 @@ Public Class TerrPricing
                 .DefaultCellStyle.BackColor = readOnlyBackColor
             End With
 
-            With .Columns("OriginalPriceColor")
+            With .Columns("OriginalPriceNatural")
                 .ReadOnly = True
                 .DefaultCellStyle.BackColor = readOnlyBackColor
             End With
-            With .Columns("OriginalPriceRococo")
+            With .Columns("OriginalPriceColor")
                 .ReadOnly = True
                 .DefaultCellStyle.BackColor = readOnlyBackColor
             End With
@@ -278,8 +273,8 @@ Public Class TerrPricing
             .Columns("TerFrom").Width = 60
 
             itmcatwidth = .Columns("Selected").Width + .Columns("ItemNumber").Width + .Columns("ItemDescription").Width + .Columns("ProdCategory").Width + .Columns("ProdCatDescription").Width + .Columns("TerCode").Width '+ .RowHeadersWidth
-            natwidth = .Columns("ItemLocPriceColor").Width + .Columns("OriginalPriceColor").Width + .Columns("ActivePriceColor").Width
-            colwidth = .Columns("ItemLocPriceRococo").Width + .Columns("OriginalPriceRococo").Width + .Columns("ActivePriceRococo").Width
+            natwidth = .Columns("ItemLocPriceNatural").Width + .Columns("OriginalPriceNatural").Width + .Columns("ActivePriceNatural").Width
+            colwidth = .Columns("ItemLocPriceColor").Width + .Columns("OriginalPriceColor").Width + .Columns("ActivePriceColor").Width
             detwidth = .Columns("ItemLocPriceDetailStain").Width + .Columns("OriginalPriceDetailStain").Width + .Columns("ActivePriceDetailStain").Width
             .Dock = DockStyle.Fill
             .ScrollBars = ScrollBars.Both
@@ -448,6 +443,11 @@ Public Class TerrPricing
             lblCount.Text = itmprclst.Count.ToString & " Items Retrieved  "
             txtTerCode.Text = SearchCriteria.TerFromCode
             txtTerFrom.Text = SearchCriteria.TerCodeSearchTerFromInTable
+            'these are the Ter Codes found in the "Load A Price" Group Box
+            .StartTerCode = Me.mcboTerritoryCodes.Text.Trim
+            .StartTerFrom = Me.txtFrom.Text.Trim
+            .StartTerDesc = Me.txtTerrDesc.Text.Trim
+
         End With
 
 
@@ -537,7 +537,7 @@ Public Class TerrPricing
                 itempricecount = BusObj.CheckCopiedItemState(itm.ItemNo, itm.TerCode, itm.TerFrom, cn)
                 If itempricecount > 0 Then
                     state = "Deleted"
-                    cItemPricingObj.SaveItemPricing(itm.ItemNo, itm.TerCode, itm.OriginalPriceColor, itm.OriginalPriceRococo, itm.OriginalPriceDetailStain, "", itm.TerDescription, state, cn)
+                    cItemPricingObj.SaveItemPricing(itm.ItemNo, itm.TerCode, itm.OriginalPriceNatural, itm.OriginalPriceColor, itm.OriginalPriceDetailStain, "", itm.TerDescription, state, cn)
                 End If
             End If
         Next
@@ -556,6 +556,7 @@ Public Class TerrPricing
         Me.Validate()
 
         With cOptionalCriteria
+
             dtDelete = GetItemPrcLevelFromObject(cItemPricingList)
             dtSave = GetSQLBulkCopyDataTableFromObject(cItemPricingList, .TerCopyToCode.Trim, .TerCopyToDesc.Trim, .TerFromCode.Trim)
         End With
@@ -660,11 +661,23 @@ Public Class TerrPricing
                 DoFillWithMarkup()
             ElseIf .PricingType = PrcType.Copied.ToString Then
                 DoStandardMarkup()
-            ElseIf .PricingType = PrcType.Primary.tostring Then
+            ElseIf .PricingType = PrcType.Primary.ToString Then
                 DoStandardMarkup()
             End If
 
         End With
+
+        'set ter codes
+        With cOptionalCriteria
+            If .SearchType = SearchType.PrimaryPrice.ToString Then
+                .SaveTerCode = .StartTerCode
+                .SaveTerFrom = .StartTerFrom
+                .SaveTerDesc = .StartTerDesc
+            End If
+
+        End With
+
+
 
         Cursor = Cursors.Default
 
@@ -674,24 +687,27 @@ Public Class TerrPricing
     End Sub
     Private Sub DoZonePercentMarkup()
         On Error Resume Next
-        'Zone percents are added by reading the table oeprczon_mas and returning the markup percent.    
+        'Zone percents are added by reading the table oeprczon_mas and returning the markup percent as of 02/04/2021   
         'Zone 2 – 18% 
         'Zone 3 – 22%
         'Zone 4 - 33%
         'Zone 5 – 43%
-        'Zone 6 – 50%
-        'Zone 7 – the rounded Zone 4 price * 1.25
-        'Zone 8 – the rounded Zone 6 price * 1.25
+        'Zone 6 – This price is no longer used, replaced with 007 and 008
+        'Zone 7 – 50%
+        'Zone 8 – 60%
 
 
-        Dim sSQL As String = "Select ter_zone, frt_markup, ter_from, ter_desc from oeprczon_mas "
+        Dim sSQL As String = "Select ter_zone, frt_markup, ter_from, ter_code_desc from oeprczon_mas "
         Dim dtZoneMarkup As DataTable = BusObj.GetZonePriceList(sSQL, "ZoneMarkupList", cn)
         Dim dvZoneMarkup As DataView = dtZoneMarkup.DataSet.DefaultViewManager.CreateDataView(dtZoneMarkup)
+
+
+
 
         With DataGridView1
             For Each rw As DataGridViewRow In .Rows
                 If Convert.ToBoolean(rw.Cells("Selected").Value) = True Then
-                    If cOptionalCriteria.PricingType <> PrcType.Advanced.ToString Then rw.Cells("TerCode").Value = cOptionalCriteria.TerZoneCode
+                    'If cOptionalCriteria.PricingType <> PrcType.Advanced.ToString Then rw.Cells("TerCode").Value = cOptionalCriteria.TerZoneCode
                     Dim tercode As String
                     Dim terfrom As String
                     Dim terdesc As String
@@ -699,27 +715,43 @@ Public Class TerrPricing
                     Dim frtmarkuppct As Decimal
                     Dim basedon As Decimal
 
+                    ' Fill Type "Ter Code" means it came from 1+ Item where the territory code (002 thru 008) for each territory is used.  
                     If cOptionalCriteria.FillType <> "Ter Code" Then
+                        'dvZoneMarkup.RowFilter = "Trim(ter_zone) = '" & cOptionalCriteria.TerZoneCode & "'"
+                        'tercode = dvZoneMarkup.Item(0)(0).ToString.Trim
+                        'terdesc = dvZoneMarkup.Item(0)(3).ToString.Trim 'rw.Cells("TerCode").Value.ToString
+                        'terfrom = rw.Cells("TerFrom").Value.ToString
+                        'frtmarkuppct = CDec(dvZoneMarkup.Item(0).Item(1))
                         tercode = cOptionalCriteria.TerCopyToCode
                         terfrom = IIf(tercode.Substring(0, 2) = "00", "", cOptionalCriteria.TerFromCode).ToString
                         terdesc = cOptionalCriteria.TerCopyToDesc
-                        filtertercode = IIf(terfrom.Trim = "", tercode, terfrom).ToString
+                        filtertercode = cOptionalCriteria.TerZoneCode 'IIf(terfrom.Trim = "", tercode, terfrom).ToString
                         dvZoneMarkup.RowFilter = "Trim(ter_zone) = '" & filtertercode & "'"
                         frtmarkuppct = CDec(dvZoneMarkup.Item(0).Item(1))
                         ' if zone 007 or 008 use basedon 
 
                     Else
-                        tercode = rw.Cells("TerCode").Value.ToString
+                        dvZoneMarkup.RowFilter = "Trim(ter_zone) = '" & cOptionalCriteria.TerZoneCode & "'"
+                        tercode = dvZoneMarkup.Item(0)(0).ToString.Trim
+                        terdesc = dvZoneMarkup.Item(0)(3).ToString.Trim 'rw.Cells("TerCode").Value.ToString
                         terfrom = rw.Cells("TerFrom").Value.ToString
-                        terdesc = rw.Cells("TerDesc").Value.ToString
-                        filtertercode = rw.Cells("TerCode").Value.ToString
-                        dvZoneMarkup.RowFilter = "Trim(ter_zone) = '" & filtertercode & "'"
                         frtmarkuppct = CDec(dvZoneMarkup.Item(0).Item(1))
-                        If tercode = "007" Then
-                            basedon = CDec(0.33)
-                        ElseIf tercode = "008" Then
-                            basedon = CDec(0.5)
-                        End If
+                        'terdesc = rw.Cells("TerDesc").Value.ToString
+                        'filtertercode = rw.Cells("TerCode").Value.ToString
+                        'dvZoneMarkup.RowFilter = "Trim(ter_zone) = '" & filtertercode & "'"
+                        'If tercode = "007" Then
+                        '    basedon = CDec(0.33)
+                        'ElseIf tercode = "008" Then
+                        '    basedon = CDec(0.5)
+                        'End If
+                    End If
+
+                    If Not (rw.Cells("ItemLocPriceNatural").Value Is Nothing) Then
+                        rw.Cells("ActivePriceNatural").Value =
+                            GetZoneMarkupPrice(frtmarkuppct, Math.Round(Convert.ToDecimal(rw.Cells("ItemLocPriceNatural").Value)),
+                            Convert.ToDecimal(rw.Cells("ItemLocPriceNatural").Value), rw.Cells("ProdCategory").ToString, basedon)
+                    Else
+                        rw.Cells("OriginalPriceNatural").Value = ""
                     End If
 
                     If Not (rw.Cells("ItemLocPriceColor").Value Is Nothing) Then
@@ -728,14 +760,6 @@ Public Class TerrPricing
                             Convert.ToDecimal(rw.Cells("ItemLocPriceColor").Value), rw.Cells("ProdCategory").ToString, basedon)
                     Else
                         rw.Cells("OriginalPriceColor").Value = ""
-                    End If
-
-                    If Not (rw.Cells("ItemLocPriceRococo").Value Is Nothing) Then
-                        rw.Cells("ActivePriceRococo").Value =
-                            GetZoneMarkupPrice(frtmarkuppct, Math.Round(Convert.ToDecimal(rw.Cells("ItemLocPriceRococo").Value)),
-                            Convert.ToDecimal(rw.Cells("ItemLocPriceRococo").Value), rw.Cells("ProdCategory").ToString, basedon)
-                    Else
-                        rw.Cells("OriginalPriceRococo").Value = ""
                     End If
 
                     If Not (rw.Cells("ItemLocPriceDetailStain").Value Is Nothing) Then
@@ -764,22 +788,22 @@ Public Class TerrPricing
                 For Each rw As DataGridViewRow In .Rows
 
                     If Not (rw.Cells("ItemLocPriceDetailStain").Value Is Nothing) Then
+                        rw.Cells("ActivePriceNatural").Value = rw.Cells("OriginalPriceNatural").Value
+                        'rw.Cells("ActivePriceNatural").Value = GetStardardMarkupPrice(frtmarkuppct, Convert.ToDecimal(rw.Cells("ItemLocPriceNatural").Value), Convert.ToDecimal(rw.Cells("ItemLocPriceColor").Value))
+                    Else
+                        rw.Cells("OriginalPriceDetailStain").Value = "" : rw.Cells("ActivePriceNatural").Value = ""
+                    End If
+
+                    If Not (rw.Cells("ItemLocPriceDetailStain").Value Is Nothing) Then
                         rw.Cells("ActivePriceColor").Value = rw.Cells("OriginalPriceColor").Value
-                        'rw.Cells("ActivePriceColor").Value = GetStardardMarkupPrice(frtmarkuppct, Convert.ToDecimal(rw.Cells("ItemLocPriceColor").Value), Convert.ToDecimal(rw.Cells("ItemLocPriceRococo").Value))
+                        'rw.Cells("ActivePriceColor").Value = GetStardardMarkupPrice(frtmarkuppct, Convert.ToDecimal(rw.Cells("ItemLocPriceColor").Value), Convert.ToDecimal(rw.Cells("ItemLocPriceColor").Value))
                     Else
                         rw.Cells("OriginalPriceDetailStain").Value = "" : rw.Cells("ActivePriceColor").Value = ""
                     End If
 
                     If Not (rw.Cells("ItemLocPriceDetailStain").Value Is Nothing) Then
-                        rw.Cells("ActivePriceRococo").Value = rw.Cells("OriginalPriceRococo").Value
-                        'rw.Cells("ActivePriceRococo").Value = GetStardardMarkupPrice(frtmarkuppct, Convert.ToDecimal(rw.Cells("ItemLocPriceRococo").Value), Convert.ToDecimal(rw.Cells("ItemLocPriceRococo").Value))
-                    Else
-                        rw.Cells("OriginalPriceDetailStain").Value = "" : rw.Cells("ActivePriceRococo").Value = ""
-                    End If
-
-                    If Not (rw.Cells("ItemLocPriceDetailStain").Value Is Nothing) Then
                         rw.Cells("ActivePriceDetailStain").Value = rw.Cells("OriginalPriceDetailStain").Value
-                        'rw.Cells("ActivePriceDetailStain").Value = GetStardardMarkupPrice(frtmarkuppct, Convert.ToDecimal(rw.Cells("ItemLocPriceDetailStain").Value), Convert.ToDecimal(rw.Cells("ItemLocPriceRococo").Value))
+                        'rw.Cells("ActivePriceDetailStain").Value = GetStardardMarkupPrice(frtmarkuppct, Convert.ToDecimal(rw.Cells("ItemLocPriceDetailStain").Value), Convert.ToDecimal(rw.Cells("ItemLocPriceColor").Value))
                     Else
                         rw.Cells("OriginalPriceDetailStain").Value = "" : rw.Cells("ActivePriceDetailStain").Value = ""
                     End If
@@ -788,21 +812,23 @@ Public Class TerrPricing
                     With cOptionalCriteria
 
 
-                        'If Not .PricingType.ToString = PrcType.Advanced.ToString Then
-                        '    rw.Cells("TerCode").Value = IIf(.TerCopyToCode = "", Me.txtTerCode.Text.Trim, .TerCopyToCode)
-                        '    rw.Cells("TerFrom").Value = .TerFromCode   'dvZoneMarkup(0)("ter_from")
-                        '    rw.Cells("TerDesc").Value = .TerCopyToDesc
-                        '    rw.Cells("LastDate").Value = Now.ToString("MM/dd/yyyy")
-                        'End If
                         If .PricingType.ToString = PrcType.Copied.ToString Then
-                            rw.Cells("TerCode").Value = IIf(.TerCopyToCode = "", Me.txtTerCode.Text.Trim, .TerCopyToCode)
-                            rw.Cells("TerFrom").Value = .TerFromCode   'dvZoneMarkup(0)("ter_from")
-                            rw.Cells("TerDesc").Value = .TerCopyToDesc
-                            rw.Cells("LastDate").Value = Now.ToString("MM/dd/yyyy")
-                        ElseIf .PricingType = PrcType.Primary.tostring Then
-                            rw.Cells("TerCode").Value = .TerCode
-                            rw.Cells("TerFrom").Value = .TerFromCode
-                            rw.Cells("TerDesc").Value = .TerFromDesc
+                            If .MarkupType = MarkupType.Manual.ToString Then
+                                rw.Cells("TerCode").Value = Me.txtTerCode.Text.Trim
+                                rw.Cells("TerFrom").Value = Me.txtTerFrom.Text.Trim
+                                rw.Cells("TerDesc").Value = .TerFromDesc
+                                rw.Cells("LastDate").Value = Now.ToString("MM/dd/yyyy")
+                            Else
+                                rw.Cells("TerCode").Value = IIf(.TerCopyToCode = "", Me.txtTerCode.Text.Trim, .TerCopyToCode)
+                                rw.Cells("TerFrom").Value = .TerFromCode   'dvZoneMarkup(0)("ter_from")
+                                rw.Cells("TerDesc").Value = .TerCopyToDesc
+                                rw.Cells("LastDate").Value = Now.ToString("MM/dd/yyyy")
+                            End If
+
+                        ElseIf .PricingType = PrcType.Primary.ToString Then
+                            rw.Cells("TerCode").Value = Me.txtTerCode.Text.Trim
+                            rw.Cells("TerFrom").Value = ""
+                            rw.Cells("TerDesc").Value = Me.txtTerrDesc.Text.Trim
                             rw.Cells("LastDate").Value = Now.ToString("MM/dd/yyyy")
                         End If
                     End With
@@ -823,8 +849,8 @@ Public Class TerrPricing
                 ' Populate the values based on the type of Update or New Pricing we are doing ...
                 For Each rw As DataGridViewRow In .Rows
                     If CBool(rw.Cells("Selected").Value) = True Then
+                        rw.Cells("ActivePriceNatural").Value = rw.Cells("ItemLocPriceNatural").Value
                         rw.Cells("ActivePriceColor").Value = rw.Cells("ItemLocPriceColor").Value
-                        rw.Cells("ActivePriceRococo").Value = rw.Cells("ItemLocPriceRococo").Value
                         rw.Cells("ActivePriceDetailStain").Value = rw.Cells("ItemLocPriceDetailStain").Value
                         If cOptionalCriteria.PricingType <> PrcType.Advanced.ToString Then
                             rw.Cells("TerFrom").Value = cOptionalCriteria.TerCodeSearchFrom 'Me.multicboTerritoryCodes.Text
@@ -849,8 +875,8 @@ Public Class TerrPricing
                 ' Populate the values based on the type of Update or New Pricing we are doing ...
                 For Each rw As DataGridViewRow In .Rows
                     If CBool(rw.Cells("Selected").Value) = True Then
+                        rw.Cells("ActivePriceNatural").Value = rw.Cells("OriginalPriceNatural").Value
                         rw.Cells("ActivePriceColor").Value = rw.Cells("OriginalPriceColor").Value
-                        rw.Cells("ActivePriceRococo").Value = rw.Cells("OriginalPriceRococo").Value
                         rw.Cells("ActivePriceDetailStain").Value = rw.Cells("OriginalPriceDetailStain").Value
                         rw.Cells("TerFrom").Value = cOptionalCriteria.TerCodeSearchFrom 'Me.multicboTerritoryCodes.Text
                         rw.Cells("TerCode").Value = Me.mcboFillTerrCodes.Text
@@ -890,31 +916,24 @@ Public Class TerrPricing
     Private Function GetZoneMarkupPrice(frtmarkuppct As Decimal, itemlocprice As Decimal, markupprice As Decimal, prod_cat As String, Optional basedon As Decimal = CDec(0)) As Decimal
         Dim frtmarkupamt As Decimal
         Dim retPrice As Decimal
-        Dim basedonamt As Decimal
+        'Dim basedonamt As Decimal
 
-        '' terr 007 and 008 are handled differently.  
-        '' zone 007 = item price for 004 * 1.25
-        '' zone 008 = item price for 006 * 1.25
+        ''' terr 007 and 008 are handled differently.  
+        ''' zone 007 = item price for 004 * 1.25
+        ''' zone 008 = item price for 006 * 1.25
 
-        '' See if we have either zone 007 or 008
-        'If tercode = "007" Then
+        ''' See if we have either zone 007 or 008
+        ''If tercode = "007" Then
 
-        'End If
+        ''End If
 
 
         Select Case prod_cat
             Case "150", "152", "390" 'Product Categories here are accessories or a Mfg Item that is the same price for all Zones, these items us the Price in MACOLA, itemlocprice.  
                 Return itemlocprice
             Case Else
-                If basedon = 0 Then
-                    frtmarkupamt = itemlocprice * frtmarkuppct
-                    retPrice = markupprice + frtmarkupamt
-                Else
-                    basedonamt = Math.Round(Convert.ToDecimal(markupprice * (1 + basedon))) ' first use this calculation to get the 004 price to calculate 007 or 006 price for 008
-                    retPrice = Convert.ToDecimal(basedonamt * (1 + frtmarkuppct))
-                    'retPrice = markupprice + frtmarkupamt
-                End If
-
+                frtmarkupamt = itemlocprice * frtmarkuppct
+                retPrice = markupprice + frtmarkupamt
                 Return retPrice
         End Select
 
@@ -945,13 +964,19 @@ Public Class TerrPricing
                     .TerFromCode = cboZonePrc.Text
                 ElseIf rbDirectMacolaPrc.Checked Then
                     .MarkupType = MarkupType.Direct.ToString
-                ElseIf txtTerCode.Text = "002" Or txtTerCode.Text = "003" Or txtTerCode.Text = "004" Or txtTerCode.Text = "005" Or txtTerCode.Text = "006" Or txtTerCode.Text = "007" Or txtTerCode.Text = "008" Or txtTerCode.Text = "009" Then
+                ElseIf txtTerCode.Text = "002" Or txtTerCode.Text = "003" Or txtTerCode.Text = "004" Or txtTerCode.Text = "005" Or txtTerCode.Text = "006" Or txtTerCode.Text = "007" Or txtTerCode.Text = "008" Then
                     .PricingType = PrcType.Primary.ToString
                     .TerCopyToCode = txtTerCode.Text.Trim
                     .TerFromCode = ""
                     .TerCopyToDesc = txtTerrDesc.Text.Trim
-
                 End If
+
+                ' Test for Manual Pricing (Manual Price is an edit to the price in the grid)
+                'If 
+                'End If
+
+
+
 
                 'once we have the TerCopyToCode (the TerrCode that will be saved) determine if it's a Primary or Copied.
                 'then set the TerCodeFrom to "" we are saving a Primary or set the TerCodeFrom to the Primary TerCode if it's Copied 
@@ -993,7 +1018,13 @@ Public Class TerrPricing
                 .MarkupType = MarkupType.Zone.ToString
             ElseIf rbDirectMacolaPrc.Checked Then
                 .MarkupType = MarkupType.Direct.ToString
+            ElseIf Me.rbCustomFill.Checked = False AndAlso Me.rbZoneFill.Checked = False AndAlso rbDirectMacolaPrc.Checked = False And Me.mcboFillTerrCodes.Text = "" Then
+                'no markup type has been selected, this is a manual update.  
+                .MarkupType = MarkupType.Manual.ToString
             End If
+
+
+
 
         End With
     End Sub
@@ -1013,7 +1044,7 @@ Public Class TerrPricing
 
         For Each o As ItemPricingObj In cItemPricingList
             If o.Selected Then
-                dt.Rows.Add(o.ItemNo, o.TerCode, o.ActivePriceRococo, o.ActivePriceColor, o.ActivePriceDetailStain, o.TerFrom, o.TerDescription, Year(Now), Now, Now)
+                dt.Rows.Add(o.ItemNo, o.TerCode, o.ActivePriceColor, o.ActivePriceNatural, o.ActivePriceDetailStain, o.TerFrom, o.TerDescription, Year(Now), Now, Now)
             End If
         Next
         Return dt
@@ -1023,7 +1054,7 @@ Public Class TerrPricing
         Dim dt As New DataTable
         dt.Columns.Add("item_no", GetType(String))
         dt.Columns.Add("prc_level", GetType(String))
-        dt.Columns.Add("prc_natural", GetType(Decimal)) 'Rococo
+        dt.Columns.Add("prc_natural", GetType(Decimal)) 'Natural
         dt.Columns.Add("prc_color", GetType(Decimal)) 'Natural and Color Stain
         dt.Columns.Add("prc_detail", GetType(Decimal)) 'Detail Stain
         dt.Columns.Add("ter_from", GetType(String))
@@ -1034,7 +1065,7 @@ Public Class TerrPricing
 
         For Each o As ItemPricingObj In cItemPricingList
             If o.Selected Then
-                dt.Rows.Add(o.ItemNo.Trim, prc_level.Trim, o.ActivePriceRococo, o.ActivePriceColor, o.ActivePriceDetailStain, ter_from.Trim, ter_desc.Trim, Year(Now), Now, Now)
+                dt.Rows.Add(o.ItemNo.Trim, o.TerCode.Trim, o.ActivePriceNatural, o.ActivePriceColor, o.ActivePriceDetailStain, o.TerFrom.Trim, o.TerDescription.Trim, Year(Now), Now, Now)
             End If
         Next
         Return dt
@@ -1092,12 +1123,12 @@ Public Class TerrPricing
             ' Populate the values based on the type of Update or New Pricing we are doing ...
             For Each rw In .Rows
                 If CBool(rw.Cells("Selected").Value) = True Then
+                    rw.Cells("ActivePriceNatural").Value = IIf(rbPercentFill.Checked,
+                                                               CDec(rw.Cells("OriginalPriceNatural").Value) * CDec(prct_ntl),
+                                                               CDec(rw.Cells("OriginalPriceNatural").Value) + CDec(cOptionalCriteria.NatAmount))
                     rw.Cells("ActivePriceColor").Value = IIf(rbPercentFill.Checked,
-                                                               CDec(rw.Cells("OriginalPriceColor").Value) * CDec(prct_ntl),
-                                                               CDec(rw.Cells("OriginalPriceColor").Value) + CDec(cOptionalCriteria.NatAmount))
-                    rw.Cells("ActivePriceRococo").Value = IIf(rbPercentFill.Checked,
-                                                             CDec(rw.Cells("OriginalPriceRococo").Value) * CDec(prct_clr),
-                                                             CDec(rw.Cells("OriginalPriceRococo").Value) + CDec(cOptionalCriteria.ClrAmount))
+                                                             CDec(rw.Cells("OriginalPriceColor").Value) * CDec(prct_clr),
+                                                             CDec(rw.Cells("OriginalPriceColor").Value) + CDec(cOptionalCriteria.ClrAmount))
                     rw.Cells("ActivePriceDetailStain").Value = IIf(rbPercentFill.Checked,
                                                               CDec(rw.Cells("OriginalPriceDetailStain").Value) * CDec(prct_dtl),
                                                               CDec(rw.Cells("OriginalPriceDetailStain").Value) + CDec(cOptionalCriteria.DtlAmount))
@@ -1136,15 +1167,15 @@ Public Class TerrPricing
     Private Sub SetDataGridBackgroundColor()
         Dim dgv As DataGridView = CType(DataGridView1, DataGridView)
         For Each rw As DataGridViewRow In dgv.Rows
-            If Convert.ToDecimal(rw.Cells("OriginalPriceColor").Value) <> Convert.ToDecimal(rw.Cells("CopiedPriceColor").Value) OrElse
-               Convert.ToDecimal(rw.Cells("OriginalPriceRococo").Value) <> Convert.ToDecimal(rw.Cells("CopiedPriceRococo").Value) OrElse
+            If Convert.ToDecimal(rw.Cells("OriginalPriceNatural").Value) <> Convert.ToDecimal(rw.Cells("CopiedPriceNatural").Value) OrElse
+               Convert.ToDecimal(rw.Cells("OriginalPriceColor").Value) <> Convert.ToDecimal(rw.Cells("CopiedPriceColor").Value) OrElse
                Convert.ToDecimal(rw.Cells("OriginalPriceDetailStain").Value) <> Convert.ToDecimal(rw.Cells("CopiedPriceDetailStain").Value) Then
                 rw.DefaultCellStyle.BackColor = Color.PaleGoldenrod
+                rw.Cells("OriginalPriceNatural").Style.BackColor = readOnlyBackColorDark
                 rw.Cells("OriginalPriceColor").Style.BackColor = readOnlyBackColorDark
-                rw.Cells("OriginalPriceRococo").Style.BackColor = readOnlyBackColorDark
                 rw.Cells("OriginalPriceDetailStain").Style.BackColor = readOnlyBackColorDark
+                rw.Cells("ItemLocPriceNatural").Style.BackColor = readOnlyBackColorDark
                 rw.Cells("ItemLocPriceColor").Style.BackColor = readOnlyBackColorDark
-                rw.Cells("ItemLocPriceRococo").Style.BackColor = readOnlyBackColorDark
                 rw.Cells("ItemLocPriceDetailStain").Style.BackColor = readOnlyBackColorDark
             End If
         Next
@@ -1251,17 +1282,17 @@ Public Class TerrPricing
         For Each itm In cItemPricingList
             If itm.Selected = True Then
                 Dim d As Decimal
+                d = itm.ActivePriceNatural
+                itm.ActivePriceNatural = CDec((Math.Round(d).ToString))
                 d = itm.ActivePriceColor
                 itm.ActivePriceColor = CDec((Math.Round(d).ToString))
-                d = itm.ActivePriceRococo
-                itm.ActivePriceRococo = CDec((Math.Round(d).ToString))
                 d = itm.ActivePriceDetailStain
                 itm.ActivePriceDetailStain = CDec((Math.Round(d).ToString))
                 If cOptionalCriteria.MarkupType = MarkupType.Zone.ToString Then
+                    d = itm.OriginalPriceNatural
+                    itm.OriginalPriceNatural = CDec((Math.Round(d).ToString))
                     d = itm.OriginalPriceColor
                     itm.OriginalPriceColor = CDec((Math.Round(d).ToString))
-                    d = itm.OriginalPriceRococo
-                    itm.OriginalPriceRococo = CDec((Math.Round(d).ToString))
                     d = itm.OriginalPriceDetailStain
                     itm.OriginalPriceDetailStain = CDec((Math.Round(d).ToString))
                 End If
@@ -1365,13 +1396,13 @@ Public Class TerrPricing
 
         With DataGridView1
             itmcatwidth = .Columns("Selected").Width + .Columns("ItemNumber").Width + .Columns("ItemDescription").Width + .Columns("ProdCategory").Width + .Columns("ProdCatDescription").Width + .Columns("TerCode").Width '+ .RowHeadersWidth
-            natwidth = .Columns("ItemLocPriceColor").Width + .Columns("OriginalPriceColor").Width + .Columns("ActivePriceColor").Width
-            colwidth = .Columns("ItemLocPriceRococo").Width + .Columns("OriginalPriceRococo").Width + .Columns("ActivePriceRococo").Width
+            natwidth = .Columns("ItemLocPriceNatural").Width + .Columns("OriginalPriceNatural").Width + .Columns("ActivePriceNatural").Width
+            colwidth = .Columns("ItemLocPriceColor").Width + .Columns("OriginalPriceColor").Width + .Columns("ActivePriceColor").Width
             detwidth = .Columns("ItemLocPriceDetailStain").Width + .Columns("OriginalPriceDetailStain").Width + .Columns("ActivePriceDetailStain").Width
 
         End With
         With dgvHeader
-            If dgv.Columns("ActivePriceColor").Width <> 2 Then
+            If dgv.Columns("ActivePriceNatural").Width <> 2 Then
                 .Columns("Column1").Width = itmcatwidth
                 .Columns("Column2").Width = natwidth
                 .Columns("Column3").Width = colwidth
@@ -1451,12 +1482,12 @@ Public Class TerrPricing
             itm.ProdCat = Convert.ToString(IIf(valuesInRow(3) Is Nothing, "", RegExSearch.PadString(Convert.ToString(valuesInRow(3)), "000", PadPosition.PadStart, 3)))
             itm.ProdCatDesc = Convert.ToString(valuesInRow(4))
             itm.TerCode = Convert.ToString(IIf(valuesInRow(5) Is Nothing, "", RegExSearch.PadString(Convert.ToString(valuesInRow(5)), "000", PadPosition.PadStart, 3)))
-            If valuesInRow(6) = "" Then itm.ItemLocPriceColor = 0 Else itm.ItemLocPriceColor = Convert.ToDecimal(valuesInRow(6))
-            If valuesInRow(7) = "" Then itm.OriginalPriceColor = 0 Else itm.OriginalPriceColor = Convert.ToDecimal(valuesInRow(7))
-            If valuesInRow(8) = "" Then itm.ActivePriceColor = 0 Else itm.ActivePriceColor = Convert.ToDecimal(valuesInRow(8))
-            If valuesInRow(9) = "" Then itm.ItemLocPriceRococo = 0 Else itm.ItemLocPriceRococo = Convert.ToDecimal(valuesInRow(9))
-            If valuesInRow(10) = "" Then itm.OriginalPriceRococo = 0 Else itm.OriginalPriceRococo = Convert.ToDecimal(valuesInRow(10))
-            If valuesInRow(11) = "" Then itm.ActivePriceRococo = 0 Else itm.ActivePriceRococo = Convert.ToDecimal(valuesInRow(11))
+            If valuesInRow(6) = "" Then itm.ItemLocPriceNatural = 0 Else itm.ItemLocPriceNatural = Convert.ToDecimal(valuesInRow(6))
+            If valuesInRow(7) = "" Then itm.OriginalPriceNatural = 0 Else itm.OriginalPriceNatural = Convert.ToDecimal(valuesInRow(7))
+            If valuesInRow(8) = "" Then itm.ActivePriceNatural = 0 Else itm.ActivePriceNatural = Convert.ToDecimal(valuesInRow(8))
+            If valuesInRow(9) = "" Then itm.ItemLocPriceColor = 0 Else itm.ItemLocPriceColor = Convert.ToDecimal(valuesInRow(9))
+            If valuesInRow(10) = "" Then itm.OriginalPriceColor = 0 Else itm.OriginalPriceColor = Convert.ToDecimal(valuesInRow(10))
+            If valuesInRow(11) = "" Then itm.ActivePriceColor = 0 Else itm.ActivePriceColor = Convert.ToDecimal(valuesInRow(11))
             If valuesInRow(12) = "" Then itm.ItemLocPriceDetailStain = 0 Else itm.ItemLocPriceDetailStain = Convert.ToDecimal(valuesInRow(12))
             If valuesInRow(13) = "" Then itm.OriginalPriceDetailStain = 0 Else itm.OriginalPriceDetailStain = Convert.ToDecimal(valuesInRow(13))
             If valuesInRow(14) = "" Then itm.ActivePriceDetailStain = 0 Else itm.ActivePriceDetailStain = Convert.ToDecimal(valuesInRow(14))
@@ -1542,10 +1573,10 @@ Public Class TerrPricing
 
     Private Sub Timer3_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer3.Tick
         Timer3.Enabled = False
-        With rbAdvanced
-            .Visible = True
-            .Checked = True
-        End With
+        'With rbAdvanced
+        '    .Visible = True
+        '    .Checked = True
+        'End With
         cboZonePrc.SelectedIndex = 0
         cboZonePrc.SelectedItem = "Ter Code"
         cboZonePrc.Text = "Ter Code"
@@ -1562,56 +1593,23 @@ Public Class TerrPricing
         If cOptionalCriteria.PricingType = PrcType.Advanced.ToString Then Exit Sub
         SetOptionalCriteriaSearch()
 
+        'clear the Fill Settings
+        'Fill Group ...
+        txtNaturalMarkup.Text = ""
+        txtColorMarkup.Text = ""
+        txtDetailMarkup.Text = ""
+        cboZonePrc.Text = ""
+        cboZonePrc.Enabled = False
+        rbZoneFill.Checked = False
+        rbCustomFill.Checked = False
+        'rbPercentFill.Checked = False
+
         LoadData(cOptionalCriteriaSearch)
         FormatPriceType(FormatPriceTypeState.Open.ToString)
         tabOptions.SelectedIndex = 0
         bAdvanceSearch = False
     End Sub
 
-    Private Sub rbPricingOptions_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles rbUpdate.CheckedChanged, rbCopy.CheckedChanged,
-                                                rbPrimary.CheckedChanged, rbDirectCopy.CheckedChanged, rbAdvanced.CheckedChanged
-        If bByPass Then Exit Sub
-
-        Dim rb As RadioButton = CType(sender, RadioButton)
-
-        Try
-            Select Case rb.Name
-                Case rbUpdate.Name
-                    FormatPriceType(FormatPriceTypeState.Update.ToString)
-                    With cOptionalCriteria
-                        '.PricingType = PrcType.Update.ToString
-                        .UpdateType = PrcUpdateType.Update.ToString
-                    End With
-
-                Case rbCopy.Name
-                    FormatPriceType(FormatPriceTypeState.Copy.ToString)
-                    With cOptionalCriteria
-                        .PricingType = PrcType.Copied.ToString
-                        .UpdateType = PrcUpdateType.Copied.ToString
-                    End With
-                Case rbPrimary.Name
-                    FormatPriceType(FormatPriceTypeState.Primary.ToString)
-                    With cOptionalCriteria
-                        '.PricingType = PrcType.Primary.ToString
-                        .UpdateType = PrcUpdateType.Primary.ToString
-                    End With
-                Case rbDirectCopy.Name
-                    FormatPriceType(FormatPriceTypeState.DirectCopy.ToString)
-                    With cOptionalCriteria
-                        '.PricingType = PrcType.DirectCopied.ToString
-                        .UpdateType = PrcUpdateType.DirectCopy.ToString
-                    End With
-                Case rbAdvanced.Name
-                    FormatPriceType(FormatPriceTypeState.Advanced.ToString)
-                    With cOptionalCriteria
-                        .PricingType = PrcType.Advanced.ToString
-                        .UpdateType = PrcUpdateType.Advanced.ToString
-                    End With
-            End Select
-
-        Catch ex As Exception
-        End Try
-    End Sub
 
 
 
@@ -1700,7 +1698,7 @@ Public Class TerrPricing
             Case PrcType.Advanced.ToString
 
                 'Enable Section
-                grpFill.Enabled = True : grpPriceType.Enabled = True
+                grpFill.Enabled = True  'grpPriceType.Enabled = True
                 rbZoneFill.Enabled = True : rbCustomFill.Enabled = True
                 btnDelete.Enabled = True
 
@@ -1708,7 +1706,7 @@ Public Class TerrPricing
                 lblCurrent.Enabled = False : lblNew.Enabled = False
                 txtFillTerrDesc.Enabled = False : txtTerCode.Enabled = False
                 mcboFillTerrCodes.Enabled = False
-                rbUpdate.Enabled = False : rbCopy.Enabled = False : rbDirectCopy.Enabled = False : rbPrimary.Enabled = False
+                'rbUpdate.Enabled = False : rbCopy.Enabled = False : rbDirectCopy.Enabled = False : rbPrimary.Enabled = False
                 btnSelectAll.Enabled = True : btnFillPricing.Enabled = True : btnRoundPricing.Enabled = True
                 grpFilter.Enabled = False
 
@@ -1735,20 +1733,20 @@ Public Class TerrPricing
                 For Each ctl As Control In GroupBox2.Controls
                     ctl.Enabled = True
                 Next
-                For Each ctl As Control In grpPriceType.Controls
-                    If ctl.Name = rbUpdate.Name _
-                        Or ctl.Name = rbCopy.Name _
-                        Or ctl.Name = rbPrimary.Name _
-                        Or ctl.Name = rbDirectCopy.Name Then
-                        ctl.Enabled = True
-                        Dim rb As RadioButton = CType(ctl, RadioButton)
-                        rb.Checked = False
-                    Else
-                        ctl.Enabled = False
-                    End If
-                Next
+                'For Each ctl As Control In grpPriceType.Controls
+                '    If ctl.Name = rbUpdate.Name _
+                '        Or ctl.Name = rbCopy.Name _
+                '        Or ctl.Name = rbPrimary.Name _
+                '        Or ctl.Name = rbDirectCopy.Name Then
+                '        ctl.Enabled = True
+                '        Dim rb As RadioButton = CType(ctl, RadioButton)
+                '        rb.Checked = False
+                '    Else
+                '        ctl.Enabled = False
+                '    End If
+                'Next
 
-                grpPriceType.Enabled = False
+                'grpPriceType.Enabled = False
                 grpFill.Enabled = False
                 btnSelectAll.Enabled = False
                 btnFillPricing.Enabled = False
@@ -1848,15 +1846,15 @@ Public Class TerrPricing
         'Dim iZeroPrices As Integer = 0
         For Each itm As ItemPricingObj In cItemPricingList
             If itm.Selected Then
-                If ((itm.ActivePriceColor = 0 And itm.OriginalPriceColor > 0) _
-                    OrElse (itm.ActivePriceRococo = 0 And itm.OriginalPriceRococo > 0) _
+                If ((itm.ActivePriceNatural = 0 And itm.OriginalPriceNatural > 0) _
+                    OrElse (itm.ActivePriceColor = 0 And itm.OriginalPriceColor > 0) _
                     OrElse (itm.ActivePriceDetailStain = 0 And itm.OriginalPriceDetailStain > 0)) Then
                     sMsg = "SET PRICE TO ZERO ITEMS FOUND!" & vbCrLf & vbCrLf &
                            "Setting prices to ZERO is not permitted.  " & vbCrLf & vbCrLf &
                                         "Uncheck this item - OR - Change the ZERO Price in the 'New Prc' Column: " & vbCrLf & vbCrLf &
                                         "Item: " & itm.ItemNo & ", " & itm.ItemDesc & vbCrLf & vbCrLf &
-                                        "NATRURAL:" & vbTab & "Current Price - " & itm.OriginalPriceColor & " / New Price - " & itm.ActivePriceColor & vbCrLf &
-                                        "COLOR:" & vbTab & vbTab & "Current Price - " & itm.OriginalPriceRococo & " / New Price - " & itm.ActivePriceRococo & vbCrLf &
+                                        "NATRURAL:" & vbTab & "Current Price - " & itm.OriginalPriceNatural & " / New Price - " & itm.ActivePriceNatural & vbCrLf &
+                                        "COLOR:" & vbTab & vbTab & "Current Price - " & itm.OriginalPriceColor & " / New Price - " & itm.ActivePriceColor & vbCrLf &
                                         "DETAIL:" & vbTab & vbTab & "Current Price - " & itm.OriginalPriceDetailStain & " / New Price - " & itm.ActivePriceDetailStain & vbCrLf & vbCrLf &
                                         "Message copied to Clipboard.  Paste to Notepad for reference. "
 
@@ -1950,7 +1948,9 @@ Public Class TerrPricing
             With cOptionalCriteria
                 If .TerFromCode > "" Then
                     If .TerCopiedFromCode > "" Then
-                        .TerFromCode = IIf(.TerCopyToCode.Substring(0, 2) = "00", "", .TerCopiedFromCode.Trim).ToString
+                        If .TerCopyToCode > "" Then
+                            .TerFromCode = IIf(.TerCopyToCode.Substring(0, 2) = "00", "", .TerCopiedFromCode.Trim).ToString
+                        End If
                     End If
 
                 End If
@@ -1966,11 +1966,22 @@ Public Class TerrPricing
 
             'if its a copied price list, handle here ... 
             With saveMessage
-                .Append(vbCrLf)
-                If cOptionalCriteria.TerCopyToCode > "" Then .Append("Save Territory To: ") : .Append(cOptionalCriteria.TerCopyToCode & vbCrLf)
-                If cOptionalCriteria.TerCopyToDesc > "" Then .Append("Save Territory To Description: ") : .Append(cOptionalCriteria.TerCopyToDesc & vbCrLf)
-                If cOptionalCriteria.TerFromCode > "" Then .Append("Territory From: ") : .Append(cOptionalCriteria.TerFromCode & vbCrLf)
-                .Append(vbCrLf)
+                If cOptionalCriteria.MarkupType = MarkupType.Manual.ToString Then
+                    .Append(vbCrLf)
+                    .Append("Save Territory To: ") : .Append(Me.txtTerCode.Text.Trim & vbCrLf)
+                    .Append("Save Territory To Description: ") : .Append(Me.txtTerrDesc.Text.Trim & vbCrLf)
+                    .Append("Territory From: ") : .Append(Me.txtTerFrom.Text.Trim & vbCrLf)
+                    .Append("Pricing Type: ") : .Append(cOptionalCriteria.MarkupType & vbCrLf)
+                    .Append(vbCrLf)
+                Else
+                    .Append(vbCrLf)
+                    If cOptionalCriteria.TerCopyToCode > "" Then .Append("Save Territory To: ") : .Append(cOptionalCriteria.TerCopyToCode & vbCrLf)
+                    If cOptionalCriteria.TerCopyToDesc > "" Then .Append("Save Territory To Description: ") : .Append(cOptionalCriteria.TerCopyToDesc & vbCrLf)
+                    If cOptionalCriteria.TerFromCode > "" Then .Append("Territory From: ") : .Append(cOptionalCriteria.TerFromCode & vbCrLf)
+                    .Append("Pricing Type: ") : .Append(cOptionalCriteria.PricingType & vbCrLf)
+                    .Append(vbCrLf)
+                End If
+
             End With
 
 
@@ -2054,10 +2065,14 @@ Public Class TerrPricing
 
             With saveMessage
                 .Append(vbCrLf)
-                If cOptionalCriteria.TerCopyToCode > "" Then .Append("Save Territory To: ") : .Append(cOptionalCriteria.TerCopyToCode & vbCrLf)
-                If cOptionalCriteria.TerCopyToDesc > "" Then .Append("Save Territory To Description: ") : .Append(cOptionalCriteria.TerCopyToDesc & vbCrLf)
-                If cOptionalCriteria.TerFromCode > "" Then .Append("Territory From: ") : .Append(cOptionalCriteria.TerFromCode & vbCrLf)
-                If cOptionalCriteria.PricingType > "" Then .Append("Pricing Type: ") : .Append(cOptionalCriteria.PricingType & vbCrLf)
+                .Append("Save Territory To: ") : .Append(cOptionalCriteria.SaveTerCode & vbCrLf)
+                .Append("Save Territory To Description: ") : .Append(cOptionalCriteria.SaveTerDesc & vbCrLf)
+                .Append("Territory From: ") : .Append(IIf(cOptionalCriteria.SaveTerFrom = "", "n/a", cOptionalCriteria.SaveTerFrom) & vbCrLf)
+                .Append("Pricing Type: ") : .Append(cOptionalCriteria.PricingType & vbCrLf)
+                'If cOptionalCriteria.TerCopyToCode > "" Then .Append("Save Territory To: ") : .Append(cOptionalCriteria.TerCopyToCode & vbCrLf)
+                'If cOptionalCriteria.TerCopyToDesc > "" Then .Append("Save Territory To Description: ") : .Append(cOptionalCriteria.TerCopyToDesc & vbCrLf)
+                'If cOptionalCriteria.TerFromCode > "" Then .Append("Territory From: ") : .Append(cOptionalCriteria.TerFromCode & vbCrLf)
+                'If cOptionalCriteria.PricingType > "" Then .Append("Pricing Type: ") : .Append(cOptionalCriteria.PricingType & vbCrLf)
                 .Append(vbCrLf)
             End With
 
@@ -2525,7 +2540,7 @@ Public Class TerrPricing
             cboOnPriceList.Enabled = True
             cboHasTerrPrice.Enabled = True
             chkShowActiveOnly.Enabled = True
-            rbAdvanced.Checked = False
+            'rbAdvanced.Checked = False
             cboZonePrc.Text = ""
             rbZoneFill.Checked = False
             rbDirectMacolaPrc.Checked = False
@@ -2551,6 +2566,7 @@ Public Class TerrPricing
         rbZoneFill.Checked = False
         rbCustomFill.Checked = False
         'rbPercentFill.Checked = False
+
 
         'Filter Group
         cboFilter.DataSource = Nothing
@@ -2589,18 +2605,18 @@ Public Class TerrPricing
             Catch ex As Exception
 
             End Try
+            .Columns("ActivePriceNatural").Visible = True
             .Columns("ActivePriceColor").Visible = True
-            .Columns("ActivePriceRococo").Visible = True
             .Columns("ActivePriceDetailStain").Visible = True
             .Columns("TerFrom").Visible = True
+            .Columns("ActivePriceNatural").Width = 60
             .Columns("ActivePriceColor").Width = 60
-            .Columns("ActivePriceRococo").Width = 60
             .Columns("ActivePriceDetailStain").Width = 60
             .Columns("TerFrom").Width = 60
-            .Columns("OriginalPriceColor").ReadOnly = True
+            .Columns("OriginalPriceNatural").ReadOnly = True
+            .Columns("OriginalPriceNatural").DefaultCellStyle.BackColor = Color.FromArgb(235, 235, 221)
             .Columns("OriginalPriceColor").DefaultCellStyle.BackColor = Color.FromArgb(235, 235, 221)
-            .Columns("OriginalPriceRococo").DefaultCellStyle.BackColor = Color.FromArgb(235, 235, 221)
-            .Columns("OriginalPriceRococo").ReadOnly = True
+            .Columns("OriginalPriceColor").ReadOnly = True
             .Columns("OriginalPriceDetailStain").DefaultCellStyle.BackColor = Color.FromArgb(235, 235, 221)
             .Columns("OriginalPriceDetailStain").ReadOnly = True
         End With
@@ -2612,34 +2628,14 @@ Public Class TerrPricing
         fAdvancedLookup.Show()
     End Sub
 
-    'Private Sub LinkLabel1_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs)
-    '    AdvancedSearch()
-    'End Sub
-
     Public Sub LookupClosed()
         FillTerritoryCodeList()
     End Sub
 
-    'Private Sub mcboTerritoryCodes_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles mcboTerritoryCodes.KeyDown
-    '    If e.KeyCode = Keys.Enter Then
-    '        With mcboTerritoryCodes
-    '            .SelectedItem = .Text
-    '            '.ResetText()
-    '            '.Refresh()
-    '        End With
-
-    '        'MsgBox("Stop")
-    '        With Timer1
-    '            .Interval = 100
-    '            .Enabled = True
-    '        End With
-    '    End If
-    'End Sub
 
     Private Sub mcboTerritoryCodes_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles mcboTerritoryCodes.SelectedIndexChanged
         If bIsLoading Then Exit Sub
         On Error Resume Next
-        'cOptionalCriteria.TerCodeSearchFrom = mcboTerritoryCodes.Data.Rows(Me.mcboTerritoryCodes.SelectedIndex)(0).ToString
         txtTerrDesc.Text = dtTerrCodes.Rows(CType(sender, JTG.ColumnComboBox).SelectedIndex)(1).ToString
         txtFrom.Text = dtTerrCodes.Rows(CType(sender, JTG.ColumnComboBox).SelectedIndex)(3).ToString
         frmSetZonePercentage.Focus()
@@ -2701,7 +2697,7 @@ Public Class TerrPricing
             Dim dg As DataGridView = DirectCast(Me.DataGridView1, DataGridView)
             Dim FldNames() As String
             FldNames = ExportGridInExcel.GetFixedFieldNames("ItemNumber, ItemDescription, ProdCategory, ProdCatDescription, " &
-                                                            "TerCode, ItemLocPriceRococo, OriginalPriceRococo, ActivePriceRococo, " &
+                                                            "TerCode, ItemLocPriceNatural, OriginalPriceNatural, ActivePriceNatural, " &
                                                             "ItemLocPriceColor, OriginalPriceColor, ActivePriceColor, ItemLocPriceDetailStain, OriginalPriceDetailStain, ActivePriceDetailStain, " &
                                                             "TerFrom, TerDesc, Active, ItemWeight, Dimensions, PageNo")
             Dim rowsCounter As Int32 = 0
@@ -2723,9 +2719,9 @@ Public Class TerrPricing
                         DataArr(rowsCounter, 2) = .ProdCat
                         DataArr(rowsCounter, 3) = .ProdCatDesc
                         DataArr(rowsCounter, 4) = .TerCode
-                        DataArr(rowsCounter, 5) = .ItemLocPriceRococo
-                        DataArr(rowsCounter, 6) = .OriginalPriceRococo
-                        DataArr(rowsCounter, 7) = .ActivePriceRococo
+                        DataArr(rowsCounter, 5) = .ItemLocPriceNatural
+                        DataArr(rowsCounter, 6) = .OriginalPriceNatural
+                        DataArr(rowsCounter, 7) = .ActivePriceNatural
                         DataArr(rowsCounter, 8) = .ItemLocPriceColor
                         DataArr(rowsCounter, 9) = .OriginalPriceColor
                         DataArr(rowsCounter, 10) = .ActivePriceColor
@@ -2745,24 +2741,6 @@ Public Class TerrPricing
                 Next
             End If
 
-            'Data Grid Export: If Data with Header Pressed, get the data, otherwise skip ...
-            'If btn.Name = btnExportExcel.Name Then
-            '    For rowsCounter As Int32 = 0 To rows
-            '        For Each cell As DataGridViewCell In dg.Rows(rowsCounter).Cells
-
-            '            If dg.Columns(cell.ColumnIndex).Visible = True Then
-            '                DataArr(rowsCounter, colsVisible) = cell.FormattedValue
-            '                Debug.Print(cell.FormattedValueType.ToString & " - " & cell.FormattedValue.ToString)
-            '                colsVisible = colsVisible + 1
-
-            '            End If
-            '            colsCounter = colsCounter + 1
-
-            '        Next
-            '        colsVisible = 0
-            '        colsCounter = 0
-            '    Next
-            'End If
 
             'Excel Variables
             Dim xlapp As New Excel.Application
@@ -2827,10 +2805,6 @@ Public Class TerrPricing
 
     End Sub
 
-    'Private Sub CloseForm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
-    '    Me.Close()
-    'End Sub
-
     Private Sub rbPercentFill_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles rbPercentFill.CheckedChanged, rbAmountFill.CheckedChanged
         If rbAmountFill.Checked Then
             cOptionalCriteria.FillType = FillType.Amount.ToString
@@ -2846,78 +2820,52 @@ Public Class TerrPricing
     End Sub
 
 
-
-
-    'Private Sub rbPricingType_CheckedChanged(sender As Object, e As System.EventArgs)
-    '    With cOptionalCriteria
-    '        If rbCopiedTerritory.Checked Then
-    '            .PricingType = PrcType.Copied.ToString
-    '        ElseIf rbPrimaryTerritory.Checked Then
-    '            '.PricingType = PrcType.Primary.ToString
-    '        ElseIf rbAdvancedSearchPricing.Checked Then
-    '            '.PricingType = PrcType.Advanced.ToString
-    '        End If
-    '    End With
-
-
-    'End Sub
-
-    'Private Sub cboFillTerrCodes_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles cboFillTerrCodes.SelectedIndexChanged
-    '    Dim cbo As ComboBox = CType(sender, ComboBox)
-    '    Dim terDescription As String = ""
-    '    Dim terNumber As String = cbo.Text.Trim
-    '    Dim sSQL As String = "select distinct MAX(ter_desc) as ter_desc from OEPRCCUS_MAZ where prc_level = '" & terNumber & "'"
-
-    '    terDescription = BusObj.GetScalarValue(sSQL, cn).ToString
-    '    Me.txtFillTerrDesc.Text = terDescription
-    'End Sub
-
     Private Sub btnAdvancedSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdvancedSearch.Click
         AdvancedSearch()
     End Sub
 
-    'Private Sub mcboFillTerrCodes_DropDownClosed(sender As Object, e As System.EventArgs) Handles mcboFillTerrCodes.DropDownClosed
+    Private Sub mcboFillTerrCodes_KeyPress(sender As Object, e As KeyPressEventArgs) Handles mcboFillTerrCodes.KeyPress
+        Dim cbo As JTG.ColumnComboBox = CType(sender, JTG.ColumnComboBox)
+        cbo.DropDownOnSuggestion = vbFalse
+        cbo.Suggest = vbFalse
+    End Sub
+    Private Sub mcboFillTerrCodes_KeyUp(sender As Object, e As KeyEventArgs) Handles mcboFillTerrCodes.KeyUp
+        With Timer5
+            .Interval = 50
+            .Enabled = True
+        End With
 
-
-
-    '    With Timer6
-    '        .Interval = 500
-    '        .Enabled = True
-    '    End With
-
-
-
-    'End Sub
-    'Private Sub Timer6_Tick(sender As System.Object, e As System.EventArgs) Handles Timer6.Tick
-
-    '    Dim tmr As Timer = DirectCast(sender, Timer)
-    '    With tmr
-    '        .Enabled = False
-
-    '    End With
-
-    '    txtTerCode.Text = dtCopyFrom.Rows(CType(sender, JTG.ColumnComboBox).SelectedIndex)(1).ToString
-    '    txtTerFrom.Text = dtTerrCodes.Rows(CType(sender, JTG.ColumnComboBox).SelectedIndex)(1).ToString
-
-
-    'End Sub
+    End Sub
     Private Sub mcboFillTerrCodes_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mcboFillTerrCodes.SelectedIndexChanged
-        If bIsLoading Or bByPass Then Exit Sub
-        ''On Error Resume Next
+        Dim cbo As JTG.ColumnComboBox = CType(sender, JTG.ColumnComboBox)
+        If bIsLoading Or bByPass Then Return
+        On Error Resume Next
+
+        cbo.DropDownOnSuggestion = vbTrue
+        cbo.Suggest = vbTrue
 
         txtFillTerrDesc.Text = dtCopyFrom.Rows(CType(sender, JTG.ColumnComboBox).SelectedIndex)(1).ToString()
         txtTerCode.Text = dtCopyFrom.Rows(CType(sender, JTG.ColumnComboBox).SelectedIndex)(0).ToString
         txtTerFrom.Text = mcboTerritoryCodes.Text.Trim
-
-
     End Sub
 
-    'Private Sub Timer5_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer5.Tick
-    '    Dim tmr As Timer = CType(sender, Timer)
-    '    tmr.Enabled = False
-    '    txtFillTerrDesc.Text = terDescFill
-    '    btnSave.Enabled = False
-    'End Sub
+
+    Private Sub Timer5_Tick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Timer5.Tick
+        Dim tmr As Timer = CType(sender, Timer)
+        tmr.Enabled = False
+        Dim cbo As JTG.ColumnComboBox = CType(mcboFillTerrCodes, JTG.ColumnComboBox)
+        txtTerCode.Text = cbo.Text.ToString.Trim()
+        txtFillTerrDesc.Text = ""
+        If cbo.Text = Nothing Then
+            txtTerFrom.Text = ""
+        Else
+            txtTerFrom.Text = mcboTerritoryCodes.Text.Trim()
+        End If
+
+        cbo.DropDownOnSuggestion = vbTrue
+        cbo.Suggest = vbTrue
+
+    End Sub
 
     Private Sub cboZonePrc_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboZonePrc.SelectedIndexChanged
         'Conditional Section
@@ -2956,8 +2904,8 @@ Public Class TerrPricing
         Dim dgv As DataGridView = CType(DataGridView1, DataGridView)
         Dim chk As CheckBox = CType(sender, CheckBox)
         With dgv
+            .Columns("CopiedPriceNatural").Visible = chk.Checked
             .Columns("CopiedPriceColor").Visible = chk.Checked
-            .Columns("CopiedPriceRococo").Visible = chk.Checked
             .Columns("CopiedPriceDetailStain").Visible = chk.Checked
         End With
     End Sub
@@ -3004,74 +2952,17 @@ Public Class TerrPricing
         Dim dgv As DataGridView = CType(DataGridView1, DataGridView)
         PasteToGrid.ClearSelection(dgv)
 
-
-        'Dim emptycell_Decimal As Decimal = 0
-        'Dim emptycell_String As String = ""
-        'Dim emptycell_Integer As Integer = 0
-        'Dim emptycell_Date As Date = #1/1/1900#
-
-        'With dgv
-        '    For Each cel As DataGridViewCell In dgv.SelectedCells
-        '        Select Case cel.ValueType.FullName
-        '            Case "System.String"
-        '                cel.Value = emptycell_String
-        '            Case "System.Decimal"
-        '                cel.Value = emptycell_Decimal
-        '            Case "System.Integer"
-        '                cel.Value = emptycell_Integer
-        '            Case "System.Date"
-        '                cel.Value = emptycell_Date
-        '        End Select
-
-        '    Next
-        'End With
-
     End Sub
 
     Private Sub btnCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCopy.Click
         Try
-            Clipboard.SetDataObject( _
+            Clipboard.SetDataObject(
                     Me.DataGridView1.GetClipboardContent())
         Catch ex As Exception
 
         End Try
     End Sub
 
-    'Private Sub btnByItems_Click(sender As System.Object, e As System.EventArgs) Handles btnByItems.Click
-    '    LookupItem.Show()
-    'End Sub
-
-    'Private Sub DataGridView1_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles DataGridView1.MouseDown
-    '    If e.Button = Windows.Forms.MouseButtons.Left Then
-    '        Exit Sub
-    '    Else
-
-    '        Dim dgv As DataGridView = CType(sender, DataGridView)
-    '        'Dim ht As DataGridView.HitTestInfo
-    '        ht = dgv.HitTest(e.X, e.Y)
-    '        hitContextMenu = dgv.HitTest(e.X, e.Y)
-
-    '        'to set current row programatically, Because current row can be multiple rows
-    '        'when row selection is set to MultiSelect, it cannot be set where the little
-    '        'black arrow will move to that row.  But setting the Cell to CurrentCell, there is only
-    '        'one currentcell, not multiples.  So, set Cell first, then row, and the little black 
-    '        'arrow will move. 
-    '        Try
-    '            With dgv
-    '                .ClearSelection()
-    '                .CurrentCell = .Rows(ht.RowIndex).Cells(ht.ColumnIndex)
-    '                '.Rows(ht.RowIndex).Selected = True
-    '            End With
-    '        Catch ex As Exception
-
-    '        End Try
-
-    '    End If
-    'End Sub
-
-    Private Sub mcboFillTerrCodes_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles mcboFillTerrCodes.TextChanged
-        btnSave.Enabled = False
-    End Sub
 
     Private Sub tabOptions_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles tabOptions.SelectedIndexChanged
         Dim tb As TabControl = CType(sender, TabControl)
@@ -3082,12 +2973,18 @@ Public Class TerrPricing
             btnRoundPricing.Enabled = True
             btnDelete.Enabled = True
             btnSave.Enabled = False
+            ' Clear Copy To tab values and reset the TerrCode and Terr From boxes
+            Me.mcboFillTerrCodes.Text = ""
+            Me.txtFillTerrDesc.Text = ""
+            Me.txtTerFrom.Text = ""
+            Me.txtTerCode.Text = mcboTerritoryCodes.Text.ToString.Trim()
         Else
             btnSelectAll.Enabled = True
             btnFillPricing.Enabled = False
             btnRoundPricing.Enabled = False
             btnDelete.Enabled = False
             btnSave.Enabled = True
+
         End If
         rbCustomFill.Checked = False
         rbZoneFill.Checked = False
@@ -3103,17 +3000,24 @@ Public Class TerrPricing
             MsgBox("No items have been selected.  Select the items to update.", MsgBoxStyle.OkOnly, "Select Items")
             Exit Sub
         End If
-        
+
         If cItemPricingList.Count = 0 Then Exit Sub
         bByPass = True
         bCopyToOption = True
         Cursor = Cursors.WaitCursor
+
         SetOptionalCopyToCriteria()
-        CollectUIFillData()
+        'CollectUIFillData()
 
         DoStandardMarkup()
 
         Cursor = Cursors.Default
+
+        'remove A4GLIdentity
+        For Each o As ItemPricingObj In cItemPricingList
+            o.A4GLIdentity = 0
+        Next
+
 
         cOptionalCriteria.IsFillPressed = True
         btnSave.Enabled = cOptionalCriteria.IsFillPressed
@@ -3145,7 +3049,7 @@ Public Class TerrPricing
     Private Sub btnBackup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBackup.Click
         Dim datestring As String = Now.Year.ToString & "_" & Now.Month.ToString & "_" & Now.Day.ToString & "_" & Now.Hour.ToString & Now.Minute.ToString
 
-        Dim sql As String = "select * into zzOEPRCCUS_MAX_" & datestring & " from dbo.OEPRCCUS_MAZ "
+        Dim sql As String = "select * into zzOEPRCCUS_MAZ_" & datestring & " from dbo.OEPRCCUS_MAZ "
         Try
             BusObj.BackupPriceList(sql, cn)
         Catch ex As Exception
@@ -3159,7 +3063,7 @@ Public Class TerrPricing
 
     End Sub
 
-   
+
     Private Sub btnPasteDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPasteDown.Click
         Dim dgv As DataGridView = CType(DataGridView1, DataGridView)
         Dim cel As DataGridViewCell = dgv.CurrentCell
@@ -3206,8 +3110,7 @@ Public Class TerrPricing
         Me.Refresh()
     End Sub
 
-    
-    
+
 End Class
 
 Friend Class OptionalCriteria
@@ -3256,6 +3159,14 @@ Friend Class OptionalCriteria
     Public UpdateType As String
     Public FillType As String
 
+    Public StartTerCode As String
+    Public StartTerFrom As String
+    Public StartTerDesc As String
+    Public SaveTerCode As String
+    Public SaveTerFrom As String
+    Public SaveTerDesc As String
+
+
     Public Sub Clear()
 
         DBName = ""
@@ -3280,6 +3191,7 @@ Friend Class OptionalCriteria
         UpdateType = ""
 
         FillType = ""
+
     End Sub
 
     Public Shared ReadOnly Property IsSet(ByVal oValue As Object) As Boolean

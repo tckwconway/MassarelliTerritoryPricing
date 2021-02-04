@@ -157,7 +157,7 @@
     <value>iLastDate</value>
     <comment>IN Param:</comment>
   </data>
-  <data name="Param_iPrcRococo" xml:space="preserve">
+  <data name="Param_iPrcColor" xml:space="preserve">
     <value>iPrcColor</value>
     <comment>IN Param:</comment>
   </data>
@@ -177,7 +177,7 @@
     <value>iPrcLevelToNOT USED</value>
     <comment>IN Param:</comment>
   </data>
-  <data name="Param_iPrcColor" xml:space="preserve">
+  <data name="Param_iPrcNatural" xml:space="preserve">
     <value>iPrcNatural</value>
     <comment>IN Param:</comment>
   </data>

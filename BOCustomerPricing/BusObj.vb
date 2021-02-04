@@ -96,18 +96,18 @@ Public Class BusObj
             If rd(2).Equals(DBNull.Value) Then oItemPricingList(2) = "" Else oItemPricingList(2) = CStr(rd(2)).Trim 'ItemDesc
             If rd(3).Equals(DBNull.Value) Then oItemPricingList(3) = "" Else oItemPricingList(3) = CStr(rd(3)).Trim 'ProdCat
             If rd(4).Equals(DBNull.Value) Then oItemPricingList(4) = "" Else oItemPricingList(4) = CStr(rd(4)).Trim 'ProdDesc
-            If rd(5).Equals(DBNull.Value) Then oItemPricingList(5) = 0 Else oItemPricingList(5) = CDec(rd(5)) 'Terr Price Rococo
+            If rd(5).Equals(DBNull.Value) Then oItemPricingList(5) = 0 Else oItemPricingList(5) = CDec(rd(5)) 'Terr Price Natural
             If rd(6).Equals(DBNull.Value) Then oItemPricingList(6) = 0 Else oItemPricingList(6) = CDec(rd(6)) 'Terr Price Color
             If rd(7).Equals(DBNull.Value) Then oItemPricingList(7) = 0 Else oItemPricingList(7) = CDec(rd(7)) 'Terr Price Detail
-            If rd(8).Equals(DBNull.Value) Then oItemPricingList(8) = 0 Else oItemPricingList(8) = CDec(rd(8)) 'Base Price Rococo
+            If rd(8).Equals(DBNull.Value) Then oItemPricingList(8) = 0 Else oItemPricingList(8) = CDec(rd(8)) 'Base Price Natural
             If rd(9).Equals(DBNull.Value) Then oItemPricingList(9) = 0 Else oItemPricingList(9) = CDec(rd(9)) 'Base Price Color
             If rd(10).Equals(DBNull.Value) Then oItemPricingList(10) = 0 Else oItemPricingList(10) = CDec(rd(10)) 'Base Price Detail
 
-            If rd(11).Equals(DBNull.Value) Then oItemPricingList(11) = 0 Else oItemPricingList(11) = CDec(rd(11)) 'Active Price Rococo - Always 0 so User can set the new price
+            If rd(11).Equals(DBNull.Value) Then oItemPricingList(11) = 0 Else oItemPricingList(11) = CDec(rd(11)) 'Active Price Natural - Always 0 so User can set the new price
             If rd(12).Equals(DBNull.Value) Then oItemPricingList(12) = 0 Else oItemPricingList(12) = CDec(rd(12)) 'Active Price Color - Always 0 so User can set the new price
             If rd(13).Equals(DBNull.Value) Then oItemPricingList(13) = 0 Else oItemPricingList(13) = CDec(rd(13)) 'Active Price Detail - Always 0 so User can set the new price
 
-            If rd(14).Equals(DBNull.Value) Then oItemPricingList(14) = 0 Else oItemPricingList(14) = CDec(rd(14)) 'Copied Price Rococo - Copied Prices are the Copied From Prices so we can compare with New Copied Terr Price to see if it's changed and set the DataGridView row to Yellow if it has changed.  
+            If rd(14).Equals(DBNull.Value) Then oItemPricingList(14) = 0 Else oItemPricingList(14) = CDec(rd(14)) 'Copied Price Natural - Copied Prices are the Copied From Prices so we can compare with New Copied Terr Price to see if it's changed and set the DataGridView row to Yellow if it has changed.  
             If rd(15).Equals(DBNull.Value) Then oItemPricingList(15) = 0 Else oItemPricingList(15) = CDec(rd(15)) 'Copied Price Color
             If rd(16).Equals(DBNull.Value) Then oItemPricingList(16) = 0 Else oItemPricingList(16) = CDec(rd(16)) 'Copied Price Detail
 
@@ -153,18 +153,18 @@ Public Class BusObj
                 If rd(2).Equals(DBNull.Value) Then oItemPricingList(2) = "" Else oItemPricingList(2) = CStr(rd(2)).Trim 'ItemDesc
                 If rd(3).Equals(DBNull.Value) Then oItemPricingList(3) = "" Else oItemPricingList(3) = CStr(rd(3)).Trim 'ProdCat
                 If rd(4).Equals(DBNull.Value) Then oItemPricingList(4) = "" Else oItemPricingList(4) = CStr(rd(4)).Trim 'ProdDesc
-                If rd(5).Equals(DBNull.Value) Then oItemPricingList(5) = 0 Else oItemPricingList(5) = CDec(rd(5)) 'Terr Price Rococo
+                If rd(5).Equals(DBNull.Value) Then oItemPricingList(5) = 0 Else oItemPricingList(5) = CDec(rd(5)) 'Terr Price Natural
                 If rd(6).Equals(DBNull.Value) Then oItemPricingList(6) = 0 Else oItemPricingList(6) = CDec(rd(6)) 'Terr Price Color
                 If rd(7).Equals(DBNull.Value) Then oItemPricingList(7) = 0 Else oItemPricingList(7) = CDec(rd(7)) 'Terr Price Detail
-                If rd(8).Equals(DBNull.Value) Then oItemPricingList(8) = 0 Else oItemPricingList(8) = CDec(rd(8)) 'Base Price Rococo
+                If rd(8).Equals(DBNull.Value) Then oItemPricingList(8) = 0 Else oItemPricingList(8) = CDec(rd(8)) 'Base Price Natural
                 If rd(9).Equals(DBNull.Value) Then oItemPricingList(9) = 0 Else oItemPricingList(9) = CDec(rd(9)) 'Base Price Color
                 If rd(10).Equals(DBNull.Value) Then oItemPricingList(10) = 0 Else oItemPricingList(10) = CDec(rd(10)) 'Base Price Detail
 
-                If rd(11).Equals(DBNull.Value) Then oItemPricingList(11) = 0 Else oItemPricingList(11) = CDec(rd(11)) 'Active Price Rococo - Always 0 so User can set the new price
+                If rd(11).Equals(DBNull.Value) Then oItemPricingList(11) = 0 Else oItemPricingList(11) = CDec(rd(11)) 'Active Price Natural - Always 0 so User can set the new price
                 If rd(12).Equals(DBNull.Value) Then oItemPricingList(12) = 0 Else oItemPricingList(12) = CDec(rd(12)) 'Active Price Color - Always 0 so User can set the new price
                 If rd(13).Equals(DBNull.Value) Then oItemPricingList(13) = 0 Else oItemPricingList(13) = CDec(rd(13)) 'Active Price Detail - Always 0 so User can set the new price
 
-                If rd(14).Equals(DBNull.Value) Then oItemPricingList(14) = 0 Else oItemPricingList(14) = CDec(rd(14)) 'Copied Price Rococo - Copied Prices are the Copied From Prices so we can compare with New Copied Terr Price to see if it's changed and set the DataGridView row to Yellow if it has changed.  
+                If rd(14).Equals(DBNull.Value) Then oItemPricingList(14) = 0 Else oItemPricingList(14) = CDec(rd(14)) 'Copied Price Natural - Copied Prices are the Copied From Prices so we can compare with New Copied Terr Price to see if it's changed and set the DataGridView row to Yellow if it has changed.  
                 If rd(15).Equals(DBNull.Value) Then oItemPricingList(15) = 0 Else oItemPricingList(15) = CDec(rd(15)) 'Copied Price Color
                 If rd(16).Equals(DBNull.Value) Then oItemPricingList(16) = 0 Else oItemPricingList(16) = CDec(rd(16)) 'Copied Price Detail
 

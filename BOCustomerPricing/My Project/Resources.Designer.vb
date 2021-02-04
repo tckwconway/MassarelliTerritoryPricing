@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -223,7 +223,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to iPrcNatural.
+        '''  Looks up a localized string similar to iPrcColor.
         '''</summary>
         Friend ReadOnly Property Param_iPrcColor() As String
             Get
@@ -259,11 +259,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to iPrcColor.
+        '''  Looks up a localized string similar to iPrcNatural.
         '''</summary>
-        Friend ReadOnly Property Param_iPrcRococo() As String
+        Friend ReadOnly Property Param_iPrcNatural() As String
             Get
-                Return ResourceManager.GetString("Param_iPrcRococo", resourceCulture)
+                Return ResourceManager.GetString("Param_iPrcNatural", resourceCulture)
             End Get
         End Property
         
