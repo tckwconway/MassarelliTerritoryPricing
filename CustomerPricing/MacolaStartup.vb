@@ -7,7 +7,8 @@ Module MacolaStartup
     Friend cn As SqlConnection
     Public Sub MacStartup(db As String)
         Try
-            Dim ConnStr As String = "Data Source=" & My.Settings.DefaultServer & ";Initial Catalog=" & db & ";Persist Security Info=True;User ID=sa;Password=STMARTIN"
+            ' Dim ConnStr As String = "Data Source=" & My.Settings.DefaultServer & ";Initial Catalog=" & db & ";Persist Security Info=True;User ID=sa;Password=STMARTIN"
+            Dim ConnStr As String = "Data Source=mass-sql1;Initial Catalog=DATA_999;Persist Security Info=True;User ID=sa;Password=STMARTIN"
             cn = New SqlConnection
             cn.ConnectionString = ConnStr
             cn.Open()

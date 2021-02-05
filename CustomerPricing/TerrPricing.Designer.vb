@@ -146,7 +146,6 @@ Partial Class TerrPricing
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnClearAll = New System.Windows.Forms.Button()
         Me.btnLoadItems = New System.Windows.Forms.Button()
-        Me.mcboTerritoryCodes = New TerritoryPricing.JTG.ColumnComboBox()
         Me.grpFill = New System.Windows.Forms.GroupBox()
         Me.tabOptions = New System.Windows.Forms.TabControl()
         Me.tbFill = New System.Windows.Forms.TabPage()
@@ -161,7 +160,6 @@ Partial Class TerrPricing
         Me.lblNatural = New System.Windows.Forms.Label()
         Me.txtNaturalMarkup = New System.Windows.Forms.TextBox()
         Me.tbCopyTo = New System.Windows.Forms.TabPage()
-        Me.mcboFillTerrCodes = New TerritoryPricing.JTG.ColumnComboBox()
         Me.lblNew = New System.Windows.Forms.Label()
         Me.btnCopyTo = New System.Windows.Forms.Button()
         Me.txtFillTerrDesc = New System.Windows.Forms.TextBox()
@@ -182,6 +180,8 @@ Partial Class TerrPricing
         Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
         Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
+        Me.mcboFillTerrCodes = New TerritoryPricing.JTG.ColumnComboBox()
+        Me.mcboTerritoryCodes = New TerritoryPricing.JTG.ColumnComboBox()
         Me.SearchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -1289,21 +1289,6 @@ Partial Class TerrPricing
         Me.btnLoadItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnLoadItems.UseVisualStyleBackColor = True
         '
-        'mcboTerritoryCodes
-        '
-        Me.mcboTerritoryCodes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.mcboTerritoryCodes.DropDownHeight = 500
-        Me.mcboTerritoryCodes.DropDownWidth = 17
-        Me.mcboTerritoryCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mcboTerritoryCodes.FormattingEnabled = True
-        Me.mcboTerritoryCodes.IntegralHeight = False
-        Me.mcboTerritoryCodes.Location = New System.Drawing.Point(83, 19)
-        Me.mcboTerritoryCodes.MaxDropDownItems = 20
-        Me.mcboTerritoryCodes.Name = "mcboTerritoryCodes"
-        Me.mcboTerritoryCodes.Size = New System.Drawing.Size(98, 24)
-        Me.mcboTerritoryCodes.TabIndex = 0
-        Me.mcboTerritoryCodes.ViewColumn = 0
-        '
         'grpFill
         '
         Me.grpFill.Controls.Add(Me.tabOptions)
@@ -1476,22 +1461,6 @@ Partial Class TerrPricing
         Me.tbCopyTo.TabIndex = 1
         Me.tbCopyTo.Text = "Copy To"
         Me.tbCopyTo.UseVisualStyleBackColor = True
-        '
-        'mcboFillTerrCodes
-        '
-        Me.mcboFillTerrCodes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.mcboFillTerrCodes.DropDownHeight = 1000
-        Me.mcboFillTerrCodes.DropDownWidth = 17
-        Me.mcboFillTerrCodes.Enabled = False
-        Me.mcboFillTerrCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mcboFillTerrCodes.FormattingEnabled = True
-        Me.mcboFillTerrCodes.IntegralHeight = False
-        Me.mcboFillTerrCodes.Location = New System.Drawing.Point(6, 39)
-        Me.mcboFillTerrCodes.MaxDropDownItems = 30
-        Me.mcboFillTerrCodes.Name = "mcboFillTerrCodes"
-        Me.mcboFillTerrCodes.Size = New System.Drawing.Size(53, 24)
-        Me.mcboFillTerrCodes.TabIndex = 120
-        Me.mcboFillTerrCodes.ViewColumn = 0
         '
         'lblNew
         '
@@ -1695,6 +1664,37 @@ Partial Class TerrPricing
         Me.btnSelectAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSelectAll.UseVisualStyleBackColor = True
         '
+        'mcboFillTerrCodes
+        '
+        Me.mcboFillTerrCodes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.mcboFillTerrCodes.DropDownHeight = 1000
+        Me.mcboFillTerrCodes.DropDownWidth = 17
+        Me.mcboFillTerrCodes.Enabled = False
+        Me.mcboFillTerrCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mcboFillTerrCodes.FormattingEnabled = True
+        Me.mcboFillTerrCodes.IntegralHeight = False
+        Me.mcboFillTerrCodes.Location = New System.Drawing.Point(6, 39)
+        Me.mcboFillTerrCodes.MaxDropDownItems = 30
+        Me.mcboFillTerrCodes.Name = "mcboFillTerrCodes"
+        Me.mcboFillTerrCodes.Size = New System.Drawing.Size(53, 24)
+        Me.mcboFillTerrCodes.TabIndex = 120
+        Me.mcboFillTerrCodes.ViewColumn = 0
+        '
+        'mcboTerritoryCodes
+        '
+        Me.mcboTerritoryCodes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.mcboTerritoryCodes.DropDownHeight = 500
+        Me.mcboTerritoryCodes.DropDownWidth = 17
+        Me.mcboTerritoryCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mcboTerritoryCodes.FormattingEnabled = True
+        Me.mcboTerritoryCodes.IntegralHeight = False
+        Me.mcboTerritoryCodes.Location = New System.Drawing.Point(83, 19)
+        Me.mcboTerritoryCodes.MaxDropDownItems = 20
+        Me.mcboTerritoryCodes.Name = "mcboTerritoryCodes"
+        Me.mcboTerritoryCodes.Size = New System.Drawing.Size(98, 24)
+        Me.mcboTerritoryCodes.TabIndex = 0
+        Me.mcboTerritoryCodes.ViewColumn = 0
+        '
         'SearchBindingSource
         '
         Me.SearchBindingSource.DataSource = GetType(TerritoryPricing.SearchClass)
@@ -1703,7 +1703,7 @@ Partial Class TerrPricing
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.BackColor = System.Drawing.SystemColors.Control
+        Me.BackColor = System.Drawing.Color.Ivory
         Me.ClientSize = New System.Drawing.Size(1107, 681)
         Me.Controls.Add(Me.btnSelectAll)
         Me.Controls.Add(Me.Panel1)

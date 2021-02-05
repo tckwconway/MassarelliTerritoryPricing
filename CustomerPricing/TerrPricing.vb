@@ -731,44 +731,57 @@ Public Class TerrPricing
                         ' if zone 007 or 008 use basedon 
 
                     Else
-                        dvZoneMarkup.RowFilter = "Trim(ter_zone) = '" & cOptionalCriteria.TerZoneCode & "'"
-                        tercode = dvZoneMarkup.Item(0)(0).ToString.Trim
-                        terdesc = dvZoneMarkup.Item(0)(3).ToString.Trim 'rw.Cells("TerCode").Value.ToString
+                        tercode = rw.Cells("TerCode").Value.ToString
                         terfrom = rw.Cells("TerFrom").Value.ToString
+                        terdesc = rw.Cells("TerDesc").Value.ToString
+                        filtertercode = rw.Cells("TerCode").Value.ToString
+                        dvZoneMarkup.RowFilter = "Trim(ter_zone) = '" & filtertercode & "'"
                         frtmarkuppct = CDec(dvZoneMarkup.Item(0).Item(1))
-                        'terdesc = rw.Cells("TerDesc").Value.ToString
-                        'filtertercode = rw.Cells("TerCode").Value.ToString
-                        'dvZoneMarkup.RowFilter = "Trim(ter_zone) = '" & filtertercode & "'"
-                        'If tercode = "007" Then
-                        '    basedon = CDec(0.33)
-                        'ElseIf tercode = "008" Then
-                        '    basedon = CDec(0.5)
-                        'End If
+
+                        '------------START Orignal Code for 1 Item + / ------------------------------
+                        ''tercode = rw.Cells("TerCode").Value.ToString
+                        ''terfrom = rw.Cells("TerFrom").Value.ToString
+                        ''terdesc = rw.Cells("TerDesc").Value.ToString
+                        ''filtertercode = rw.Cells("TerCode").Value.ToString
+                        ''dvZoneMarkup.RowFilter = "Trim(ter_zone) = '" & filtertercode & "'"
+                        ''frtmarkuppct = CDec(dvZoneMarkup.Item(0).Item(1))
+                        ''If tercode = "007" Then
+                        ''    basedon = CDec(0.33)
+                        ''ElseIf tercode = "008" Then
+                        ''    basedon = CDec(0.5)
+                        ''End If
+                        '------------END Orignal Code for 1 Item + / ------------------------------
+
                     End If
 
                     If Not (rw.Cells("ItemLocPriceNatural").Value Is Nothing) Then
                         rw.Cells("ActivePriceNatural").Value =
-                            GetZoneMarkupPrice(frtmarkuppct, Math.Round(Convert.ToDecimal(rw.Cells("ItemLocPriceNatural").Value)),
+                            GetZoneMarkupPrice(frtmarkuppct, Math.Round(Convert.ToDecimal(rw.Cells("ItemLocPriceNatural").Value), 2),
                             Convert.ToDecimal(rw.Cells("ItemLocPriceNatural").Value), rw.Cells("ProdCategory").ToString, basedon)
                     Else
                         rw.Cells("OriginalPriceNatural").Value = ""
                     End If
 
                     If Not (rw.Cells("ItemLocPriceColor").Value Is Nothing) Then
-                        rw.Cells("ActivePriceColor").Value =
-                            GetZoneMarkupPrice(frtmarkuppct, Math.Round(Convert.ToDecimal(rw.Cells("ItemLocPriceColor").Value)),
-                            Convert.ToDecimal(rw.Cells("ItemLocPriceColor").Value), rw.Cells("ProdCategory").ToString, basedon)
-                    Else
-                        rw.Cells("OriginalPriceColor").Value = ""
+                        If Not (rw.Cells("ItemLocPriceColor").Value Is Nothing) Then
+                            rw.Cells("ActivePriceColor").Value =
+                                GetZoneMarkupPrice(frtmarkuppct, Math.Round(Convert.ToDecimal(rw.Cells("ItemLocPriceColor").Value), 2),
+                                Convert.ToDecimal(rw.Cells("ItemLocPriceColor").Value), rw.Cells("ProdCategory").ToString, basedon)
+                        Else
+                            rw.Cells("OriginalPriceColor").Value = ""
+                        End If
                     End If
 
                     If Not (rw.Cells("ItemLocPriceDetailStain").Value Is Nothing) Then
-                        rw.Cells("ActivePriceDetailStain").Value =
-                            GetZoneMarkupPrice(frtmarkuppct, Math.Round(Convert.ToDecimal(rw.Cells("ItemLocPriceDetailStain").Value)),
-                            Convert.ToDecimal(rw.Cells("ItemLocPriceDetailStain").Value), rw.Cells("ProdCategory").ToString, basedon)
-                    Else
-                        rw.Cells("OriginalPriceDetailStain").Value = ""
+                        If Not (rw.Cells("ItemLocPriceDetailStain").Value Is Nothing) Then
+                            rw.Cells("ActivePriceDetailStain").Value =
+                                    GetZoneMarkupPrice(frtmarkuppct, Math.Round(Convert.ToDecimal(rw.Cells("ItemLocPriceDetailStain").Value), 2),
+                                    Convert.ToDecimal(rw.Cells("ItemLocPriceDetailStain").Value), rw.Cells("ProdCategory").ToString, basedon)
+                        Else
+                            rw.Cells("OriginalPriceDetailStain").Value = ""
+                        End If
                     End If
+
 
                     rw.Cells("TerCode").Value = tercode
                     rw.Cells("TerFrom").Value = terfrom  '.TercodeSearch  
@@ -1279,25 +1292,48 @@ Public Class TerrPricing
             Exit Sub
         End If
 
+        '--------- NEW USES CEILING ---------
         For Each itm In cItemPricingList
             If itm.Selected = True Then
                 Dim d As Decimal
                 d = itm.ActivePriceNatural
-                itm.ActivePriceNatural = CDec((Math.Round(d).ToString))
+                itm.ActivePriceNatural = CDec((Math.Ceiling(d).ToString))
                 d = itm.ActivePriceColor
-                itm.ActivePriceColor = CDec((Math.Round(d).ToString))
+                itm.ActivePriceColor = CDec((Math.Ceiling(d).ToString))
                 d = itm.ActivePriceDetailStain
-                itm.ActivePriceDetailStain = CDec((Math.Round(d).ToString))
+                itm.ActivePriceDetailStain = CDec((Math.Ceiling(d).ToString))
                 If cOptionalCriteria.MarkupType = MarkupType.Zone.ToString Then
                     d = itm.OriginalPriceNatural
-                    itm.OriginalPriceNatural = CDec((Math.Round(d).ToString))
+                    itm.OriginalPriceNatural = CDec((Math.Ceiling(d).ToString))
                     d = itm.OriginalPriceColor
-                    itm.OriginalPriceColor = CDec((Math.Round(d).ToString))
+                    itm.OriginalPriceColor = CDec((Math.Ceiling(d).ToString))
                     d = itm.OriginalPriceDetailStain
-                    itm.OriginalPriceDetailStain = CDec((Math.Round(d).ToString))
+                    itm.OriginalPriceDetailStain = CDec((Math.Ceiling(d).ToString))
                 End If
             End If
         Next
+
+
+        '--------- ORIGINAL USED ROUNDING ------
+        'For Each itm In cItemPricingList
+        '    If itm.Selected = True Then
+        '        Dim d As Decimal
+        '        d = itm.ActivePriceNatural
+        '        itm.ActivePriceNatural = CDec((Math.Round(d).ToString))
+        '        d = itm.ActivePriceColor
+        '        itm.ActivePriceColor = CDec((Math.Round(d).ToString))
+        '        d = itm.ActivePriceDetailStain
+        '        itm.ActivePriceDetailStain = CDec((Math.Round(d).ToString))
+        '        If cOptionalCriteria.MarkupType = MarkupType.Zone.ToString Then
+        '            d = itm.OriginalPriceNatural
+        '            itm.OriginalPriceNatural = CDec((Math.Round(d).ToString))
+        '            d = itm.OriginalPriceColor
+        '            itm.OriginalPriceColor = CDec((Math.Round(d).ToString))
+        '            d = itm.OriginalPriceDetailStain
+        '            itm.OriginalPriceDetailStain = CDec((Math.Round(d).ToString))
+        '        End If
+        '    End If
+        'Next
 
         Me.ValidateChildren()
         cItemPricingList.ResetBindings()
@@ -2542,6 +2578,7 @@ Public Class TerrPricing
             chkShowActiveOnly.Enabled = True
             'rbAdvanced.Checked = False
             cboZonePrc.Text = ""
+            cboZonePrc.Enabled = True
             rbZoneFill.Checked = False
             rbDirectMacolaPrc.Checked = False
             bCopyToOption = False
@@ -2586,6 +2623,9 @@ Public Class TerrPricing
         bByPass = False
         tabOptions.SelectedIndex = 0
         bCopyToOption = False
+
+        'booleans
+        bAdvanceSearch = False
     End Sub
 
     Private Sub AdvancedSearch()
@@ -2669,6 +2709,8 @@ Public Class TerrPricing
                 'bSkipChecked = True
                 If rb.Checked Then
                     FormatPriceType(MarkupType.Zone.ToString)
+                    cboZonePrc.Enabled = vbTrue
+
                 Else
                     FormatPriceType(PrcType.Copied.ToString)
                 End If
