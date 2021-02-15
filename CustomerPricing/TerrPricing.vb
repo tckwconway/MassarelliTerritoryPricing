@@ -1292,48 +1292,48 @@ Public Class TerrPricing
             Exit Sub
         End If
 
-        '--------- NEW USES CEILING ---------
-        For Each itm In cItemPricingList
-            If itm.Selected = True Then
-                Dim d As Decimal
-                d = itm.ActivePriceNatural
-                itm.ActivePriceNatural = CDec((Math.Ceiling(d).ToString))
-                d = itm.ActivePriceColor
-                itm.ActivePriceColor = CDec((Math.Ceiling(d).ToString))
-                d = itm.ActivePriceDetailStain
-                itm.ActivePriceDetailStain = CDec((Math.Ceiling(d).ToString))
-                If cOptionalCriteria.MarkupType = MarkupType.Zone.ToString Then
-                    d = itm.OriginalPriceNatural
-                    itm.OriginalPriceNatural = CDec((Math.Ceiling(d).ToString))
-                    d = itm.OriginalPriceColor
-                    itm.OriginalPriceColor = CDec((Math.Ceiling(d).ToString))
-                    d = itm.OriginalPriceDetailStain
-                    itm.OriginalPriceDetailStain = CDec((Math.Ceiling(d).ToString))
-                End If
-            End If
-        Next
-
-
-        '--------- ORIGINAL USED ROUNDING ------
+        ''--------- NEW USES CEILING ---------
         'For Each itm In cItemPricingList
         '    If itm.Selected = True Then
         '        Dim d As Decimal
         '        d = itm.ActivePriceNatural
-        '        itm.ActivePriceNatural = CDec((Math.Round(d).ToString))
+        '        itm.ActivePriceNatural = CDec((Math.Ceiling(d).ToString))
         '        d = itm.ActivePriceColor
-        '        itm.ActivePriceColor = CDec((Math.Round(d).ToString))
+        '        itm.ActivePriceColor = CDec((Math.Ceiling(d).ToString))
         '        d = itm.ActivePriceDetailStain
-        '        itm.ActivePriceDetailStain = CDec((Math.Round(d).ToString))
+        '        itm.ActivePriceDetailStain = CDec((Math.Ceiling(d).ToString))
         '        If cOptionalCriteria.MarkupType = MarkupType.Zone.ToString Then
         '            d = itm.OriginalPriceNatural
-        '            itm.OriginalPriceNatural = CDec((Math.Round(d).ToString))
+        '            itm.OriginalPriceNatural = CDec((Math.Ceiling(d).ToString))
         '            d = itm.OriginalPriceColor
-        '            itm.OriginalPriceColor = CDec((Math.Round(d).ToString))
+        '            itm.OriginalPriceColor = CDec((Math.Ceiling(d).ToString))
         '            d = itm.OriginalPriceDetailStain
-        '            itm.OriginalPriceDetailStain = CDec((Math.Round(d).ToString))
+        '            itm.OriginalPriceDetailStain = CDec((Math.Ceiling(d).ToString))
         '        End If
         '    End If
         'Next
+
+
+        '--------- ORIGINAL USED ROUNDING ------
+        For Each itm In cItemPricingList
+            If itm.Selected = True Then
+                Dim d As Decimal
+                d = itm.ActivePriceNatural
+                itm.ActivePriceNatural = CDec((Math.Round(d).ToString))
+                d = itm.ActivePriceColor
+                itm.ActivePriceColor = CDec((Math.Round(d).ToString))
+                d = itm.ActivePriceDetailStain
+                itm.ActivePriceDetailStain = CDec((Math.Round(d).ToString))
+                If cOptionalCriteria.MarkupType = MarkupType.Zone.ToString Then
+                    d = itm.OriginalPriceNatural
+                    itm.OriginalPriceNatural = CDec((Math.Round(d).ToString))
+                    d = itm.OriginalPriceColor
+                    itm.OriginalPriceColor = CDec((Math.Round(d).ToString))
+                    d = itm.OriginalPriceDetailStain
+                    itm.OriginalPriceDetailStain = CDec((Math.Round(d).ToString))
+                End If
+            End If
+        Next
 
         Me.ValidateChildren()
         cItemPricingList.ResetBindings()
