@@ -180,6 +180,7 @@ Public Class TerrPricing
         'Status bar labels ...
         lblCurrentDB.Text = cOptionalCriteria.CurrentDB
         lblDefaultDB.Text = cOptionalCriteria.DefaultDB
+        lblServer.Text = My.Settings.DefaultServer
 
         'Load Search Terr List
         FillTerritoryCodeList()

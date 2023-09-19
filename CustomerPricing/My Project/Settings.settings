@@ -6,7 +6,7 @@
       <Value Profile="(Default)">DATA</Value>
     </Setting>
     <Setting Name="DefaultServer" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">mass-sql1</Value>
+      <Value Profile="(Default)">mass-sql2</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -21,26 +21,26 @@ Partial Class TerrPricing
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(TerrPricing))
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.SaveFileDialogExportExcel = New System.Windows.Forms.SaveFileDialog()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.btnCopy = New System.Windows.Forms.ToolStripMenuItem()
@@ -146,6 +146,7 @@ Partial Class TerrPricing
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnClearAll = New System.Windows.Forms.Button()
         Me.btnLoadItems = New System.Windows.Forms.Button()
+        Me.mcboTerritoryCodes = New TerritoryPricing.JTG.ColumnComboBox()
         Me.grpFill = New System.Windows.Forms.GroupBox()
         Me.tabOptions = New System.Windows.Forms.TabControl()
         Me.tbFill = New System.Windows.Forms.TabPage()
@@ -160,6 +161,7 @@ Partial Class TerrPricing
         Me.lblNatural = New System.Windows.Forms.Label()
         Me.txtNaturalMarkup = New System.Windows.Forms.TextBox()
         Me.tbCopyTo = New System.Windows.Forms.TabPage()
+        Me.mcboFillTerrCodes = New TerritoryPricing.JTG.ColumnComboBox()
         Me.lblNew = New System.Windows.Forms.Label()
         Me.btnCopyTo = New System.Windows.Forms.Button()
         Me.txtFillTerrDesc = New System.Windows.Forms.TextBox()
@@ -180,9 +182,9 @@ Partial Class TerrPricing
         Me.Timer5 = New System.Windows.Forms.Timer(Me.components)
         Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.Timer6 = New System.Windows.Forms.Timer(Me.components)
-        Me.mcboFillTerrCodes = New TerritoryPricing.JTG.ColumnComboBox()
-        Me.mcboTerritoryCodes = New TerritoryPricing.JTG.ColumnComboBox()
         Me.SearchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.lblDivider4 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblServer = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -516,39 +518,39 @@ Partial Class TerrPricing
         Me.DataGridView1.AutoGenerateColumns = False
         Me.DataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.DataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI Semibold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomLeft
+        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("Segoe UI Semibold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle21
         Me.DataGridView1.ColumnHeadersHeight = 27
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Selected, Me.ItemNumber, Me.ItemDescription, Me.ProdCategory, Me.ProdCatDescription, Me.TerCode, Me.ItemLocPriceNatural, Me.OriginalPriceNatural, Me.ActivePriceNatural, Me.CopiedPriceNatural, Me.ItemLocPriceColor, Me.OriginalPriceColor, Me.ActivePriceColor, Me.CopiedPriceColor, Me.ItemLocPriceDetailStain, Me.OriginalPriceDetailStain, Me.ActivePriceDetailStain, Me.CopiedPriceDetailStain, Me.TerFrom, Me.TerDesc, Me.Activeitm, Me.ItemWeight, Me.PageNo, Me.LastDate, Me.A4GLIdentity})
         Me.DataGridView1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.DataGridView1.DataSource = Me.ItemPricingObjBindingSource
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Segoe UI Semibold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle38.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle38.Font = New System.Drawing.Font("Segoe UI Semibold", 7.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle38
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
         Me.DataGridView1.Location = New System.Drawing.Point(0, 56)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle39.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle39.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle39.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle39.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle39.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle39
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidth = 25
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
@@ -600,10 +602,10 @@ Partial Class TerrPricing
         'ItemLocPriceNatural
         '
         Me.ItemLocPriceNatural.DataPropertyName = "ItemLocPriceNatural"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle2.Format = "N2"
-        DataGridViewCellStyle2.NullValue = Nothing
-        Me.ItemLocPriceNatural.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle22.Format = "N2"
+        DataGridViewCellStyle22.NullValue = Nothing
+        Me.ItemLocPriceNatural.DefaultCellStyle = DataGridViewCellStyle22
         Me.ItemLocPriceNatural.FillWeight = 120.0!
         Me.ItemLocPriceNatural.HeaderText = "MAC Prc"
         Me.ItemLocPriceNatural.Name = "ItemLocPriceNatural"
@@ -613,10 +615,10 @@ Partial Class TerrPricing
         'OriginalPriceNatural
         '
         Me.OriginalPriceNatural.DataPropertyName = "OriginalPriceNatural"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle3.Format = "N2"
-        DataGridViewCellStyle3.NullValue = Nothing
-        Me.OriginalPriceNatural.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle23.Format = "N2"
+        DataGridViewCellStyle23.NullValue = Nothing
+        Me.OriginalPriceNatural.DefaultCellStyle = DataGridViewCellStyle23
         Me.OriginalPriceNatural.FillWeight = 120.0!
         Me.OriginalPriceNatural.HeaderText = "Curr Prc"
         Me.OriginalPriceNatural.Name = "OriginalPriceNatural"
@@ -625,10 +627,10 @@ Partial Class TerrPricing
         'ActivePriceNatural
         '
         Me.ActivePriceNatural.DataPropertyName = "ActivePriceNatural"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.Format = "N2"
-        DataGridViewCellStyle4.NullValue = """"""
-        Me.ActivePriceNatural.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle24.Format = "N2"
+        DataGridViewCellStyle24.NullValue = """"""
+        Me.ActivePriceNatural.DefaultCellStyle = DataGridViewCellStyle24
         Me.ActivePriceNatural.FillWeight = 120.0!
         Me.ActivePriceNatural.HeaderText = "New Prc"
         Me.ActivePriceNatural.MinimumWidth = 2
@@ -640,9 +642,9 @@ Partial Class TerrPricing
         'CopiedPriceNatural
         '
         Me.CopiedPriceNatural.DataPropertyName = "CopiedPriceNatural"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.Format = "N2"
-        Me.CopiedPriceNatural.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle25.Format = "N2"
+        Me.CopiedPriceNatural.DefaultCellStyle = DataGridViewCellStyle25
         Me.CopiedPriceNatural.HeaderText = "Copied"
         Me.CopiedPriceNatural.Name = "CopiedPriceNatural"
         Me.CopiedPriceNatural.Visible = False
@@ -651,10 +653,10 @@ Partial Class TerrPricing
         'ItemLocPriceColor
         '
         Me.ItemLocPriceColor.DataPropertyName = "ItemLocPriceColor"
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle6.Format = "N2"
-        DataGridViewCellStyle6.NullValue = Nothing
-        Me.ItemLocPriceColor.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle26.Format = "N2"
+        DataGridViewCellStyle26.NullValue = Nothing
+        Me.ItemLocPriceColor.DefaultCellStyle = DataGridViewCellStyle26
         Me.ItemLocPriceColor.FillWeight = 140.0!
         Me.ItemLocPriceColor.HeaderText = "MAC Prc"
         Me.ItemLocPriceColor.Name = "ItemLocPriceColor"
@@ -664,10 +666,10 @@ Partial Class TerrPricing
         'OriginalPriceColor
         '
         Me.OriginalPriceColor.DataPropertyName = "OriginalPriceColor"
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle7.Format = "N2"
-        DataGridViewCellStyle7.NullValue = Nothing
-        Me.OriginalPriceColor.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle27.Format = "N2"
+        DataGridViewCellStyle27.NullValue = Nothing
+        Me.OriginalPriceColor.DefaultCellStyle = DataGridViewCellStyle27
         Me.OriginalPriceColor.FillWeight = 120.0!
         Me.OriginalPriceColor.HeaderText = "Curr Prc"
         Me.OriginalPriceColor.Name = "OriginalPriceColor"
@@ -676,9 +678,9 @@ Partial Class TerrPricing
         'ActivePriceColor
         '
         Me.ActivePriceColor.DataPropertyName = "ActivePriceColor"
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle8.Format = "N2"
-        Me.ActivePriceColor.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle28.Format = "N2"
+        Me.ActivePriceColor.DefaultCellStyle = DataGridViewCellStyle28
         Me.ActivePriceColor.HeaderText = "New Prc"
         Me.ActivePriceColor.MinimumWidth = 2
         Me.ActivePriceColor.Name = "ActivePriceColor"
@@ -687,9 +689,9 @@ Partial Class TerrPricing
         'CopiedPriceColor
         '
         Me.CopiedPriceColor.DataPropertyName = "CopiedPriceColor"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle9.Format = "N2"
-        Me.CopiedPriceColor.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle29.Format = "N2"
+        Me.CopiedPriceColor.DefaultCellStyle = DataGridViewCellStyle29
         Me.CopiedPriceColor.HeaderText = "Copied"
         Me.CopiedPriceColor.Name = "CopiedPriceColor"
         Me.CopiedPriceColor.Visible = False
@@ -698,10 +700,10 @@ Partial Class TerrPricing
         'ItemLocPriceDetailStain
         '
         Me.ItemLocPriceDetailStain.DataPropertyName = "ItemLocPriceDetailStain"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle10.Format = "N2"
-        DataGridViewCellStyle10.NullValue = Nothing
-        Me.ItemLocPriceDetailStain.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle30.Format = "N2"
+        DataGridViewCellStyle30.NullValue = Nothing
+        Me.ItemLocPriceDetailStain.DefaultCellStyle = DataGridViewCellStyle30
         Me.ItemLocPriceDetailStain.FillWeight = 120.0!
         Me.ItemLocPriceDetailStain.HeaderText = "MAC Prc"
         Me.ItemLocPriceDetailStain.Name = "ItemLocPriceDetailStain"
@@ -711,10 +713,10 @@ Partial Class TerrPricing
         'OriginalPriceDetailStain
         '
         Me.OriginalPriceDetailStain.DataPropertyName = "OriginalPriceDetailStain"
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle11.Format = "N2"
-        DataGridViewCellStyle11.NullValue = Nothing
-        Me.OriginalPriceDetailStain.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle31.Format = "N2"
+        DataGridViewCellStyle31.NullValue = Nothing
+        Me.OriginalPriceDetailStain.DefaultCellStyle = DataGridViewCellStyle31
         Me.OriginalPriceDetailStain.FillWeight = 120.0!
         Me.OriginalPriceDetailStain.HeaderText = "Curr Prc"
         Me.OriginalPriceDetailStain.Name = "OriginalPriceDetailStain"
@@ -723,9 +725,9 @@ Partial Class TerrPricing
         'ActivePriceDetailStain
         '
         Me.ActivePriceDetailStain.DataPropertyName = "ActivePriceDetailStain"
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle12.Format = "N2"
-        Me.ActivePriceDetailStain.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle32.Format = "N2"
+        Me.ActivePriceDetailStain.DefaultCellStyle = DataGridViewCellStyle32
         Me.ActivePriceDetailStain.FillWeight = 120.0!
         Me.ActivePriceDetailStain.HeaderText = "New Prc"
         Me.ActivePriceDetailStain.MinimumWidth = 2
@@ -735,9 +737,9 @@ Partial Class TerrPricing
         'CopiedPriceDetailStain
         '
         Me.CopiedPriceDetailStain.DataPropertyName = "CopiedPriceDetailStain"
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle13.Format = "N2"
-        Me.CopiedPriceDetailStain.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle33.Format = "N2"
+        Me.CopiedPriceDetailStain.DefaultCellStyle = DataGridViewCellStyle33
         Me.CopiedPriceDetailStain.HeaderText = "Copied"
         Me.CopiedPriceDetailStain.Name = "CopiedPriceDetailStain"
         Me.CopiedPriceDetailStain.Visible = False
@@ -760,8 +762,8 @@ Partial Class TerrPricing
         'Activeitm
         '
         Me.Activeitm.DataPropertyName = "OnPriceList"
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Activeitm.DefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Activeitm.DefaultCellStyle = DataGridViewCellStyle34
         Me.Activeitm.HeaderText = "On Prc List"
         Me.Activeitm.Name = "Activeitm"
         Me.Activeitm.Width = 70
@@ -769,9 +771,9 @@ Partial Class TerrPricing
         'ItemWeight
         '
         Me.ItemWeight.DataPropertyName = "ItemWeight"
-        DataGridViewCellStyle15.Format = "N2"
-        DataGridViewCellStyle15.NullValue = Nothing
-        Me.ItemWeight.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle35.Format = "N2"
+        DataGridViewCellStyle35.NullValue = Nothing
+        Me.ItemWeight.DefaultCellStyle = DataGridViewCellStyle35
         Me.ItemWeight.HeaderText = "Weight"
         Me.ItemWeight.Name = "ItemWeight"
         Me.ItemWeight.Visible = False
@@ -787,17 +789,17 @@ Partial Class TerrPricing
         'LastDate
         '
         Me.LastDate.DataPropertyName = "LastDate"
-        DataGridViewCellStyle16.Format = "d"
-        DataGridViewCellStyle16.NullValue = Nothing
-        Me.LastDate.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle36.Format = "d"
+        DataGridViewCellStyle36.NullValue = Nothing
+        Me.LastDate.DefaultCellStyle = DataGridViewCellStyle36
         Me.LastDate.HeaderText = "Prc Date"
         Me.LastDate.Name = "LastDate"
         '
         'A4GLIdentity
         '
         Me.A4GLIdentity.DataPropertyName = "A4GLIdentity"
-        DataGridViewCellStyle17.NullValue = Nothing
-        Me.A4GLIdentity.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle37.NullValue = Nothing
+        Me.A4GLIdentity.DefaultCellStyle = DataGridViewCellStyle37
         Me.A4GLIdentity.HeaderText = "A4GLIdentity"
         Me.A4GLIdentity.Name = "A4GLIdentity"
         Me.A4GLIdentity.Visible = False
@@ -814,14 +816,14 @@ Partial Class TerrPricing
         Me.dgvHeader.AllowUserToResizeRows = False
         Me.dgvHeader.BackgroundColor = System.Drawing.SystemColors.Control
         Me.dgvHeader.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvHeader.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvHeader.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvHeader.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.dgvHeader.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4})
         Me.dgvHeader.Dock = System.Windows.Forms.DockStyle.Top
@@ -986,7 +988,7 @@ Partial Class TerrPricing
         'StatusStrip1
         '
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblPricingType, Me.lblDivider1, Me.lblCount, Me.lblDivider2, Me.lblCurrentDB, Me.lblDivider3, Me.lblDefaultDB})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblPricingType, Me.lblCount, Me.lblDivider1, Me.lblDivider2, Me.lblCurrentDB, Me.lblDivider3, Me.lblDefaultDB, Me.lblDivider4, Me.lblServer})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 659)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 15, 0)
@@ -1289,6 +1291,21 @@ Partial Class TerrPricing
         Me.btnLoadItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnLoadItems.UseVisualStyleBackColor = True
         '
+        'mcboTerritoryCodes
+        '
+        Me.mcboTerritoryCodes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.mcboTerritoryCodes.DropDownHeight = 500
+        Me.mcboTerritoryCodes.DropDownWidth = 17
+        Me.mcboTerritoryCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mcboTerritoryCodes.FormattingEnabled = True
+        Me.mcboTerritoryCodes.IntegralHeight = False
+        Me.mcboTerritoryCodes.Location = New System.Drawing.Point(83, 19)
+        Me.mcboTerritoryCodes.MaxDropDownItems = 20
+        Me.mcboTerritoryCodes.Name = "mcboTerritoryCodes"
+        Me.mcboTerritoryCodes.Size = New System.Drawing.Size(98, 24)
+        Me.mcboTerritoryCodes.TabIndex = 0
+        Me.mcboTerritoryCodes.ViewColumn = 0
+        '
         'grpFill
         '
         Me.grpFill.Controls.Add(Me.tabOptions)
@@ -1461,6 +1478,22 @@ Partial Class TerrPricing
         Me.tbCopyTo.TabIndex = 1
         Me.tbCopyTo.Text = "Copy To"
         Me.tbCopyTo.UseVisualStyleBackColor = True
+        '
+        'mcboFillTerrCodes
+        '
+        Me.mcboFillTerrCodes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
+        Me.mcboFillTerrCodes.DropDownHeight = 1000
+        Me.mcboFillTerrCodes.DropDownWidth = 17
+        Me.mcboFillTerrCodes.Enabled = False
+        Me.mcboFillTerrCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mcboFillTerrCodes.FormattingEnabled = True
+        Me.mcboFillTerrCodes.IntegralHeight = False
+        Me.mcboFillTerrCodes.Location = New System.Drawing.Point(6, 39)
+        Me.mcboFillTerrCodes.MaxDropDownItems = 30
+        Me.mcboFillTerrCodes.Name = "mcboFillTerrCodes"
+        Me.mcboFillTerrCodes.Size = New System.Drawing.Size(53, 24)
+        Me.mcboFillTerrCodes.TabIndex = 120
+        Me.mcboFillTerrCodes.ViewColumn = 0
         '
         'lblNew
         '
@@ -1664,40 +1697,21 @@ Partial Class TerrPricing
         Me.btnSelectAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSelectAll.UseVisualStyleBackColor = True
         '
-        'mcboFillTerrCodes
-        '
-        Me.mcboFillTerrCodes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.mcboFillTerrCodes.DropDownHeight = 1000
-        Me.mcboFillTerrCodes.DropDownWidth = 17
-        Me.mcboFillTerrCodes.Enabled = False
-        Me.mcboFillTerrCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mcboFillTerrCodes.FormattingEnabled = True
-        Me.mcboFillTerrCodes.IntegralHeight = False
-        Me.mcboFillTerrCodes.Location = New System.Drawing.Point(6, 39)
-        Me.mcboFillTerrCodes.MaxDropDownItems = 30
-        Me.mcboFillTerrCodes.Name = "mcboFillTerrCodes"
-        Me.mcboFillTerrCodes.Size = New System.Drawing.Size(53, 24)
-        Me.mcboFillTerrCodes.TabIndex = 120
-        Me.mcboFillTerrCodes.ViewColumn = 0
-        '
-        'mcboTerritoryCodes
-        '
-        Me.mcboTerritoryCodes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable
-        Me.mcboTerritoryCodes.DropDownHeight = 500
-        Me.mcboTerritoryCodes.DropDownWidth = 17
-        Me.mcboTerritoryCodes.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mcboTerritoryCodes.FormattingEnabled = True
-        Me.mcboTerritoryCodes.IntegralHeight = False
-        Me.mcboTerritoryCodes.Location = New System.Drawing.Point(83, 19)
-        Me.mcboTerritoryCodes.MaxDropDownItems = 20
-        Me.mcboTerritoryCodes.Name = "mcboTerritoryCodes"
-        Me.mcboTerritoryCodes.Size = New System.Drawing.Size(98, 24)
-        Me.mcboTerritoryCodes.TabIndex = 0
-        Me.mcboTerritoryCodes.ViewColumn = 0
-        '
         'SearchBindingSource
         '
         Me.SearchBindingSource.DataSource = GetType(TerritoryPricing.SearchClass)
+        '
+        'lblDivider4
+        '
+        Me.lblDivider4.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left
+        Me.lblDivider4.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken
+        Me.lblDivider4.Name = "lblDivider4"
+        Me.lblDivider4.Size = New System.Drawing.Size(4, 17)
+        '
+        'lblServer
+        '
+        Me.lblServer.Name = "lblServer"
+        Me.lblServer.Size = New System.Drawing.Size(0, 17)
         '
         'TerrPricing
         '
@@ -1903,4 +1917,6 @@ Partial Class TerrPricing
     Friend WithEvents PageNo As DataGridViewTextBoxColumn
     Friend WithEvents LastDate As DataGridViewTextBoxColumn
     Friend WithEvents A4GLIdentity As DataGridViewTextBoxColumn
+    Friend WithEvents lblDivider4 As ToolStripStatusLabel
+    Friend WithEvents lblServer As ToolStripStatusLabel
 End Class
